@@ -1,0 +1,1098 @@
+/* ==========================================================================
+   HAVEN — marketing page styles
+   Built on the HAVEN design system (styles.css + tokens/).
+   Only vanilla CSS. No frameworks.
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   PALETTE OVERRIDE — no blues on this site.
+   The design system ships a sky/denim blue, but the HAVEN logo is pink,
+   green and yellow only, so this page stays inside those three (plus the
+   red-crayon accent, cream paper, and ink). Blue textures were recolored
+   to green; the sky tokens are remapped here rather than edited in
+   tokens/colors.css, so the shared design system stays intact.
+   -------------------------------------------------------------------------- */
+:root {
+  --yellow-soft: #fdefc0;          /* soft tint the system was missing */
+  --sky:      var(--green);        /* was #8fb3d9 */
+  --sky-soft: var(--yellow-soft);  /* was #d3e4f2 */
+  --denim:    #2f4a2c;             /* deep forest, matches the footer texture */
+  --brand-info: var(--green);
+  --focus-ring: var(--red-crayon); /* readable against pink, green and yellow */
+  --tape-ink: #2f2a20;             /* dark pencil, for writing on top of tape */
+}
+
+/* --- reset ---------------------------------------------------------------- */
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+body, h1, h2, h3, h4, p, ul, ol, figure, blockquote { margin: 0; }
+ul, ol { padding: 0; list-style: none; }
+img { max-width: 100%; display: block; }
+button, input, textarea, select { font: inherit; color: inherit; }
+a { color: inherit; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    transition-duration: .01ms !important;
+  }
+}
+
+/* --- page ----------------------------------------------------------------- */
+/* the body is the desk the notebook is lying on — a shade deeper than the
+   pages, so the white sheets read as paper sitting on top of it */
+body {
+  font-family: var(--font-body);
+  font-size: var(--text-body-md);
+  line-height: var(--leading-normal);
+  color: var(--text-body);
+  background-color: var(--paper-cream);
+  background-image: url('assets/textures/notebook-grid-brand.jpg');
+  background-size: 420px;
+  background-repeat: repeat;
+  overflow-x: hidden;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: var(--paper-cream);
+  opacity: .55;
+  z-index: -1;
+  pointer-events: none;
+}
+
+/* scroll stays locked while the notebook is still opening */
+body.is-loading { overflow: hidden; }
+
+/* ==========================================================================
+   THE NOTEBOOK COVER  (loading screen)
+   ========================================================================== */
+.book { display: none; }
+
+.js .book {
+  display: grid;
+  place-items: center;
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  background-color: var(--paper-cream);
+  background-image: url('assets/textures/notebook-grid-brand.jpg');
+  background-size: 420px;
+}
+
+.book__scene {
+  position: relative;
+  width: min(330px, 58vw);
+  aspect-ratio: 736 / 951;
+  perspective: 1700px;
+  transform: scale(.96);
+  animation: book-settle 700ms var(--ease-bounce) both;
+}
+
+@keyframes book-settle {
+  from { transform: scale(.86) translateY(14px); opacity: 0; }
+  to   { transform: scale(.96) translateY(0);    opacity: 1; }
+}
+
+/* the first page, waiting underneath the cover */
+.book__page {
+  position: absolute;
+  inset: 0;
+  background-color: #fffdf8;
+  background-image:
+    linear-gradient(to right, transparent 0 13%, rgba(212,81,74,.5) 13% calc(13% + 1.5px), transparent calc(13% + 1.5px)),
+    repeating-linear-gradient(to bottom, transparent 0 15px, rgba(123,161,93,.3) 15px 16px);
+  border-radius: 2px 8px 8px 2px;
+  box-shadow: inset 14px 0 18px -14px rgba(74,64,50,.5), 0 10px 26px rgba(74,64,50,.22);
+}
+
+.book__cover {
+  position: absolute;
+  inset: 0;
+  transform-origin: left center;
+  transform: rotateY(0deg);
+  transform-style: preserve-3d;
+  border-radius: 3px 9px 9px 3px;
+  overflow: hidden;
+  box-shadow: 0 12px 30px rgba(74,64,50,.34);
+  transition: transform 1150ms cubic-bezier(.62,.02,.2,1),
+              box-shadow 1150ms var(--ease-out);
+}
+.book__cover img { width: 100%; height: 100%; object-fit: cover; }
+
+/* a paper label taped over the printed one */
+.book__label {
+  position: absolute;
+  left: 31.5%;
+  top: 15.5%;
+  width: 44%;
+  min-height: 24%;
+  display: grid;
+  align-content: center;
+  justify-items: center;
+  gap: 2px;
+  padding: 3% 2%;
+  background: #fffdf8;
+  border: 2px solid var(--ink);
+  border-radius: 12px;
+  box-shadow: 1px 2px 0 rgba(74,64,50,.5);
+  transform: rotate(-2deg);
+  text-align: center;
+}
+.book__label-kicker {
+  font-family: var(--font-hand);
+  font-size: clamp(.5rem, 1.5vw, .62rem);
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+.book__label-name {
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 5.5vw, 2.4rem);
+  line-height: 1;
+  color: var(--ink);
+}
+.book__label-sub {
+  font-family: var(--font-hand);
+  font-size: clamp(.5rem, 1.4vw, .6rem);
+  color: var(--ink-soft);
+}
+
+/* two scraps of washi holding the label down */
+.book__tape {
+  position: absolute;
+  width: 17%;
+  height: 5.5%;
+  background-image: url('assets/textures/tape-green.jpg');
+  background-size: auto 100%;
+  opacity: .95;
+}
+.book__tape--tl { left: 28%; top: 13.5%; transform: rotate(-24deg); }
+.book__tape--br { left: 62%; top: 36%;   transform: rotate(-24deg); }
+
+/* --- the opening --------------------------------------------------------- */
+.book.is-open .book__cover {
+  transform: rotateY(-162deg);
+  box-shadow: 0 22px 44px rgba(74,64,50,.16);
+}
+.book.is-open .book__scene { animation: book-lean 1150ms var(--ease-out) both; }
+
+@keyframes book-lean {
+  from { transform: scale(.96); }
+  to   { transform: scale(1.06); }
+}
+
+.book.is-gone {
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 520ms var(--ease-out), visibility 0s 520ms;
+}
+
+/* someone who prefers less motion just gets the site */
+@media (prefers-reduced-motion: reduce) {
+  .js .book { display: none; }
+}
+
+.container {
+  width: min(100% - var(--space-5) * 2, var(--container-width));
+  margin-inline: auto;
+}
+
+.section { padding-block: var(--space-8); }
+.section--tight { padding-block: var(--space-7); }
+
+/* ==========================================================================
+   SHEETS — every section of content sits on a page of the notebook
+   ========================================================================== */
+.sheet {
+  --sheet-margin: 78px;          /* where the red margin rule falls */
+  --rule-gap: 30px;              /* spacing of the ruled lines */
+
+  position: relative;
+  background-color: #fffdf8;
+  padding: var(--space-8) var(--space-7) var(--space-8) calc(var(--sheet-margin) + var(--space-4));
+  border-radius: 3px;
+  box-shadow:
+    0 1px 0 rgba(74,64,50,.18),
+    0 14px 28px -18px rgba(74,64,50,.55),
+    inset 22px 0 26px -26px rgba(74,64,50,.35);   /* shadow near the binding */
+}
+
+/* the ruling itself — behind the content, never on top of it */
+.sheet::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  border-radius: inherit;
+  background-image:
+    /* red margin rule */
+    linear-gradient(to right,
+      transparent 0 var(--sheet-margin),
+      rgba(212,81,74,.42) var(--sheet-margin),
+      rgba(212,81,74,.42) calc(var(--sheet-margin) + 1.5px),
+      transparent calc(var(--sheet-margin) + 1.5px)),
+    /* horizontal rules */
+    repeating-linear-gradient(to bottom,
+      transparent 0 calc(var(--rule-gap) - 1px),
+      rgba(123,161,93,.22) calc(var(--rule-gap) - 1px),
+      rgba(123,161,93,.22) var(--rule-gap));
+  background-position: 0 0, 0 var(--space-6);
+}
+
+/* stitched binding down the left edge */
+.sheet::after {
+  content: '';
+  position: absolute;
+  left: 26px;
+  top: var(--space-6);
+  bottom: var(--space-6);
+  width: 2px;
+  z-index: 0;
+  pointer-events: none;
+  background-image: repeating-linear-gradient(to bottom,
+    var(--ink-soft) 0 9px, transparent 9px 19px);
+  opacity: .4;
+}
+
+/* content rides above the ruling */
+.sheet > * { position: relative; z-index: 1; }
+
+/* pages are stacked by hand, so they don't all line up perfectly */
+.sheet--first { transform: rotate(-.35deg); }
+#programs .sheet, #team .sheet, #contact .sheet { transform: rotate(.3deg); }
+#listening .sheet, #involved .sheet { transform: rotate(-.4deg); }
+
+/* --- typography ----------------------------------------------------------- */
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  color: var(--text-heading);
+  line-height: var(--leading-tight);
+  font-weight: 400;
+}
+.display-xl { font-size: var(--text-display-xl); }
+.display-lg { font-size: var(--text-display-lg); }
+.display-md { font-size: var(--text-display-md); }
+.heading-md { font-size: var(--text-heading-md); font-family: var(--font-display); }
+
+.lede {
+  font-size: var(--text-body-lg);
+  line-height: var(--leading-normal);
+  max-width: 58ch;
+}
+.muted { color: var(--ink-soft); }
+.eyebrow {
+  font-family: var(--font-hand);
+  font-size: var(--text-label);
+  letter-spacing: var(--tracking-wide);
+  color: var(--ink-soft);
+}
+
+/* skip link */
+.skip-link {
+  position: absolute;
+  left: var(--space-4);
+  top: -100px;
+  z-index: 100;
+  background: var(--yellow);
+  color: var(--ink);
+  border: 2.5px solid var(--ink);
+  border-radius: var(--radius-pill);
+  padding: var(--space-2) var(--space-4);
+  transition: top var(--duration-fast) var(--ease-out);
+}
+.skip-link:focus { top: var(--space-4); }
+
+/* consistent focus treatment */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  outline: 3px solid var(--focus-ring);
+  outline-offset: 3px;
+}
+
+/* --- buttons: strips of washi tape ---------------------------------------- */
+/*
+   Every button is a piece of tape stuck to the page: real scanned tape as the
+   background, hand-torn ends, a slight tilt, and a soft shadow so it sits on
+   the paper rather than floating above it.
+
+   The tape lives on ::before rather than the button itself. Clipping the torn
+   ends would also clip the keyboard focus ring, so the button box stays a plain
+   rectangle and only the pseudo-element gets cut.
+*/
+.btn {
+  position: relative;
+  isolation: isolate;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  font-family: var(--font-hand);
+  font-weight: 700;
+  font-size: var(--text-body-md);
+  letter-spacing: var(--tracking-wide);
+  text-decoration: none;
+  cursor: pointer;
+  border: none;
+  border-radius: 0;
+  background: none;
+  padding: var(--space-3) var(--space-6);
+  color: var(--tape-ink);
+  text-shadow: 0 1px 0 rgba(255, 253, 246, .55);
+  transform: rotate(-1.2deg);
+  transition:
+    transform var(--duration-med) var(--ease-bounce),
+    filter var(--duration-med) var(--ease-out);
+}
+
+.btn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  background-image: var(--tape, url('assets/textures/tape-cream.jpg'));
+  background-repeat: repeat-x;
+  background-position: center;
+  background-size: auto 100%;
+  /* hand-torn left and right ends */
+  clip-path: polygon(
+    3px 0%, calc(100% - 2px) 0%,
+    calc(100% - 5px) 17%, 100% 38%,
+    calc(100% - 3px) 60%, calc(100% - 1px) 82%,
+    calc(100% - 4px) 100%, 2px 100%,
+    5px 79%, 0px 57%, 4px 33%, 1px 15%
+  );
+  filter: drop-shadow(1px 2px 2px rgba(74, 64, 50, .3));
+  transition: filter var(--duration-med) var(--ease-out);
+}
+
+/* --- the corner peels ------------------------------------------------------
+   On hover the top-right corner lifts and folds back over the tape, the way a
+   piece of washi does when you start picking at it. The flap is a triangle
+   folded along the diagonal, so it covers exactly the patch it came from —
+   no need to fake a hole in the tape underneath.
+   -------------------------------------------------------------------------- */
+.btn::after {
+  content: '';
+  position: absolute;
+  top: -1px;
+  right: -1px;
+  width: 26px;
+  height: 26px;
+  z-index: -1;
+  pointer-events: none;
+  /* the triangle: fold runs top-left to bottom-right, tip at top-right */
+  clip-path: polygon(100% 0, 0 0, 100% 100%);
+  /* dark along the fold, catching the light out at the lifted tip */
+  background-image: linear-gradient(45deg,
+    rgba(126, 114,  94, .82)  0%,
+    rgba(214, 203, 180, .92) 34%,
+    rgba(253, 250, 240, .97) 68%,
+    rgba(255, 253, 246, .99) 100%);
+  filter: drop-shadow(-2px 3px 2px rgba(74, 64, 50, .32));
+  transform-origin: 100% 0;
+  transform: scale(.05) rotate(-14deg);
+  opacity: 0;
+  transition:
+    transform 300ms var(--ease-bounce),
+    opacity 140ms var(--ease-out);
+}
+
+.btn:hover::after,
+.btn:focus-visible::after {
+  transform: scale(1) rotate(0deg);
+  opacity: 1;
+}
+.btn--lg::after { width: 32px; height: 32px; }
+.btn--sm::after { width: 20px; height: 20px; }
+
+/* pressing it puts the corner back down */
+.btn:active::after { transform: scale(.55) rotate(-6deg); transition-duration: 90ms; }
+
+/* hover: the tape lifts and settles straighter, like it's being repositioned */
+.btn:hover { transform: translateY(-2px) rotate(.4deg); }
+.btn:hover::before { filter: drop-shadow(2px 4px 4px rgba(74, 64, 50, .34)); }
+.btn:active { transform: translateY(1px) rotate(-1.2deg) scale(.97); }
+.btn:active::before { filter: drop-shadow(1px 1px 1px rgba(74, 64, 50, .3)); }
+
+.btn:disabled { opacity: .5; cursor: not-allowed; transform: none; }
+.btn:disabled::before { filter: none; }
+.btn:disabled::after { display: none; }
+
+/* no peeling for anyone who asked for less motion */
+@media (prefers-reduced-motion: reduce) {
+  .btn::after { display: none; }
+}
+
+/* the focus ring needs the unclipped button box, so it is drawn here */
+.btn:focus-visible { outline: 3px solid var(--focus-ring); outline-offset: 4px; }
+
+.btn--primary   { --tape: url('assets/textures/tape-pink.jpg'); }
+.btn--accent    { --tape: url('assets/textures/tape-yellow.jpg'); transform: rotate(1.4deg); }
+.btn--ghost     { --tape: url('assets/textures/tape-cream.jpg'); }
+.btn--secondary {
+  --tape: url('assets/textures/tape-green.jpg');
+  color: var(--paper);
+  text-shadow: 0 1px 2px rgba(28, 34, 20, .85);
+}
+.btn--accent:hover  { transform: translateY(-2px) rotate(-.4deg); }
+.btn--accent:active { transform: translateY(1px) rotate(1.4deg) scale(.97); }
+
+.btn--lg { font-size: var(--text-body-lg); padding: var(--space-4) var(--space-7); }
+.btn--sm { font-size: var(--text-body-sm); padding: var(--space-2) var(--space-5); }
+
+/* --- cards ---------------------------------------------------------------- */
+.card {
+  background: var(--surface-card);
+  border: 2.5px solid var(--border-ink);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-crayon);
+  padding: var(--space-5);
+}
+.card--lg { border-radius: var(--radius-lg); padding: var(--space-6); }
+.card--cream { background: var(--paper-cream); }
+.card--pink  { background: var(--pink-soft); }
+.card--green { background: var(--green-soft); }
+.card--yellow { background: var(--yellow-soft); }
+
+/* hand-placed tilt — applied to some cards, never all */
+.tilt-1 { transform: rotate(var(--rotate-sticker-1)); }
+.tilt-2 { transform: rotate(var(--rotate-sticker-2)); }
+.tilt-3 { transform: rotate(var(--rotate-sticker-3)); }
+
+.card.wobble {
+  transition: transform var(--duration-med) var(--ease-bounce),
+              box-shadow var(--duration-med) var(--ease-out);
+}
+.card.wobble:hover { transform: translateY(-4px) rotate(-1.5deg); box-shadow: 4px 6px 0 var(--ink); }
+.card.tilt-2.wobble:hover { transform: translateY(-4px) rotate(2.5deg); }
+
+/* --- sticker label (washi tape) ------------------------------------------- */
+.sticker {
+  display: inline-block;
+  font-family: var(--font-hand);
+  font-weight: 700;
+  font-size: var(--text-label);
+  color: var(--ink);
+  padding: var(--space-1) var(--space-4);
+  border: 2px solid var(--ink);
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-crayon-sm);
+  background-image: url('assets/textures/washi-tape-green-gingham.jpg');
+  background-size: cover;
+  background-position: center;
+  transform: rotate(-4deg);
+}
+.sticker--yellow { background-image: none; background-color: var(--yellow); }
+.sticker--pink   { background-image: none; background-color: var(--pink-soft); transform: rotate(3deg); }
+
+/* --- badges / tags -------------------------------------------------------- */
+.tag {
+  display: inline-block;
+  font-family: var(--font-hand);
+  font-size: var(--text-body-sm);
+  padding: 2px var(--space-3);
+  border: 2px solid var(--ink);
+  border-radius: var(--radius-pill);
+  background: var(--paper-cream);
+}
+
+/* --- doodles -------------------------------------------------------------- */
+/* source illustrations sit on white paper — multiply drops them onto cream */
+.doodle { mix-blend-mode: multiply; }
+
+/* ==========================================================================
+   NAV
+   ========================================================================== */
+.nav {
+  position: relative;
+  z-index: 20;
+  padding-block: var(--space-4);
+  border-bottom: 2.5px dashed var(--border-soft);
+  background: rgba(255, 253, 246, .9);
+}
+.nav__inner {
+  display: flex;
+  align-items: center;
+  gap: var(--space-5);
+}
+.nav__brand {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  text-decoration: none;
+  margin-right: auto;
+}
+.nav__logo { width: 54px; height: 54px; object-fit: contain; }
+.nav__wordmark {
+  font-family: var(--font-display);
+  font-size: var(--text-heading-md);
+  color: var(--ink);
+  line-height: 1;
+}
+.nav__links {
+  display: flex;
+  align-items: center;
+  gap: var(--space-5);
+}
+.nav__link {
+  font-family: var(--font-hand);
+  font-size: var(--text-body-md);
+  text-decoration: none;
+  color: var(--ink);
+  padding-bottom: 2px;
+  border-bottom: 2.5px solid transparent;
+  transition: border-color var(--duration-fast) var(--ease-out),
+              transform var(--duration-med) var(--ease-bounce);
+}
+.nav__link:hover { border-bottom-color: var(--pink); transform: translateY(-2px) rotate(-1deg); }
+
+.nav__toggle {
+  display: none;
+  background: #fff;
+  border: 2.5px solid var(--ink);
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-crayon-sm);
+  padding: 6px 10px;
+  cursor: pointer;
+  font-family: var(--font-hand);
+}
+.nav__toggle-bars { display: block; width: 22px; }
+.nav__toggle-bars span {
+  display: block;
+  height: 2.5px;
+  background: var(--ink);
+  border-radius: 2px;
+  margin: 4px 0;
+}
+
+/* ==========================================================================
+   HERO
+   ========================================================================== */
+.hero { padding-block: var(--space-8) var(--space-9); position: relative; }
+.hero__grid {
+  display: grid;
+  grid-template-columns: 1.15fr .85fr;
+  gap: var(--space-8);
+  align-items: center;
+}
+.hero__title { margin-bottom: var(--space-4); }
+.hero__title em { font-style: normal; color: var(--pink); }
+.hero__mission {
+  margin-block: var(--space-4) var(--space-6);
+  padding-left: var(--space-4);
+  border-left: 4px solid var(--green);
+}
+.hero__actions { display: flex; flex-wrap: wrap; gap: var(--space-4); align-items: center; }
+.hero__note { font-size: var(--text-body-sm); color: var(--ink-soft); margin-top: var(--space-4); }
+
+.hero__art { position: relative; display: grid; place-items: center; }
+.hero__art-card {
+  background: #fff;
+  border: 2.5px solid var(--ink);
+  border-radius: var(--radius-lg);
+  box-shadow: 4px 6px 0 var(--ink);
+  padding: var(--space-4);
+  transform: rotate(2deg);
+  max-width: 380px;
+}
+.hero__art-card img { border-radius: var(--radius-sm); }
+.hero__sticker {
+  position: absolute;
+  top: -18px;
+  left: 4%;
+  z-index: 2;
+}
+.hero__art-mini {
+  position: absolute;
+  bottom: -34px;
+  right: -10px;
+  width: 128px;
+  background: #fff;
+  border: 2.5px solid var(--ink);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-crayon);
+  padding: 6px;
+  transform: rotate(-6deg);
+}
+
+/* ==========================================================================
+   SECTION HEADERS
+   ========================================================================== */
+.section-head { max-width: 62ch; margin-bottom: var(--space-7); }
+.section-head .eyebrow { display: block; margin-bottom: var(--space-2); }
+.section-head p { margin-top: var(--space-3); font-size: var(--text-body-lg); }
+
+/* ==========================================================================
+   ABOUT
+   ========================================================================== */
+.about {
+  background-image: url('assets/textures/notebook-graph-washi-green.jpg');
+  background-size: 320px;
+  border-block: 3px solid var(--ink);
+}
+.about__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-8);
+  align-items: center;
+}
+.about__text p + p { margin-top: var(--space-4); }
+.about__facts {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-5);
+}
+.fact { text-align: center; }
+.fact__value {
+  font-family: var(--font-display);
+  font-size: var(--text-display-md);
+  color: var(--ink);
+  display: block;
+  line-height: 1;
+  margin-bottom: var(--space-2);
+}
+.fact__label { font-size: var(--text-body-sm); color: var(--ink-soft); }
+
+/* ==========================================================================
+   PROGRAM PILLARS
+   ========================================================================== */
+.pillars {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-6);
+}
+.pillar { display: flex; flex-direction: column; }
+.pillar__art {
+  border: 2.5px solid var(--ink);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  margin-bottom: var(--space-4);
+  aspect-ratio: 4 / 3;
+}
+.pillar__art img { width: 100%; height: 100%; object-fit: cover; }
+.pillar h3 { font-size: var(--text-heading-lg); margin-bottom: var(--space-2); }
+.pillar p { margin-bottom: var(--space-4); }
+.pillar__list { margin-top: auto; display: flex; flex-wrap: wrap; gap: var(--space-2); }
+
+/* ==========================================================================
+   WHO WE SERVE
+   ========================================================================== */
+.serve {
+  background-image: url('assets/textures/notebook-plaid-yellow-green.jpg');
+  background-size: 340px;
+  border-block: 3px solid var(--ink);
+}
+.serve__inner {
+  display: grid;
+  grid-template-columns: 1.1fr .9fr;
+  gap: var(--space-7);
+  align-items: center;
+}
+/* the sheet already is the panel here — don't stack a second sheet of paper
+   on top of the first one */
+.serve__panel {
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  padding: 0;
+}
+.serve__list { display: grid; gap: var(--space-4); margin-top: var(--space-5); }
+.serve__list li {
+  display: flex;
+  gap: var(--space-3);
+  align-items: flex-start;
+  font-size: var(--text-body-md);
+}
+.serve__star { flex: 0 0 auto; color: var(--yellow-deep); font-size: 1.3em; line-height: 1.1; }
+
+.quote-card { background: #fff; padding: var(--space-3); }
+.quote-card img { border-radius: var(--radius-sm); }
+.quote-card figcaption {
+  font-size: var(--text-body-sm);
+  color: var(--ink-soft);
+  text-align: center;
+  padding-top: var(--space-3);
+}
+
+/* ==========================================================================
+   LISTENING / NEEDS ASSESSMENT
+   ========================================================================== */
+.listen__grid {
+  display: grid;
+  grid-template-columns: .85fr 1.15fr;
+  gap: var(--space-8);
+  align-items: start;
+}
+
+.pull-quote {
+  background: var(--pink-soft);
+  position: sticky;
+  top: var(--space-5);
+}
+.pull-quote blockquote {
+  font-family: var(--font-display);
+  font-size: var(--text-heading-lg);
+  line-height: var(--leading-snug);
+  color: var(--ink);
+}
+.pull-quote figcaption {
+  margin-top: var(--space-4);
+  font-size: var(--text-body-md);
+  color: var(--ink-soft);
+}
+
+.stat-list { display: grid; gap: var(--space-4); margin-top: var(--space-5); }
+.stat-list li {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: var(--space-4);
+  align-items: center;
+  padding: var(--space-4) var(--space-5);
+}
+.stat-list__value {
+  font-family: var(--font-display);
+  font-size: var(--text-heading-lg);
+  color: var(--green-deep);
+  line-height: 1;
+}
+
+/* ==========================================================================
+   AN AFTERNOON — the weekly schedule (Mon / Tue / Thu)
+   ========================================================================== */
+.week {
+  margin-top: var(--space-6);
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-5);
+}
+
+.day-card {
+  background: var(--paper-cream);
+  border: 2.5px solid var(--border-ink);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-crayon);
+  padding: var(--space-5);
+}
+.day-card__name {
+  font-size: var(--text-heading-lg);
+  padding-bottom: var(--space-3);
+  margin-bottom: var(--space-4);
+  border-bottom: 3px dashed var(--green);
+}
+
+.day-card__list { display: grid; gap: var(--space-4); }
+.day-card__list li {
+  display: grid;
+  gap: var(--space-1);
+  background: var(--surface-card);
+  border: 2px solid var(--ink);
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-crayon-sm);
+  padding: var(--space-3) var(--space-4);
+}
+.day-card__list strong {
+  font-family: var(--font-display);
+  font-size: var(--text-heading-md);
+  font-weight: 400;
+  color: var(--text-heading);
+  line-height: var(--leading-tight);
+}
+.day-card__list p { font-size: var(--text-body-sm); margin-top: var(--space-1); }
+
+.slot__time {
+  font-family: var(--font-hand);
+  font-weight: 700;
+  font-size: var(--text-body-sm);
+  color: var(--ink);
+}
+.slot__label {
+  justify-self: start;
+  font-family: var(--font-hand);
+  font-size: var(--text-label);
+  background: var(--yellow);
+  border: 2px solid var(--ink);
+  border-radius: var(--radius-pill);
+  padding: 0 var(--space-3);
+  margin-bottom: var(--space-1);
+}
+
+/* the two short, unglamorous slots stay visually quiet */
+.day-card__list .slot--transition,
+.day-card__list .slot--pickup {
+  grid-template-columns: auto 1fr;
+  align-items: baseline;
+  gap: var(--space-3);
+  background: transparent;
+  border: none;
+  border-left: 3px dashed var(--border-soft);
+  border-radius: 0;
+  box-shadow: none;
+  padding: var(--space-1) var(--space-4);
+}
+.day-card__list .slot--transition strong,
+.day-card__list .slot--pickup strong {
+  font-family: var(--font-hand);
+  font-size: var(--text-body-sm);
+  color: var(--ink-soft);
+  font-weight: 400;
+}
+
+/* ==========================================================================
+   TEAM
+   ========================================================================== */
+.team {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-6);
+}
+.team__card { display: flex; flex-direction: column; gap: var(--space-3); }
+.team__card h3 { font-size: var(--text-heading-lg); }
+.team__card .tag { align-self: flex-start; background: var(--green-soft); }
+
+.partners { margin-top: var(--space-7); }
+
+/* ==========================================================================
+   GET INVOLVED
+   ========================================================================== */
+.involve {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-6);
+}
+.involve__card { display: flex; flex-direction: column; gap: var(--space-3); }
+.involve__card h3 { font-size: var(--text-heading-lg); }
+.involve__card ul { display: grid; gap: var(--space-2); }
+.involve__card li { display: flex; gap: var(--space-2); font-size: var(--text-body-sm); }
+.involve__card li::before { content: '✦'; color: var(--green-deep); flex: 0 0 auto; }
+.involve__card .btn { margin-top: auto; align-self: flex-start; }
+
+/* ==========================================================================
+   DONATE BAND
+   ========================================================================== */
+.donate {
+  background-image: url('assets/textures/gingham-stars-green.jpg');
+  background-size: 300px;
+  border-block: 3px solid var(--ink);
+  text-align: center;
+}
+.donate__panel {
+  max-width: 720px;
+  margin-inline: auto;
+  background: var(--paper);
+  text-align: center;
+}
+.donate__panel p { margin-block: var(--space-4) var(--space-6); font-size: var(--text-body-lg); }
+.donate__actions { display: flex; gap: var(--space-4); justify-content: center; flex-wrap: wrap; }
+.donate__fine { margin-top: var(--space-5) !important; font-size: var(--text-body-sm) !important; color: var(--ink-soft); }
+
+/* ==========================================================================
+   CONTACT
+   ========================================================================== */
+.contact__grid {
+  display: grid;
+  grid-template-columns: .85fr 1.15fr;
+  gap: var(--space-8);
+  align-items: start;
+}
+.contact__aside p + p { margin-top: var(--space-4); }
+.contact__detail {
+  margin-top: var(--space-5);
+  display: grid;
+  gap: var(--space-3);
+  font-size: var(--text-body-md);
+}
+.contact__detail strong { font-family: var(--font-hand); color: var(--ink); }
+
+.form { display: grid; gap: var(--space-5); }
+.field { display: grid; gap: var(--space-2); }
+.field > label {
+  font-family: var(--font-hand);
+  font-weight: 700;
+  color: var(--ink);
+  font-size: var(--text-body-md);
+}
+.field input,
+.field textarea,
+.field select {
+  font-family: var(--font-body);
+  font-size: var(--text-body-md);
+  background: #fff;
+  border: 2.5px solid var(--ink);
+  border-radius: var(--radius-md);
+  padding: var(--space-3) var(--space-4);
+  box-shadow: var(--shadow-crayon-sm);
+  transition: transform var(--duration-fast) var(--ease-out);
+}
+.field textarea { resize: vertical; min-height: 130px; }
+.field input:focus, .field textarea:focus, .field select:focus { transform: translateY(-1px); }
+.field[data-invalid='true'] input,
+.field[data-invalid='true'] textarea,
+.field[data-invalid='true'] select { border-color: var(--red-crayon); }
+.field__error {
+  font-size: var(--text-body-sm);
+  color: var(--red-crayon);
+  min-height: 0;
+  display: none;
+}
+.field[data-invalid='true'] .field__error { display: block; }
+
+.form__row { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-5); }
+.form__foot { display: flex; align-items: center; gap: var(--space-4); flex-wrap: wrap; }
+.form__note { font-size: var(--text-body-sm); color: var(--ink-soft); }
+
+/* toast */
+.toast {
+  position: fixed;
+  left: 50%;
+  bottom: var(--space-6);
+  transform: translate(-50%, 140%) rotate(-1.5deg);
+  background: var(--yellow);
+  border: 2.5px solid var(--ink);
+  border-radius: var(--radius-pill);
+  box-shadow: var(--shadow-crayon);
+  padding: var(--space-3) var(--space-6);
+  font-family: var(--font-hand);
+  font-weight: 700;
+  color: var(--ink);
+  z-index: 60;
+  transition: transform var(--duration-med) var(--ease-bounce);
+}
+.toast.is-visible { transform: translate(-50%, 0) rotate(-1.5deg); }
+
+/* ==========================================================================
+   FOOTER
+   ========================================================================== */
+.footer {
+  background-image: url('assets/textures/forest-stars-pattern.jpg');
+  background-size: 300px;
+  border-top: 3px solid var(--ink);
+  padding-block: var(--space-8);
+  color: var(--paper);
+}
+.footer__panel {
+  background: var(--paper);
+  color: var(--text-body);
+  display: grid;
+  grid-template-columns: 1.2fr 1fr 1fr;
+  gap: var(--space-6);
+}
+.footer__brand { display: flex; align-items: center; gap: var(--space-3); margin-bottom: var(--space-3); }
+.footer__brand img { width: 60px; }
+.footer h4 { font-size: var(--text-heading-sm); margin-bottom: var(--space-3); }
+.footer__list { display: grid; gap: var(--space-2); font-size: var(--text-body-sm); }
+.footer__list a { text-decoration: none; border-bottom: 2px solid transparent; }
+.footer__list a:hover { border-bottom-color: var(--pink); }
+.footer__legal {
+  margin-top: var(--space-6);
+  text-align: center;
+  font-size: var(--text-body-sm);
+  color: var(--paper-cream);
+  text-shadow: 0 1px 3px rgba(24, 46, 22, .85);
+}
+
+/* ==========================================================================
+   SCROLL REVEAL
+   ========================================================================== */
+.reveal { opacity: 0; transform: translateY(18px); }
+.reveal.is-in {
+  opacity: 1;
+  transform: none;
+  transition: opacity 500ms var(--ease-out), transform 500ms var(--ease-out);
+}
+/* keep the hand-placed tilts once revealed */
+.reveal.tilt-1.is-in { transform: rotate(var(--rotate-sticker-1)); }
+.reveal.tilt-2.is-in { transform: rotate(var(--rotate-sticker-2)); }
+.reveal.tilt-3.is-in { transform: rotate(var(--rotate-sticker-3)); }
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal { opacity: 1; transform: none; }
+}
+
+/* ==========================================================================
+   CUT-OUT DOODLES
+   These drawings have had their white paper knocked out, so they sit straight
+   on the page like stickers instead of inside a white frame.
+   ========================================================================== */
+.art-bare {
+  background: none;
+  border: none;
+  box-shadow: none;
+  padding: 0;
+  max-width: 340px;
+}
+.art-bare img { border-radius: 0; }
+
+.cutout {
+  /* the frames used multiply to hide their white box — a cut-out doesn't
+     need it, and multiply would only muddy the colours against the paper */
+  mix-blend-mode: normal;
+  filter: drop-shadow(1px 3px 2px rgba(74, 64, 50, .22));
+}
+
+/* ==========================================================================
+   RESPONSIVE
+   ========================================================================== */
+@media (max-width: 960px) {
+  .hero__grid,
+  .about__grid,
+  .serve__inner,
+  .listen__grid,
+  .contact__grid { grid-template-columns: 1fr; }
+  .pillars, .involve, .team, .week { grid-template-columns: 1fr; }
+  .pull-quote { position: static; }
+  .day-card.tilt-2, .reveal.day-card.tilt-2.is-in { transform: none; }
+  .footer__panel { grid-template-columns: 1fr; }
+  .hero__art { order: -1; }
+  .hero__art-mini { display: none; }
+
+  .nav__toggle { display: block; }
+  .nav__links {
+    display: none;
+    position: absolute;
+    top: calc(100% + 10px);
+    right: var(--space-5);
+    left: var(--space-5);
+    flex-direction: column;
+    align-items: stretch;
+    gap: var(--space-4);
+    background: var(--paper);
+    border: 2.5px solid var(--ink);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-crayon);
+    padding: var(--space-5);
+  }
+  .nav__links.is-open { display: flex; }
+  .nav__link { border-bottom: 2.5px dashed var(--border-soft); padding-bottom: var(--space-2); }
+}
+
+@media (max-width: 720px) {
+  /* narrower page: pull the margin rule in and lose the stitching */
+  .sheet {
+    --sheet-margin: 34px;
+    --rule-gap: 28px;
+    padding: var(--space-6) var(--space-4) var(--space-6) calc(var(--sheet-margin) + var(--space-3));
+  }
+  .sheet::after { display: none; }
+  .sheet, .sheet--first,
+  #programs .sheet, #team .sheet, #contact .sheet,
+  #listening .sheet, #involved .sheet { transform: none; }
+  .book__scene { width: min(300px, 72vw); }
+}
+
+@media (max-width: 560px) {
+  .section { padding-block: var(--space-7); }
+  .form__row { grid-template-columns: 1fr; }
+  .about__facts { grid-template-columns: 1fr; }
+  .stat-list li { grid-template-columns: 1fr; gap: var(--space-2); }
+  .day-card { padding: var(--space-4); }
+  .card { padding: var(--space-4); }
+  .card--lg { padding: var(--space-5); }
+}

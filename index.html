@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>HAVEN — the home for arts, voices, enrichment, and nurturing</title>
+<meta name="description" content="HAVEN is an after-school program inside Jane Addams Place, a family shelter in North Philadelphia. Storytelling, movement, and art for kids in grades K–5 — and a few hours back for their caregivers.">
+
+<link rel="icon" href="assets/logo.png">
+<!-- design system tokens (colors, type, spacing, fonts, effects) -->
+<link rel="stylesheet" href="styles.css">
+<!-- page styles -->
+<link rel="stylesheet" href="site.css">
+<!-- content that fades in on scroll must still be visible without JS -->
+<noscript><style>.reveal { opacity: 1 !important; transform: none !important; }</style></noscript>
+<!-- The notebook cover is only shown when JS can also open it again.
+     Without this flag it stays hidden and the site loads straight in. -->
+<script>document.documentElement.className += ' js';</script>
+</head>
+
+<body class="is-loading">
+
+<!-- ============================================== NOTEBOOK COVER ======== -->
+<div class="book" id="book" aria-hidden="true">
+  <div class="book__scene">
+    <!-- the first page, waiting underneath -->
+    <div class="book__page"></div>
+
+    <!-- the cover that swings open -->
+    <div class="book__cover">
+      <img src="assets/illustrations/comp-book-cover-brand.jpg" alt="">
+      <div class="book__label">
+        <span class="book__label-kicker">composition book</span>
+        <span class="book__label-name">HAVEN</span>
+        <span class="book__label-sub">arts · voices · enrichment · nurturing</span>
+      </div>
+      <span class="book__tape book__tape--tl"></span>
+      <span class="book__tape book__tape--br"></span>
+    </div>
+  </div>
+</div>
+
+<a class="skip-link" href="#main">skip to content</a>
+
+<!-- ======================================================== NAV ========= -->
+<header class="nav">
+  <div class="container nav__inner">
+    <a class="nav__brand" href="#top">
+      <img class="nav__logo" src="assets/logo.png" alt="HAVEN logo — a little green house with stars">
+      <span class="nav__wordmark">HAVEN</span>
+    </a>
+
+    <button class="nav__toggle" id="navToggle" aria-expanded="false" aria-controls="navLinks" aria-label="Open menu">
+      <span class="nav__toggle-bars"><span></span><span></span><span></span></span>
+    </button>
+
+    <nav class="nav__links" id="navLinks" aria-label="Main">
+      <a class="nav__link" href="#about">about</a>
+      <a class="nav__link" href="#programs">what we do</a>
+      <a class="nav__link" href="#day">an afternoon</a>
+      <a class="nav__link" href="#team">our team</a>
+      <a class="nav__link" href="#involved">get involved</a>
+      <a class="nav__link" href="#contact">contact</a>
+      <!-- TODO: swap "#donate" for your donation platform URL (Givebutter / Stripe / PayPal) -->
+      <a class="btn btn--primary btn--sm" href="#donate">donate</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+<span id="top"></span>
+
+<!-- ======================================================= HERO ========= -->
+<section class="hero">
+  <div class="container sheet sheet--first hero__grid">
+    <div class="hero__copy">
+      <h1 class="display-xl hero__title">A soft place to land,<br><em>after school.</em></h1>
+
+      <blockquote class="lede hero__mission">
+        HAVEN nurtures the success of the whole family on the journey towards stable housing —
+        through joyful child enrichment that alleviates caregiver burdens.
+      </blockquote>
+
+      <p class="lede muted">
+        We're an after-school program built right inside a family shelter. Three afternoons a week,
+        kids in grades K–5 get to draw, move, and tell their own stories — and their caregivers get
+        a few reliable hours to work on what comes next.
+      </p>
+
+      <div class="hero__actions" style="margin-top: var(--space-6);">
+        <a class="btn btn--primary btn--lg" href="#donate">support the pilot</a>
+        <a class="btn btn--ghost btn--lg" href="#day">see what an afternoon looks like</a>
+      </div>
+
+      <p class="hero__note">
+        Our pilot runs at <strong>Jane Addams Place</strong>, a family shelter in North Philadelphia.
+        First program period: <strong>July–December 2026</strong>.
+      </p>
+    </div>
+
+    <div class="hero__art">
+      <span class="sticker hero__sticker">pilot program</span>
+      <figure class="hero__art-card art-bare">
+        <img class="cutout" src="assets/illustrations/cat-star-buddy.png"
+             alt="A hand-drawn black cat sitting in a big yellow star">
+      </figure>
+      <div class="hero__art-mini art-bare">
+        <img class="cutout" src="assets/illustrations/red-spiral-stars-yellow.png"
+             alt="Small crayon drawing of a red spiral surrounded by yellow stars">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====================================================== ABOUT ========= -->
+<section class="section about" id="about">
+  <div class="container sheet about__grid">
+    <div class="about__text">
+      <span class="eyebrow">about us</span>
+      <h2 class="display-lg">The home for arts, voices, enrichment, and nurturing.</h2>
+
+      <p class="lede" style="margin-top: var(--space-5);">
+        In 2024, nearly a third of Philadelphians without housing were families with children. When
+        a family lands in a shelter, the building is built for beds and paperwork — not for
+        childhood. School lets out, and there's nowhere for a seven-year-old to be a seven-year-old.
+      </p>
+
+      <p>
+        HAVEN takes that gap seriously. We turn a few hours of the shelter's afternoon into a room
+        that belongs to the kids: art on the tables, music on, room to run, and grown-ups who know
+        their names. Nothing is graded. Nothing gets corrected. What a child makes is theirs.
+      </p>
+
+      <p>
+        And while their child is with us, a caregiver has something rare — time. Time for a housing
+        appointment, a job interview, a phone call that can't happen with a five-year-old on their
+        lap. Supporting the child and supporting the caregiver aren't two programs. They're the
+        same one.
+      </p>
+
+      <p>
+        We started small on purpose, at one shelter, with one cohort — and we're documenting every
+        step so other shelters can run this too.
+      </p>
+    </div>
+
+    <div class="about__facts">
+      <div class="card card--pink tilt-1 reveal fact">
+        <span class="fact__value">40</span>
+        <span class="fact__label">children across two semesters</span>
+      </div>
+      <div class="card card--yellow reveal fact">
+        <span class="fact__value">3</span>
+        <span class="fact__label">afternoons a week — Mon, Tue, Thu</span>
+      </div>
+      <div class="card card--green tilt-2 reveal fact">
+        <span class="fact__value">K–5</span>
+        <span class="fact__label">the grades we serve</span>
+      </div>
+      <div class="card card--cream reveal fact">
+        <span class="fact__value">1:5</span>
+        <span class="fact__label">one grown-up for every five kids</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================================================== LISTENING ======= -->
+<section class="section section--tight" id="listening">
+  <div class="container sheet listen__grid">
+    <figure class="card card--lg pull-quote tilt-1 reveal">
+      <blockquote>
+        “It takes a village to raise a child. When that support isn't around families, the stress
+        becomes overwhelming. When organizations step in to surround these caregivers, it truly
+        makes a difference.”
+      </blockquote>
+      <figcaption>— a caregiver at Jane Addams Place</figcaption>
+    </figure>
+
+    <div class="listen__text">
+      <span class="eyebrow">we asked first</span>
+      <h2 class="display-md" style="margin-top: var(--space-2);">We built this from what families told us.</h2>
+      <p style="margin-top: var(--space-4);">
+        Before we designed a single session, we sat down with caregivers at Jane Addams Place and
+        asked what would actually help. Here's what they said, in November 2025:
+      </p>
+
+      <ul class="stat-list">
+        <li class="card card--cream reveal">
+          <span class="stat-list__value">100%</span>
+          <span>said their kids needed more help with schoolwork</span>
+        </li>
+        <li class="card card--cream tilt-3 reveal">
+          <span class="stat-list__value">88%</span>
+          <span>said after-school programming would let them work, train, or make appointments</span>
+        </li>
+        <li class="card card--cream reveal">
+          <span class="stat-list__value">88%</span>
+          <span>said their kids needed more supervised physical activity</span>
+        </li>
+        <li class="card card--cream tilt-3 reveal">
+          <span class="stat-list__value">88%</span>
+          <span>wanted more positive, constructive things for their kids to do</span>
+        </li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- =================================================== PROGRAMS ========= -->
+<section class="section" id="programs">
+  <div class="container sheet">
+    <div class="section-head">
+      <span class="eyebrow">what we do</span>
+      <h2 class="display-lg">Three threads, woven into every afternoon.</h2>
+      <p class="muted">
+        Sessions aren't a schedule of separate classes. Storytelling, movement, and art keep folding
+        into each other — a story becomes a dance, a dance becomes a drawing.
+      </p>
+    </div>
+
+    <div class="pillars">
+      <article class="card card--lg pillar wobble reveal">
+        <div class="pillar__art">
+          <img class="doodle" src="assets/illustrations/word-search-doodle-green.jpg"
+               alt="Hand-drawn notebook page covered in colorful letters and doodles">
+        </div>
+        <h3>storytelling</h3>
+        <p>
+          We read out loud together — stopping to ask questions, argue with the characters, and
+          wonder what happens next. Then the kids write and draw their own. By the end of the
+          semester, every child has a book with their name on the cover.
+        </p>
+        <div class="pillar__list">
+          <span class="tag">reading together</span>
+          <span class="tag">story mapping</span>
+          <span class="tag">making our own books</span>
+        </div>
+      </article>
+
+      <article class="card card--lg pillar wobble tilt-2 reveal">
+        <div class="pillar__art">
+          <img class="doodle" src="assets/illustrations/starfish-what-are-we-doing-green.jpg"
+               alt="Hand-drawn starfish characters asking what are we doing">
+        </div>
+        <h3>movement</h3>
+        <p>
+          Shelter life is short on room to run. So we make room — cooperative games, parachute days,
+          tug-of-war, and choreography built with CityStep. It's how kids shake off a long day and
+          learn to work with each other at the same time.
+        </p>
+        <div class="pillar__list">
+          <span class="tag">cooperative games</span>
+          <span class="tag">dance &amp; choreography</span>
+          <span class="tag">settling down together</span>
+        </div>
+      </article>
+
+      <article class="card card--lg pillar wobble reveal">
+        <div class="pillar__art">
+          <img class="doodle" src="assets/illustrations/doodle-sticker-sheet-pink.jpg"
+               alt="Sheet of hand-drawn stickers — flowers, hearts, a strawberry and a smiling cloud">
+        </div>
+        <h3>art</h3>
+        <p>
+          Open studio and guided art therapy sessions with the Kardon Center. Some feelings are
+          easier to paint than to say out loud, and a kid who's had a hard week gets to put it
+          somewhere. Materials are good ones, and there's no wrong way to use them.
+        </p>
+        <div class="pillar__list">
+          <span class="tag">open studio</span>
+          <span class="tag">guided art therapy</span>
+          <span class="tag">take-home projects</span>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ======================================================== DAY ========= -->
+<section class="section serve" id="day">
+  <div class="container sheet">
+    <div class="card card--lg serve__panel reveal">
+      <span class="eyebrow">an afternoon at HAVEN</span>
+      <h2 class="display-md" style="margin-top: var(--space-2);">What actually happens, hour by hour.</h2>
+      <p class="muted" style="margin-top: var(--space-3); max-width: 62ch;">
+        We meet Mondays, Tuesdays, and Thursdays, 3:30 to 5:45. The is the same every time —
+        a lighter warm-up block, a short breather, then the main event. Kids who've had a lot of
+        upheaval shouldn't have to guess what's coming next.
+      </p>
+
+      <div class="week">
+        <article class="day-card reveal">
+          <h3 class="day-card__name">Mondays</h3>
+          <ol class="day-card__list">
+            <li>
+              <span class="slot__time">3:30 – 4:15</span>
+              <span class="slot__label">warm-up</span>
+              <strong>Arts creation</strong>
+              <p>Loosen up with paint, clay, and paper. No prompt, no wrong answers.</p>
+            </li>
+            <li class="slot--transition"><span class="slot__time">4:20 – 4:30</span><strong>A breather</strong></li>
+            <li>
+              <span class="slot__time">4:30 – 5:30</span>
+              <span class="slot__label">main block</span>
+              <strong>Storytelling &amp; writing</strong>
+              <p>Reading out loud together, then writing and drawing our own — building toward each child's book.</p>
+            </li>
+            <li class="slot--pickup"><span class="slot__time">5:30 – 5:45</span><strong>Pickup</strong></li>
+          </ol>
+        </article>
+
+        <article class="day-card tilt-2 reveal">
+          <h3 class="day-card__name">Tuesdays</h3>
+          <ol class="day-card__list">
+            <li>
+              <span class="slot__time">3:30 – 4:15</span>
+              <span class="slot__label">warm-up</span>
+              <strong>Open gym</strong>
+              <p>Room to run. Cooperative games, parachute, tag — whatever burns off the school day.</p>
+            </li>
+            <li class="slot--transition"><span class="slot__time">4:20 – 4:30</span><strong>A breather</strong></li>
+            <li>
+              <span class="slot__time">4:30 – 5:30</span>
+              <span class="slot__label">main block</span>
+              <!-- NOTE: Kardon Center partnership is marked "need to confirm" on the schedule.
+                   Copy below is deliberately soft — tighten it once the partnership is signed. -->
+              <strong>Art therapy</strong>
+              <p>Guided sessions with a trained art therapist. Some feelings are easier to paint than to say.</p>
+            </li>
+            <li class="slot--pickup"><span class="slot__time">5:30 – 5:45</span><strong>Pickup</strong></li>
+          </ol>
+        </article>
+
+        <article class="day-card reveal">
+          <h3 class="day-card__name">Thursdays</h3>
+          <ol class="day-card__list">
+            <li>
+              <span class="slot__time">3:30 – 4:15</span>
+              <span class="slot__label">warm-up</span>
+              <strong>Homework help</strong>
+              <p>A quiet table, a grown-up beside you, and someone to check it when you're done.</p>
+            </li>
+            <li class="slot--transition"><span class="slot__time">4:20 – 4:30</span><strong>A breather</strong></li>
+            <li>
+              <span class="slot__time">4:30 – 5:30</span>
+              <span class="slot__label">main block</span>
+              <strong>Dance &amp; movement</strong>
+              <p>Rhythm games and choreography built together — learning to move as a group.</p>
+            </li>
+            <li class="slot--pickup"><span class="slot__time">5:30 – 5:45</span><strong>Pickup</strong></li>
+          </ol>
+        </article>
+      </div>
+
+      <p class="muted" style="margin-top: var(--space-6);">
+        Every session starts with hellos and a snack — nobody learns anything hungry. Four adults are
+        in the room the whole time: two program leads, two undergraduate mentors, and a paid
+        high-school intern from the shelter itself. Our team stays after pickup to talk through how
+        the day went.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ==================================================== FAMILIES ======== -->
+<section class="section" id="families">
+  <div class="container sheet serve__inner">
+    <div class="card card--lg reveal">
+      <span class="eyebrow">who we serve</span>
+      <h2 class="display-md" style="margin-top: var(--space-2);">Whole families, not just enrolled kids.</h2>
+
+      <ul class="serve__list">
+        <li><span class="serve__star">★</span><span><strong>Children in grades K–5</strong> living at the shelter — about 40 of them across two semesters.</span></li>
+        <li><span class="serve__star">★</span><span><strong>Around 30 caregivers</strong>, who get consistent, predictable hours back to work toward housing and employment.</span></li>
+        <li><span class="serve__star">★</span><span><strong>About 10 high-school interns</strong> each semester, hired from within the shelter and paid for their work with the younger kids.</span></li>
+        <li><span class="serve__star">★</span><span><strong>Shelter staff and case managers</strong>, who we work alongside rather than around.</span></li>
+      </ul>
+
+      <p style="margin-top: var(--space-5);" class="muted">
+        Enrollment is free. Families move a lot; a child who leaves and comes back is still ours.
+      </p>
+    </div>
+
+    <figure class="card quote-card tilt-2 reveal">
+      <img class="doodle" src="assets/illustrations/quote-glad-you-exist-pink.jpg"
+           alt="Hand-lettered drawing reading: im so glad that you exist">
+      <figcaption>the whole idea, in five words.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- ======================================================= TEAM ========= -->
+<section class="section" id="team">
+  <div class="container sheet">
+    <div class="section-head">
+      <span class="eyebrow">who's behind this</span>
+      <h2 class="display-lg">Three of us, and four years of Wednesdays.</h2>
+      <p class="muted">
+        For the past four years we've spent after-school hours in Philadelphia's shelters — dancing,
+        reading, and giving caregivers a brief moment of respite. HAVEN grew out of those afternoons.
+      </p>
+    </div>
+
+    <div class="team">
+      <article class="card card--lg team__card wobble reveal">
+        <h3>Chloe Chang</h3>
+        <span class="tag">operations &amp; storytelling</span>
+        <p>
+          Builds the volunteer and fundraising side of things, and wrote a picture book for children
+          experiencing homelessness. Studying English and creative writing at Penn.
+        </p>
+      </article>
+
+      <article class="card card--lg team__card wobble tilt-2 reveal">
+        <h3>Connie Ni</h3>
+        <span class="tag">program design &amp; movement</span>
+        <p>
+          Designs and evaluates health programs in shelters, and teaches the movement side of HAVEN.
+          Studying health and societies at Penn.
+        </p>
+      </article>
+
+      <article class="card card--lg team__card wobble reveal">
+        <h3>Darlene Justicia Leohansson</h3>
+        <span class="tag">programs &amp; arts-based therapy</span>
+        <p>
+          Designs arts-integrated curricula and has taught in classrooms and community settings
+          across the city. Studying neuroscience and fine arts at Penn.
+        </p>
+      </article>
+    </div>
+
+    <div class="card card--cream partners reveal">
+      <h3 class="heading-md">We don't do this alone.</h3>
+      <p class="muted" style="margin-top: var(--space-3);">
+        HAVEN was built with the families and staff of Jane Addams Place, and we work with the
+        Kardon Center, CityStep, Tree House Books, and Mural Arts Philadelphia. Dr. Caroline Watts
+        of Penn's Graduate School of Education advises the program, and Penn's Early Childhood and
+        Family Research Center is helping us measure whether it works.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- =================================================== INVOLVED ========= -->
+<section class="section" id="involved">
+  <div class="container sheet">
+    <div class="section-head">
+      <span class="eyebrow">get involved</span>
+      <h2 class="display-lg">There's more than one way to help.</h2>
+      <p class="muted">A program this size runs on people showing up. Any of these matter.</p>
+    </div>
+
+    <div class="involve">
+      <article class="card card--lg card--cream involve__card wobble reveal">
+        <span class="sticker sticker--yellow">most needed</span>
+        <h3>volunteer</h3>
+        <p>
+          Sit on the floor and be a steady grown-up. We train you, and we ask for consistency over
+          hours — the same face every week matters more than one big shift.
+        </p>
+        <ul>
+          <li>session assistants</li>
+          <li>read-aloud partners</li>
+          <li>supply prep &amp; setup</li>
+        </ul>
+        <a class="btn btn--secondary" href="#contact" data-prefill="volunteer">ask about volunteering</a>
+      </article>
+
+      <article class="card card--lg involve__card wobble reveal">
+        <h3>partner with us</h3>
+        <p>
+          We're building HAVEN to be copied. If you run a shelter, a school, a clinic, or a family
+          services program — or you teach art or movement — we'd like to talk.
+        </p>
+        <ul>
+          <li>shelters &amp; transitional housing</li>
+          <li>schools &amp; family services</li>
+          <li>art &amp; movement practitioners</li>
+        </ul>
+        <a class="btn btn--secondary" href="#contact" data-prefill="partnership">start a conversation</a>
+      </article>
+
+      <article class="card card--lg involve__card wobble tilt-2 reveal">
+        <h3>give supplies</h3>
+        <p>
+          In-kind gifts go straight into the room — crayons, paper, clay, books, snacks, yoga mats.
+          We'll send you the current list before you buy anything.
+        </p>
+        <ul>
+          <li>art materials &amp; paper</li>
+          <li>picture books (multilingual welcome)</li>
+          <li>snacks &amp; floor cushions</li>
+        </ul>
+        <a class="btn btn--secondary" href="#contact" data-prefill="in-kind donation">request the supply list</a>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ===================================================== DONATE ========= -->
+<section class="section section--tight donate" id="donate">
+  <div class="container sheet">
+    <div class="card card--lg donate__panel reveal">
+      <span class="sticker sticker--pink">every bit helps</span>
+      <h2 class="display-md" style="margin-top: var(--space-4);">Fund an afternoon.</h2>
+      <p>
+        Your gift buys crayons and picture books, pays the art therapists and mentors who sit with
+        our kids, puts a stipend in a teenager's pocket, and gives a caregiver a few uninterrupted
+        hours to work on getting home.
+      </p>
+
+      <div class="donate__actions">
+        <!-- TODO: point both links at your donation platform (Givebutter / Stripe / PayPal / Zeffy) -->
+        <a class="btn btn--primary btn--lg" href="#" rel="noopener">donate once</a>
+        <a class="btn btn--accent btn--lg" href="#" rel="noopener">give monthly</a>
+      </div>
+
+      <p class="donate__fine">
+        <!-- PLACEHOLDER: 501(c)(3) filing is in progress per the budget. Add legal name + EIN once confirmed. -->
+        [HAVEN's 501(c)(3) status is in progress. Legal entity <strong>[name]</strong>,
+        EIN <strong>[00-0000000]</strong>. Donations will be tax-deductible to the extent allowed by law.]
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ==================================================== CONTACT ========= -->
+<section class="section" id="contact">
+  <div class="container sheet contact__grid">
+    <div class="contact__aside">
+      <span class="eyebrow">contact</span>
+      <h2 class="display-md" style="margin-top: var(--space-2);">Say hello.</h2>
+
+      <p style="margin-top: var(--space-4);">
+        Whether you want to enroll a child, volunteer an afternoon, or just ask what this is —
+        write to us. A real person reads every message.
+      </p>
+      <p class="muted">We usually reply within a few days.</p>
+
+      <div class="contact__detail">
+        <!-- PLACEHOLDER: replace with your real contact details -->
+        <div><strong>email</strong><br>[hello@haven-example.org]</div>
+        <div><strong>phone</strong><br>[(000) 000-0000]</div>
+        <div><strong>where we are</strong><br>Jane Addams Place<br>North Philadelphia, PA</div>
+      </div>
+
+      <figure class="art-bare tilt-1 reveal" style="margin-top: var(--space-6); max-width: 260px;">
+        <img class="cutout" src="assets/illustrations/cat-apple-buddy.png"
+             alt="Hand-drawn black cat peeking out of a red apple">
+      </figure>
+    </div>
+
+    <form class="card card--lg form" id="contactForm" novalidate>
+      <div class="form__row">
+        <div class="field" id="field-name">
+          <label for="name">your name</label>
+          <input id="name" name="name" type="text" autocomplete="name" placeholder="first and last">
+          <span class="field__error" id="err-name">please tell us your name.</span>
+        </div>
+
+        <div class="field" id="field-email">
+          <label for="email">email</label>
+          <input id="email" name="email" type="email" autocomplete="email" placeholder="you@example.com">
+          <span class="field__error" id="err-email">that email doesn't look quite right.</span>
+        </div>
+      </div>
+
+      <div class="field" id="field-topic">
+        <label for="topic">what's this about?</label>
+        <select id="topic" name="topic">
+          <option value="">choose one</option>
+          <option value="enrollment">enrolling my child</option>
+          <option value="volunteer">volunteering</option>
+          <option value="partnership">partnering with HAVEN</option>
+          <option value="in-kind donation">donating supplies</option>
+          <option value="something else">something else</option>
+        </select>
+        <span class="field__error" id="err-topic">pick whichever is closest.</span>
+      </div>
+
+      <div class="field" id="field-message">
+        <label for="message">your message</label>
+        <textarea id="message" name="message" placeholder="tell us as much or as little as you like."></textarea>
+        <span class="field__error" id="err-message">a sentence or two is plenty.</span>
+      </div>
+
+      <div class="form__foot">
+        <button class="btn btn--primary btn--lg" type="submit">send it</button>
+        <span class="form__note">
+          <!-- NOTE: front-end only. Wire this to Formspree/Netlify Forms/your backend before launch. -->
+          We'll only use this to reply to you.
+        </span>
+      </div>
+    </form>
+  </div>
+</section>
+</main>
+
+<!-- ====================================================== FOOTER ======== -->
+<footer class="footer">
+  <div class="container">
+    <div class="card card--lg footer__panel">
+      <div>
+        <div class="footer__brand">
+          <img src="assets/logo.png" alt="">
+          <span class="nav__wordmark">HAVEN</span>
+        </div>
+        <p class="muted" style="font-size: var(--text-body-sm);">
+          The Home for Arts, Voices, Enrichment, and Nurturing. An after-school program for children
+          living in shelter, based at Jane Addams Place in North Philadelphia.
+        </p>
+      </div>
+
+      <div>
+        <h4>on this page</h4>
+        <ul class="footer__list">
+          <li><a href="#about">about</a></li>
+          <li><a href="#programs">what we do</a></li>
+          <li><a href="#day">an afternoon</a></li>
+          <li><a href="#team">our team</a></li>
+          <li><a href="#involved">get involved</a></li>
+          <li><a href="#donate">donate</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4>reach us</h4>
+        <ul class="footer__list">
+          <!-- PLACEHOLDER: real details + social links go here -->
+          <li>[hello@haven-example.org]</li>
+          <li>[(000) 000-0000]</li>
+          <li>North Philadelphia, PA</li>
+          <li><a href="#contact">send a message</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <p class="footer__legal">
+      © <span id="year">2026</span> HAVEN. Illustrations and typefaces from the HAVEN design system —
+      Karumbi by onlinewebfonts.com (CC BY 4.0), Gaegu (OFL).
+    </p>
+  </div>
+</footer>
+
+<div class="toast" id="toast" role="status" aria-live="polite">thanks — your message is on its way!</div>
+
+<script src="site.js"></script>
+</body>
+</html>

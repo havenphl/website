@@ -1,0 +1,12 @@
+:root{
+--ease-bounce:cubic-bezier(.34,1.56,.64,1); /* @kind other */
+--ease-out:cubic-bezier(.22,.9,.36,1); /* @kind other */
+--duration-fast:120ms; /* @kind other */
+--duration-med:220ms; /* @kind other */
+--rotate-sticker-1:-3deg; /* @kind other */
+--rotate-sticker-2:2deg; /* @kind other */
+--rotate-sticker-3:-1.5deg; /* @kind other */
+}
+.wobble-hover{transition:transform var(--duration-med) var(--ease-bounce)}
+.wobble-hover:hover{transform:translateY(-3px) rotate(-1.5deg)}
+.press-shrink:active{transform:translateY(1px) scale(.97)}
