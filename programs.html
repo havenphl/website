@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>What we do — HAVEN</title>
+<meta name="description" content="Three afternoons a week at HAVEN: storytelling, movement, and art for children in grades K–5 living in shelter. Here is what an afternoon actually looks like.">
+
+<link rel="icon" href="assets/logo.png">
+<!-- design system tokens (colors, type, spacing, fonts, effects) -->
+<link rel="stylesheet" href="styles.css">
+<!-- page styles -->
+<link rel="stylesheet" href="site.css">
+<!-- content that fades in on scroll must still be visible without JS -->
+<noscript><style>.reveal { opacity: 1 !important; transform: none !important; }</style></noscript>
+<!-- The notebook cover is only shown when JS can also open it again.
+     Without this flag it stays hidden and the site loads straight in. -->
+<script>document.documentElement.className += ' js';</script>
+</head>
+
+<body class="is-loading">
+
+<!-- ============================================== NOTEBOOK COVER ======== -->
+<div class="book" id="book" aria-hidden="true">
+  <div class="book__scene">
+    <!-- the first page, waiting underneath -->
+    <div class="book__page"></div>
+
+    <!-- the cover that swings open -->
+    <div class="book__cover">
+      <img src="assets/illustrations/comp-book-cover-brand.jpg" alt="">
+      <div class="book__label">
+        <span class="book__label-kicker">composition book</span>
+        <span class="book__label-name">HAVEN</span>
+        <span class="book__label-sub">arts · voices · enrichment · nurturing</span>
+      </div>
+      <span class="book__tape book__tape--tl"></span>
+      <span class="book__tape book__tape--br"></span>
+    </div>
+  </div>
+</div>
+
+<a class="skip-link" href="#main">skip to content</a>
+
+<!-- ======================================================== NAV ========= -->
+<header class="nav">
+  <div class="container nav__inner">
+    <a class="nav__brand" href="index.html">
+      <img class="nav__lockup" src="assets/logo-lockup.png"
+           alt="HAVEN — Home for Arts, Voices, Enrichment, and Nurturing">
+    </a>
+
+    <button class="nav__toggle" id="navToggle" aria-expanded="false" aria-controls="navLinks" aria-label="Open menu">
+      <span class="nav__toggle-bars"><span></span><span></span><span></span></span>
+    </button>
+
+    <nav class="nav__links" id="navLinks" aria-label="Main">
+      <a class="nav__link" href="index.html">home</a>
+      <a class="nav__link is-current" href="programs.html" aria-current="page">what we do</a>
+      <a class="nav__link" href="about.html">about</a>
+      <a class="nav__link" href="involved.html">get involved</a>
+      <a class="btn btn--primary btn--sm" href="donate.html">donate</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+<span id="top"></span>
+
+<div class="container sheet">
+
+
+<section class="section" id="programs">
+  <div>
+    <div class="section-head">
+      <span class="eyebrow">what we do</span>
+      <h2 class="display-lg">Three threads, woven into every afternoon.</h2>
+      <p class="muted">
+        Sessions aren't a schedule of separate classes. Storytelling, movement, and art keep folding
+        into each other — a story becomes a dance, a dance becomes a drawing.
+      </p>
+    </div>
+
+    <div class="pillars">
+      <article class="card card--lg pillar wobble reveal">
+        <div class="pillar__art">
+          <img class="doodle" src="assets/illustrations/word-search-doodle-green.jpg"
+               alt="Hand-drawn notebook page covered in colorful letters and doodles">
+        </div>
+        <h3>storytelling</h3>
+        <p>
+          We read out loud together — stopping to ask questions, argue with the characters, and
+          wonder what happens next. Then the kids write and draw their own. By the end of the
+          semester, every child has a book with their name on the cover.
+        </p>
+        <div class="pillar__list">
+          <span class="tag">reading together</span>
+          <span class="tag">story mapping</span>
+          <span class="tag">making our own books</span>
+        </div>
+      </article>
+
+      <article class="card card--lg pillar wobble tilt-2 reveal">
+        <div class="pillar__art">
+          <img class="doodle" src="assets/illustrations/starfish-what-are-we-doing-green.jpg"
+               alt="Hand-drawn starfish characters asking what are we doing">
+        </div>
+        <h3>movement</h3>
+        <p>
+          Shelter life is short on room to run. So we make room — cooperative games, parachute days,
+          tug-of-war, and choreography built with CityStep. It's how kids shake off a long day and
+          learn to work with each other at the same time.
+        </p>
+        <div class="pillar__list">
+          <span class="tag">cooperative games</span>
+          <span class="tag">dance &amp; choreography</span>
+          <span class="tag">settling down together</span>
+        </div>
+      </article>
+
+      <article class="card card--lg pillar wobble reveal">
+        <div class="pillar__art">
+          <img class="doodle" src="assets/illustrations/doodle-sticker-sheet-pink.jpg"
+               alt="Sheet of hand-drawn stickers — flowers, hearts, a strawberry and a smiling cloud">
+        </div>
+        <h3>art</h3>
+        <p>
+          Open studio and guided art therapy sessions with the Kardon Center. Some feelings are
+          easier to paint than to say out loud, and a kid who's had a hard week gets to put it
+          somewhere. Materials are good ones, and there's no wrong way to use them.
+        </p>
+        <div class="pillar__list">
+          <span class="tag">open studio</span>
+          <span class="tag">guided art therapy</span>
+          <span class="tag">take-home projects</span>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="day">
+  <div>
+    <div class="card card--lg serve__panel reveal">
+      <span class="eyebrow">an afternoon at HAVEN</span>
+      <h2 class="display-md">What actually happens, hour by hour.</h2>
+      <p class="muted" style="max-width: 62ch;">
+        We meet Mondays, Tuesdays, and Thursdays, 3:30 to 5:45. The is the same every time —
+        a lighter warm-up block, a short breather, then the main event. Kids who've had a lot of
+        upheaval shouldn't have to guess what's coming next.
+      </p>
+
+      <div class="week">
+        <article class="day-card reveal">
+          <h3 class="day-card__name">Mondays</h3>
+          <ol class="day-card__list">
+            <li>
+              <span class="slot__time">3:30 – 4:15</span>
+              <span class="slot__label">warm-up</span>
+              <strong>Arts creation</strong>
+              <p>Loosen up with paint, clay, and paper. No prompt, no wrong answers.</p>
+            </li>
+            <li class="slot--transition"><span class="slot__time">4:20 – 4:30</span><strong>A breather</strong></li>
+            <li>
+              <span class="slot__time">4:30 – 5:30</span>
+              <span class="slot__label">main block</span>
+              <strong>Storytelling &amp; writing</strong>
+              <p>Reading out loud together, then writing and drawing our own — building toward each child's book.</p>
+            </li>
+            <li class="slot--pickup"><span class="slot__time">5:30 – 5:45</span><strong>Pickup</strong></li>
+          </ol>
+        </article>
+
+        <article class="day-card tilt-2 reveal">
+          <h3 class="day-card__name">Tuesdays</h3>
+          <ol class="day-card__list">
+            <li>
+              <span class="slot__time">3:30 – 4:15</span>
+              <span class="slot__label">warm-up</span>
+              <strong>Open gym</strong>
+              <p>Room to run. Cooperative games, parachute, tag — whatever burns off the school day.</p>
+            </li>
+            <li class="slot--transition"><span class="slot__time">4:20 – 4:30</span><strong>A breather</strong></li>
+            <li>
+              <span class="slot__time">4:30 – 5:30</span>
+              <span class="slot__label">main block</span>
+              <!-- NOTE: Kardon Center partnership is marked "need to confirm" on the schedule.
+                   Copy below is deliberately soft — tighten it once the partnership is signed. -->
+              <strong>Art therapy</strong>
+              <p>Guided sessions with a trained art therapist. Some feelings are easier to paint than to say.</p>
+            </li>
+            <li class="slot--pickup"><span class="slot__time">5:30 – 5:45</span><strong>Pickup</strong></li>
+          </ol>
+        </article>
+
+        <article class="day-card reveal">
+          <h3 class="day-card__name">Thursdays</h3>
+          <ol class="day-card__list">
+            <li>
+              <span class="slot__time">3:30 – 4:15</span>
+              <span class="slot__label">warm-up</span>
+              <strong>Homework help</strong>
+              <p>A quiet table, a grown-up beside you, and someone to check it when you're done.</p>
+            </li>
+            <li class="slot--transition"><span class="slot__time">4:20 – 4:30</span><strong>A breather</strong></li>
+            <li>
+              <span class="slot__time">4:30 – 5:30</span>
+              <span class="slot__label">main block</span>
+              <strong>Dance &amp; movement</strong>
+              <p>Rhythm games and choreography built together — learning to move as a group.</p>
+            </li>
+            <li class="slot--pickup"><span class="slot__time">5:30 – 5:45</span><strong>Pickup</strong></li>
+          </ol>
+        </article>
+      </div>
+
+      <p class="muted">
+        Every session starts with hellos and a snack — nobody learns anything hungry. Four adults are
+        in the room the whole time: two program leads, two undergraduate mentors, and a paid
+        high-school intern from the shelter itself. Our team stays after pickup to talk through how
+        the day went.
+      </p>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="families">
+  <div class="serve__inner">
+    <div class="card card--lg reveal">
+      <span class="eyebrow">who we serve</span>
+      <h2 class="display-md">Whole families, not just enrolled kids.</h2>
+
+      <ul class="serve__list">
+        <li><span class="serve__star">★</span><span><strong>Children in grades K–5</strong> living at the shelter — about 40 of them across two semesters.</span></li>
+        <li><span class="serve__star">★</span><span><strong>Around 30 caregivers</strong>, who get consistent, predictable hours back to work toward housing and employment.</span></li>
+        <li><span class="serve__star">★</span><span><strong>About 10 high-school interns</strong> each semester, hired from within the shelter and paid for their work with the younger kids.</span></li>
+        <li><span class="serve__star">★</span><span><strong>Shelter staff and case managers</strong>, who we work alongside rather than around.</span></li>
+      </ul>
+
+      <p class="muted">
+        Enrollment is free. Families move a lot; a child who leaves and comes back is still ours.
+      </p>
+    </div>
+
+    <figure class="card quote-card tilt-2 reveal">
+      <img class="doodle" src="assets/illustrations/quote-glad-you-exist-pink.jpg"
+           alt="Hand-lettered drawing reading: im so glad that you exist">
+      <figcaption>the whole idea, in five words.</figcaption>
+    </figure>
+  </div>
+</section>
+</div>
+
+</main>
+
+<!-- ====================================================== FOOTER ======== -->
+<footer class="footer">
+  <div class="container">
+    <div class="card card--lg footer__panel">
+      <div>
+        <div class="footer__brand">
+          <img src="assets/logo.png" alt="">
+          <span class="footer__name">Home for Arts, Voices, Enrichment, and Nurturing</span>
+        </div>
+        <p class="muted" style="font-size: var(--text-body-sm);">
+          HAVEN is a nonprofit providing an after-school enrichment program for children living
+          in-shelter.
+        </p>
+      </div>
+
+      <div>
+        <h4>on this page</h4>
+        <ul class="footer__list">
+          <li><a href="about.html">about</a></li>
+          <li><a href="programs.html">what we do</a></li>
+          <li><a href="programs.html#day">an afternoon</a></li>
+          <li><a href="about.html#team">our team</a></li>
+          <li><a href="donate.html">donate</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4>reach us</h4>
+        <ul class="footer__list">
+          <li><a href="mailto:info@havenphl.org">info@havenphl.org</a></li>
+          <li><a href="involved.html#contact">send a message</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <p class="footer__legal">
+      &copy; <span id="year">2026</span> HAVEN. Illustrations and typefaces from the HAVEN design
+      system &mdash; Karumbi by onlinewebfonts.com (CC BY 4.0), Gaegu (OFL).
+    </p>
+  </div>
+</footer>
+
+<div class="toast" id="toast" role="status" aria-live="polite">thanks — your message is on its way!</div>
+
+<script src="site.js"></script>
+</body>
+</html>

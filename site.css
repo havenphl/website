@@ -13,6 +13,9 @@
    tokens/colors.css, so the shared design system stays intact.
    -------------------------------------------------------------------------- */
 :root {
+  --rule-gap: 30px;                /* spacing of the ruled lines, and the
+                                      line-height of every line of body copy */
+  --rule-offset: 22px;             /* nudges the ruling onto the baseline */
   --yellow-soft: #fdefc0;          /* soft tint the system was missing */
   --sky:      var(--green);        /* was #8fb3d9 */
   --sky-soft: var(--yellow-soft);  /* was #d3e4f2 */
@@ -44,8 +47,10 @@ a { color: inherit; }
    pages, so the white sheets read as paper sitting on top of it */
 body {
   font-family: var(--font-body);
-  font-size: var(--text-body-md);
-  line-height: var(--leading-normal);
+  /* every line of Gaegu is one size and exactly one ruled line tall, so the
+     writing sits on the paper instead of drifting across it */
+  font-size: var(--text-body-lg);
+  line-height: var(--rule-gap);
   color: var(--text-body);
   background-color: var(--paper-cream);
   background-image: url('assets/textures/notebook-grid-brand.jpg');
@@ -201,19 +206,21 @@ body.is-loading { overflow: hidden; }
   margin-inline: auto;
 }
 
-.section { padding-block: var(--space-8); }
-.section--tight { padding-block: var(--space-7); }
+/* sections sit directly under one another — one blank ruled line between */
+.section { padding-block: 0; margin-top: var(--rule-gap); }
+.section--tight { padding-block: 0; }
 
 /* ==========================================================================
-   SHEETS — every section of content sits on a page of the notebook
+   THE SHEET — one continuous page of looseleaf per page of the site.
+   All the content sits on a single piece of paper: the ruling, the red
+   margin rule and the stitched binding run unbroken from top to bottom.
    ========================================================================== */
 .sheet {
   --sheet-margin: 78px;          /* where the red margin rule falls */
-  --rule-gap: 30px;              /* spacing of the ruled lines */
 
   position: relative;
   background-color: #fffdf8;
-  padding: var(--space-8) var(--space-7) var(--space-8) calc(var(--sheet-margin) + var(--space-4));
+  padding: 60px var(--space-7) 60px calc(var(--sheet-margin) + var(--space-4));
   border-radius: 3px;
   box-shadow:
     0 1px 0 rgba(74,64,50,.18),
@@ -241,7 +248,7 @@ body.is-loading { overflow: hidden; }
       transparent 0 calc(var(--rule-gap) - 1px),
       rgba(123,161,93,.22) calc(var(--rule-gap) - 1px),
       rgba(123,161,93,.22) var(--rule-gap));
-  background-position: 0 0, 0 var(--space-6);
+  background-position: 0 0, 0 var(--rule-offset);
 }
 
 /* stitched binding down the left edge */
@@ -262,10 +269,13 @@ body.is-loading { overflow: hidden; }
 /* content rides above the ruling */
 .sheet > * { position: relative; z-index: 1; }
 
-/* pages are stacked by hand, so they don't all line up perfectly */
-.sheet--first { transform: rotate(-.35deg); }
-#programs .sheet, #team .sheet, #contact .sheet { transform: rotate(.3deg); }
-#listening .sheet, #involved .sheet { transform: rotate(-.4deg); }
+/* one continuous sheet per page: the ruling, margin rule and stitched binding
+   run unbroken from the top of the content to the bottom */
+.sheet > .section:first-child,
+.sheet > .hero:first-child { margin-top: 0; }
+
+/* sections are just spacing now — they carry no paper of their own */
+.sheet > section { position: relative; z-index: 1; }
 
 /* --- typography ----------------------------------------------------------- */
 h1, h2, h3, h4 {
@@ -279,11 +289,23 @@ h1, h2, h3, h4 {
 .display-md { font-size: var(--text-display-md); }
 .heading-md { font-size: var(--text-heading-md); font-family: var(--font-display); }
 
-.lede {
+/* .lede used to be the larger size — now it just constrains the measure */
+.lede { max-width: 58ch; }
+
+/* one size for every line of body copy on the paper */
+.sheet p,
+.sheet li,
+.sheet blockquote,
+.sheet label,
+.sheet input,
+.sheet textarea,
+.sheet select {
   font-size: var(--text-body-lg);
-  line-height: var(--leading-normal);
-  max-width: 58ch;
+  line-height: var(--rule-gap);
 }
+
+/* paragraphs step by whole ruled lines, so the rhythm never breaks */
+.sheet p + p { margin-top: var(--rule-gap); }
 .muted { color: var(--ink-soft); }
 .eyebrow {
   font-family: var(--font-hand);
@@ -521,7 +543,7 @@ select:focus-visible {
 .nav__inner {
   display: flex;
   align-items: center;
-  gap: var(--space-5);
+  gap: var(--space-6);
 }
 .nav__brand {
   display: flex;
@@ -531,6 +553,7 @@ select:focus-visible {
   margin-right: auto;
 }
 .nav__logo { width: 54px; height: 54px; object-fit: contain; }
+.nav__lockup { height: 44px; width: auto; }
 .nav__wordmark {
   font-family: var(--font-display);
   font-size: var(--text-heading-md);
@@ -554,6 +577,13 @@ select:focus-visible {
 }
 .nav__link:hover { border-bottom-color: var(--pink); transform: translateY(-2px) rotate(-1deg); }
 
+/* the page you're on is underlined in crayon and sits a touch heavier */
+.nav__link.is-current {
+  border-bottom-color: var(--green);
+  border-bottom-style: solid;
+  font-weight: 700;
+}
+
 .nav__toggle {
   display: none;
   background: #fff;
@@ -576,7 +606,7 @@ select:focus-visible {
 /* ==========================================================================
    HERO
    ========================================================================== */
-.hero { padding-block: var(--space-8) var(--space-9); position: relative; }
+.hero { padding-block: 0; position: relative; }
 .hero__grid {
   display: grid;
   grid-template-columns: 1.15fr .85fr;
@@ -593,7 +623,7 @@ select:focus-visible {
 .hero__actions { display: flex; flex-wrap: wrap; gap: var(--space-4); align-items: center; }
 .hero__note { font-size: var(--text-body-sm); color: var(--ink-soft); margin-top: var(--space-4); }
 
-.hero__art { position: relative; display: grid; place-items: center; }
+.hero__art { position: relative; display: grid; justify-items: start; align-items: center; }
 .hero__art-card {
   background: #fff;
   border: 2.5px solid var(--ink);
@@ -613,7 +643,9 @@ select:focus-visible {
 .hero__art-mini {
   position: absolute;
   bottom: -34px;
-  right: -10px;
+  /* anchored to the logo rather than the right edge, so it follows it left */
+  left: 62%;
+  right: auto;
   width: 128px;
   background: #fff;
   border: 2.5px solid var(--ink);
@@ -633,11 +665,7 @@ select:focus-visible {
 /* ==========================================================================
    ABOUT
    ========================================================================== */
-.about {
-  background-image: url('assets/textures/notebook-graph-washi-green.jpg');
-  background-size: 320px;
-  border-block: 3px solid var(--ink);
-}
+
 .about__grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -685,11 +713,7 @@ select:focus-visible {
 /* ==========================================================================
    WHO WE SERVE
    ========================================================================== */
-.serve {
-  background-image: url('assets/textures/notebook-plaid-yellow-green.jpg');
-  background-size: 340px;
-  border-block: 3px solid var(--ink);
-}
+
 .serve__inner {
   display: grid;
   grid-template-columns: 1.1fr .9fr;
@@ -877,12 +901,7 @@ select:focus-visible {
 /* ==========================================================================
    DONATE BAND
    ========================================================================== */
-.donate {
-  background-image: url('assets/textures/gingham-stars-green.jpg');
-  background-size: 300px;
-  border-block: 3px solid var(--ink);
-  text-align: center;
-}
+.donate { text-align: center; }
 .donate__panel {
   max-width: 720px;
   margin-inline: auto;
@@ -891,6 +910,7 @@ select:focus-visible {
 }
 .donate__panel p { margin-block: var(--space-4) var(--space-6); font-size: var(--text-body-lg); }
 .donate__actions { display: flex; gap: var(--space-4); justify-content: center; flex-wrap: wrap; }
+
 .donate__fine { margin-top: var(--space-5) !important; font-size: var(--text-body-sm) !important; color: var(--ink-soft); }
 
 /* ==========================================================================
@@ -986,6 +1006,12 @@ select:focus-visible {
 }
 .footer__brand { display: flex; align-items: center; gap: var(--space-3); margin-bottom: var(--space-3); }
 .footer__brand img { width: 60px; }
+.footer__name {
+  font-family: var(--font-display);
+  font-size: var(--text-heading-sm);
+  line-height: var(--leading-tight);
+  color: var(--text-heading);
+}
 .footer h4 { font-size: var(--text-heading-sm); margin-bottom: var(--space-3); }
 .footer__list { display: grid; gap: var(--space-2); font-size: var(--text-body-sm); }
 .footer__list a { text-decoration: none; border-bottom: 2px solid transparent; }
@@ -1017,6 +1043,64 @@ select:focus-visible {
 }
 
 /* ==========================================================================
+   HOME PAGE
+   ========================================================================== */
+/* the three problems, hand-numbered down the margin */
+.numbered {
+  display: grid;
+  gap: var(--space-2);
+  margin-top: var(--space-4);
+  max-width: 56ch;
+}
+.numbered li {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: var(--space-3);
+  align-items: center;
+  font-size: var(--text-body-lg);
+  /* the list runs tighter than the ruled body copy around it */
+  line-height: var(--leading-snug);
+}
+.numbered__n {
+  font-family: var(--font-display);
+  font-size: var(--text-heading-md);
+  line-height: 1;
+  color: var(--ink);
+  width: 38px;
+  height: 38px;
+  display: grid;
+  place-items: center;
+  background: var(--yellow);
+  border: 2.5px solid var(--ink);
+  border-radius: var(--radius-pill);
+  box-shadow: var(--shadow-crayon-sm);
+}
+.numbered li:nth-child(2) .numbered__n { background: var(--pink-soft); }
+.numbered li:nth-child(3) .numbered__n { background: var(--green-soft); }
+
+/* the three objectives */
+.objective { display: flex; flex-direction: column; gap: var(--space-4); }
+.objective .tag {
+  align-self: flex-start;
+  font-weight: 700;
+  background: var(--paper-cream);
+}
+.objective:nth-child(1) .tag { background: var(--pink-soft); }
+.objective:nth-child(2) .tag { background: var(--yellow); }
+.objective:nth-child(3) .tag { background: var(--green-soft); }
+.objective p { font-size: var(--text-body-lg); }
+
+.closing-line {
+  margin: var(--space-8) auto 0;
+  max-width: 62ch;
+  text-align: center;
+  font-family: var(--font-display);
+  font-size: var(--text-display-md);
+  line-height: var(--leading-snug);
+  color: var(--text-heading);
+}
+
+/* ==========================================================================
    CUT-OUT DOODLES
    These drawings have had their white paper knocked out, so they sit straight
    on the page like stickers instead of inside a white frame.
@@ -1038,6 +1122,109 @@ select:focus-visible {
 }
 
 /* ==========================================================================
+   ONE SIZE FOR EVERY LINE OF GAEGU
+   Body copy was set at three different sizes depending on where it sat.
+   Every line of running text is now the same size and exactly one ruled
+   line tall, so nothing looks shrunken next to its neighbours.
+
+   Chips keep their small size on purpose — tags, the eyebrow labels and the
+   sticker labels are labels, not prose.
+   ========================================================================== */
+.sheet p,
+.sheet li,
+.sheet blockquote,
+.sheet figcaption,
+.sheet label,
+.sheet input,
+.sheet textarea,
+.sheet select,
+.sheet .lede,
+.sheet .muted,
+.hero__note,
+.fact__label,
+.day-card__list p,
+.involve__card li,
+.serve__list li,
+.contact__detail,
+.form__note,
+.field__error,
+.donate__fine,
+.pull-quote figcaption,
+.quote-card figcaption,
+.stat-list li,
+.footer__panel p,
+.footer__list {
+  font-size: var(--text-body-lg);
+  line-height: var(--rule-gap);
+}
+.numbered li { line-height: var(--leading-snug); }
+
+/* the one exception worth keeping small: the legal line under the footer */
+.footer__legal { font-size: var(--text-body-sm); line-height: var(--leading-normal); }
+
+/* !important on the donate fine print used to force it smaller */
+.donate__fine { font-size: var(--text-body-lg) !important; }
+
+/* ==========================================================================
+   THE PROBLEM — the caregiver's words alongside what the shelters can't do
+   ========================================================================== */
+.problem__grid {
+  display: grid;
+  grid-template-columns: .9fr 1.1fr;
+  gap: var(--space-7);
+  align-items: center;
+}
+
+.problem__quote { box-shadow: 3px 4px 0 var(--ink); }
+.problem__quote blockquote {
+  font-family: var(--font-display);
+  font-size: clamp(1.15rem, 2vw, 1.5rem);
+  line-height: var(--leading-snug);
+  color: var(--ink);
+}
+.problem__quote figcaption {
+  margin-top: var(--space-4);
+  color: var(--ink-soft);
+}
+
+/* ==========================================================================
+   NOTE BOX — one line of copy set apart in a plain box so it reads as a
+   statement rather than another paragraph.
+   ========================================================================== */
+.note-box {
+  /* fills the page width, so the sentence holds to two lines */
+  width: 100%;
+  padding: var(--space-6) var(--space-5);
+  background: var(--surface-card);
+  border: 2.5px solid var(--border-ink);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-crayon);
+
+  font-family: var(--font-display) !important;
+  font-size: clamp(1.05rem, 2.55vw, 2.1rem) !important;
+  line-height: var(--leading-snug) !important;
+  color: var(--text-heading);
+  text-align: center;
+}
+
+/* below this the first line can't fit on one line at a readable size, so
+   drop the forced break and let it wrap naturally */
+@media (max-width: 820px) {
+  .note-box br { display: none; }
+}
+
+/* the closing line is a statement, not body copy — it stays large */
+.closing-line {
+  font-family: var(--font-display) !important;
+  font-size: var(--text-display-md) !important;
+  line-height: var(--leading-snug) !important;
+  color: var(--text-heading);
+  margin: var(--space-8) auto 0;
+  max-width: 62ch;
+  text-align: center;
+}
+
+/* ==========================================================================
    RESPONSIVE
    ========================================================================== */
 @media (max-width: 960px) {
@@ -1047,6 +1234,7 @@ select:focus-visible {
   .listen__grid,
   .contact__grid { grid-template-columns: 1fr; }
   .pillars, .involve, .team, .week { grid-template-columns: 1fr; }
+  .problem__grid { grid-template-columns: 1fr; }
   .pull-quote { position: static; }
   .day-card.tilt-2, .reveal.day-card.tilt-2.is-in { transform: none; }
   .footer__panel { grid-template-columns: 1fr; }
@@ -1054,6 +1242,7 @@ select:focus-visible {
   .hero__art-mini { display: none; }
 
   .nav__toggle { display: block; }
+  .nav__lockup { height: 34px; }
   .nav__links {
     display: none;
     position: absolute;
@@ -1081,14 +1270,11 @@ select:focus-visible {
     padding: var(--space-6) var(--space-4) var(--space-6) calc(var(--sheet-margin) + var(--space-3));
   }
   .sheet::after { display: none; }
-  .sheet, .sheet--first,
-  #programs .sheet, #team .sheet, #contact .sheet,
-  #listening .sheet, #involved .sheet { transform: none; }
   .book__scene { width: min(300px, 72vw); }
 }
 
 @media (max-width: 560px) {
-  .section { padding-block: var(--space-7); }
+
   .form__row { grid-template-columns: 1fr; }
   .about__facts { grid-template-columns: 1fr; }
   .stat-list li { grid-template-columns: 1fr; gap: var(--space-2); }

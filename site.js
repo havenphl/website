@@ -27,7 +27,18 @@
     window.setTimeout(finishOpening, 520);
   }
 
-  if (!book || reduced) {
+  // the cover plays on the first page of a visit, then stays out of the way.
+  // private browsing can throw on sessionStorage, so treat any failure as
+  // "haven't seen it" rather than letting it break the page.
+  function alreadySeen() {
+    try {
+      if (window.sessionStorage.getItem('haven-opened')) return true;
+      window.sessionStorage.setItem('haven-opened', '1');
+    } catch (e) { /* storage unavailable — just play it */ }
+    return false;
+  }
+
+  if (!book || reduced || alreadySeen()) {
     finishOpening();
   } else {
     window.setTimeout(function () { book.classList.add('is-open'); }, 900);

@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>About HAVEN</title>
+<meta name="description" content="HAVEN is an after-school pilot program for children living in shelter in North Philadelphia — built from what caregivers at Jane Addams Place told us they needed.">
+
+<link rel="icon" href="assets/logo.png">
+<!-- design system tokens (colors, type, spacing, fonts, effects) -->
+<link rel="stylesheet" href="styles.css">
+<!-- page styles -->
+<link rel="stylesheet" href="site.css">
+<!-- content that fades in on scroll must still be visible without JS -->
+<noscript><style>.reveal { opacity: 1 !important; transform: none !important; }</style></noscript>
+<!-- The notebook cover is only shown when JS can also open it again.
+     Without this flag it stays hidden and the site loads straight in. -->
+<script>document.documentElement.className += ' js';</script>
+</head>
+
+<body class="is-loading">
+
+<!-- ============================================== NOTEBOOK COVER ======== -->
+<div class="book" id="book" aria-hidden="true">
+  <div class="book__scene">
+    <!-- the first page, waiting underneath -->
+    <div class="book__page"></div>
+
+    <!-- the cover that swings open -->
+    <div class="book__cover">
+      <img src="assets/illustrations/comp-book-cover-brand.jpg" alt="">
+      <div class="book__label">
+        <span class="book__label-kicker">composition book</span>
+        <span class="book__label-name">HAVEN</span>
+        <span class="book__label-sub">arts · voices · enrichment · nurturing</span>
+      </div>
+      <span class="book__tape book__tape--tl"></span>
+      <span class="book__tape book__tape--br"></span>
+    </div>
+  </div>
+</div>
+
+<a class="skip-link" href="#main">skip to content</a>
+
+<!-- ======================================================== NAV ========= -->
+<header class="nav">
+  <div class="container nav__inner">
+    <a class="nav__brand" href="index.html">
+      <img class="nav__lockup" src="assets/logo-lockup.png"
+           alt="HAVEN — Home for Arts, Voices, Enrichment, and Nurturing">
+    </a>
+
+    <button class="nav__toggle" id="navToggle" aria-expanded="false" aria-controls="navLinks" aria-label="Open menu">
+      <span class="nav__toggle-bars"><span></span><span></span><span></span></span>
+    </button>
+
+    <nav class="nav__links" id="navLinks" aria-label="Main">
+      <a class="nav__link" href="index.html">home</a>
+      <a class="nav__link" href="programs.html">what we do</a>
+      <a class="nav__link is-current" href="about.html" aria-current="page">about</a>
+      <a class="nav__link" href="involved.html">get involved</a>
+      <a class="btn btn--primary btn--sm" href="donate.html">donate</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+<span id="top"></span>
+
+<div class="container sheet">
+
+
+<section class="section" id="about">
+  <div class="about__grid">
+    <div class="about__text">
+      <span class="eyebrow">about us</span>
+      <h2 class="display-lg">The home for arts, voices, enrichment, and nurturing.</h2>
+
+      <p class="lede">
+        In 2024, nearly a third of Philadelphians without housing were families with children. When
+        a family lands in a shelter, the building is built for beds and paperwork — not for
+        childhood. School lets out, and there's nowhere for a seven-year-old to be a seven-year-old.
+      </p>
+
+      <p>
+        HAVEN takes that gap seriously. We turn a few hours of the shelter's afternoon into a room
+        that belongs to the kids: art on the tables, music on, room to run, and grown-ups who know
+        their names. Nothing is graded. Nothing gets corrected. What a child makes is theirs.
+      </p>
+
+      <p>
+        And while their child is with us, a caregiver has something rare — time. Time for a housing
+        appointment, a job interview, a phone call that can't happen with a five-year-old on their
+        lap. Supporting the child and supporting the caregiver aren't two programs. They're the
+        same one.
+      </p>
+
+      <p>
+        We started small on purpose, at one shelter, with one cohort — and we're documenting every
+        step so other shelters can run this too.
+      </p>
+    </div>
+
+    <div class="about__facts">
+      <div class="card card--pink tilt-1 reveal fact">
+        <span class="fact__value">40</span>
+        <span class="fact__label">children across two semesters</span>
+      </div>
+      <div class="card card--yellow reveal fact">
+        <span class="fact__value">3</span>
+        <span class="fact__label">afternoons a week — Mon, Tue, Thu</span>
+      </div>
+      <div class="card card--green tilt-2 reveal fact">
+        <span class="fact__value">K–5</span>
+        <span class="fact__label">the grades we serve</span>
+      </div>
+      <div class="card card--cream reveal fact">
+        <span class="fact__value">1:5</span>
+        <span class="fact__label">one grown-up for every five kids</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="team">
+  <div>
+    <div class="section-head">
+      <span class="eyebrow">who's behind this</span>
+      <h2 class="display-lg">Three of us, and four years of Wednesdays.</h2>
+      <p class="muted">
+        For the past four years we've spent after-school hours in Philadelphia's shelters — dancing,
+        reading, and giving caregivers a brief moment of respite. HAVEN grew out of those afternoons.
+      </p>
+    </div>
+
+    <div class="team">
+      <article class="card card--lg team__card wobble reveal">
+        <h3>Chloe Chang</h3>
+        <span class="tag">operations &amp; storytelling</span>
+        <p>
+          Builds the volunteer and fundraising side of things, and wrote a picture book for children
+          experiencing homelessness. Studying English and creative writing at Penn.
+        </p>
+      </article>
+
+      <article class="card card--lg team__card wobble tilt-2 reveal">
+        <h3>Connie Ni</h3>
+        <span class="tag">program design &amp; movement</span>
+        <p>
+          Designs and evaluates health programs in shelters, and teaches the movement side of HAVEN.
+          Studying health and societies at Penn.
+        </p>
+      </article>
+
+      <article class="card card--lg team__card wobble reveal">
+        <h3>Darlene Justicia Leohansson</h3>
+        <span class="tag">programs &amp; arts-based therapy</span>
+        <p>
+          Designs arts-integrated curricula and has taught in classrooms and community settings
+          across the city. Studying neuroscience and fine arts at Penn.
+        </p>
+      </article>
+    </div>
+
+    <div class="card card--cream partners reveal">
+      <h3 class="heading-md">We don't do this alone.</h3>
+      <p class="muted">
+        HAVEN was built with the families and staff of Jane Addams Place, and we work with the
+        Kardon Center, CityStep, Tree House Books, and Mural Arts Philadelphia. Dr. Caroline Watts
+        of Penn's Graduate School of Education advises the program, and Penn's Early Childhood and
+        Family Research Center is helping us measure whether it works.
+      </p>
+    </div>
+  </div>
+</section>
+<section class="section section--tight" id="listening">
+  <div class="listen__grid">
+    <figure class="card card--lg pull-quote tilt-1 reveal">
+      <blockquote>
+        “It takes a village to raise a child. When that support isn't around families, the stress
+        becomes overwhelming. When organizations step in to surround these caregivers, it truly
+        makes a difference.”
+      </blockquote>
+      <figcaption>— a caregiver at Jane Addams Place</figcaption>
+    </figure>
+
+    <div class="listen__text">
+      <span class="eyebrow">we asked first</span>
+      <h2 class="display-md">We built this from what families told us.</h2>
+      <p>
+        Before we designed a single session, we sat down with caregivers at Jane Addams Place and
+        asked what would actually help. Here's what they said, in November 2025:
+      </p>
+
+      <ul class="stat-list">
+        <li class="card card--cream reveal">
+          <span class="stat-list__value">100%</span>
+          <span>said their kids needed more help with schoolwork</span>
+        </li>
+        <li class="card card--cream tilt-3 reveal">
+          <span class="stat-list__value">88%</span>
+          <span>said after-school programming would let them work, train, or make appointments</span>
+        </li>
+        <li class="card card--cream reveal">
+          <span class="stat-list__value">88%</span>
+          <span>said their kids needed more supervised physical activity</span>
+        </li>
+        <li class="card card--cream tilt-3 reveal">
+          <span class="stat-list__value">88%</span>
+          <span>wanted more positive, constructive things for their kids to do</span>
+        </li>
+      </ul>
+    </div>
+  </div>
+</section>
+</div>
+
+</main>
+
+<!-- ====================================================== FOOTER ======== -->
+<footer class="footer">
+  <div class="container">
+    <div class="card card--lg footer__panel">
+      <div>
+        <div class="footer__brand">
+          <img src="assets/logo.png" alt="">
+          <span class="footer__name">Home for Arts, Voices, Enrichment, and Nurturing</span>
+        </div>
+        <p class="muted" style="font-size: var(--text-body-sm);">
+          HAVEN is a nonprofit providing an after-school enrichment program for children living
+          in-shelter.
+        </p>
+      </div>
+
+      <div>
+        <h4>on this page</h4>
+        <ul class="footer__list">
+          <li><a href="about.html">about</a></li>
+          <li><a href="programs.html">what we do</a></li>
+          <li><a href="programs.html#day">an afternoon</a></li>
+          <li><a href="about.html#team">our team</a></li>
+          <li><a href="donate.html">donate</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4>reach us</h4>
+        <ul class="footer__list">
+          <li><a href="mailto:info@havenphl.org">info@havenphl.org</a></li>
+          <li><a href="involved.html#contact">send a message</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <p class="footer__legal">
+      &copy; <span id="year">2026</span> HAVEN. Illustrations and typefaces from the HAVEN design
+      system &mdash; Karumbi by onlinewebfonts.com (CC BY 4.0), Gaegu (OFL).
+    </p>
+  </div>
+</footer>
+
+<div class="toast" id="toast" role="status" aria-live="polite">thanks — your message is on its way!</div>
+
+<script src="site.js"></script>
+</body>
+</html>
