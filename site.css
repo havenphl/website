@@ -1263,10 +1263,25 @@ select:focus-visible {
    this is the one paragraph on the site that is not body copy */
 .sheet .mission-line {
   font-family: var(--font-display);
-  font-size: clamp(1.9rem, 3.2vw, 2.9rem);
-  line-height: 1.25;
+  /* sized to land on exactly two lines. The sentence is ~45.3em wide in
+     Karumbi, so each line needs ~22.7em — the ceiling is 2 x (available
+     width) / 45.3, with slack for kerning. The vw term tracks the container
+     until it hits its 1120px cap, where the 2.15rem ceiling takes over. */
+  font-size: clamp(1.5rem, calc(4.1vw - 13px), 2.15rem);
+  line-height: 1.35;
+  text-wrap: balance;
   color: var(--text-heading);
   margin: 0;
+}
+
+/* a crayon underline — text-decoration rather than a border so it survives
+   the line break if the phrase ever wraps */
+.mission-line .mark {
+  text-decoration: underline;
+  text-decoration-color: var(--green);
+  text-decoration-thickness: 4px;
+  text-underline-offset: 8px;
+  text-decoration-skip-ink: none;
 }
 
 /* who we serve — three groups, each in its own card */
