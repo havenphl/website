@@ -1253,7 +1253,6 @@ select:focus-visible {
   background-size: var(--dot-tile) var(--dot-tile);
   background-position: 0 0, calc(var(--dot-tile) / 2) calc(var(--dot-tile) / 2);
   border-radius: 3px;
-  box-shadow: var(--shadow-crayon);
 }
 .mission-frame__inner {
   background: #fff;
@@ -1265,7 +1264,6 @@ select:focus-visible {
   font-size: var(--text-display-lg);
   line-height: var(--leading-snug);
   color: var(--text-heading);
-  max-width: 34ch;
   margin: 0;
 }
 
