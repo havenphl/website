@@ -1261,7 +1261,7 @@ select:focus-visible {
 
 .mission-line {
   font-family: var(--font-display);
-  font-size: var(--text-display-lg);
+  font-size: var(--text-display-xl);
   line-height: var(--leading-snug);
   color: var(--text-heading);
   margin: 0;
@@ -1420,7 +1420,7 @@ select:focus-visible {
   .day-card { padding: var(--space-4); }
   .card { padding: var(--space-4); }
   .card--lg { padding: var(--space-5); }
-  .mission-line { font-size: var(--text-display-md); }
+  .mission-line { font-size: var(--text-display-lg); }
   .mission-frame { padding: 26px; --dot-tile: 26px; --dot-r: 4.5px; }
   .mission-frame__inner { padding: var(--space-5); }
 }
