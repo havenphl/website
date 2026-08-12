@@ -1238,13 +1238,35 @@ select:focus-visible {
 /* ==========================================================================
    OUR STORY PAGE
    ========================================================================== */
+/* the mission sits inside a polka-dot border, like a bulletin-board frame.
+   The dots are two offset radial-gradient tiles rather than an image, so the
+   band stays crisp at any size and the spacing never breaks on a wide screen. */
+.mission-frame {
+  --dot-tile: 34px;                /* one dot per tile, offset half a tile */
+  --dot-r: 6px;
+  margin-top: var(--space-5);
+  padding: 46px;
+  background-color: var(--yellow);
+  background-image:
+    radial-gradient(circle var(--dot-r) at 50% 50%, #fff 97%, transparent 100%),
+    radial-gradient(circle var(--dot-r) at 50% 50%, #fff 97%, transparent 100%);
+  background-size: var(--dot-tile) var(--dot-tile);
+  background-position: 0 0, calc(var(--dot-tile) / 2) calc(var(--dot-tile) / 2);
+  border-radius: 3px;
+  box-shadow: var(--shadow-crayon);
+}
+.mission-frame__inner {
+  background: #fff;
+  padding: var(--space-6) var(--space-7);
+}
+
 .mission-line {
   font-family: var(--font-display);
-  font-size: var(--text-display-md);
+  font-size: var(--text-display-lg);
   line-height: var(--leading-snug);
   color: var(--text-heading);
-  max-width: 30ch;
-  margin-top: var(--space-4);
+  max-width: 34ch;
+  margin: 0;
 }
 
 /* who we serve — three groups, each labelled */
@@ -1400,5 +1422,7 @@ select:focus-visible {
   .day-card { padding: var(--space-4); }
   .card { padding: var(--space-4); }
   .card--lg { padding: var(--space-5); }
-  .mission-line { font-size: var(--text-heading-lg); }
+  .mission-line { font-size: var(--text-display-md); }
+  .mission-frame { padding: 26px; --dot-tile: 26px; --dot-r: 4.5px; }
+  .mission-frame__inner { padding: var(--space-5); }
 }
