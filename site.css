@@ -609,10 +609,12 @@ select:focus-visible {
 .hero { padding-block: 0; position: relative; }
 .hero__grid {
   display: grid;
-  grid-template-columns: 1.15fr .85fr;
+  grid-template-columns: 1.05fr .95fr;
   gap: var(--space-8);
   align-items: center;
 }
+/* the copy column now carries the problem list too, so it needs its own rhythm */
+.hero__copy > * + * { margin-top: var(--rule-gap); }
 .hero__title { margin-bottom: var(--space-4); }
 .hero__title em { font-style: normal; color: var(--pink); }
 .hero__mission {
@@ -623,7 +625,7 @@ select:focus-visible {
 .hero__actions { display: flex; flex-wrap: wrap; gap: var(--space-4); align-items: center; }
 .hero__note { font-size: var(--text-body-sm); color: var(--ink-soft); margin-top: var(--space-4); }
 
-.hero__art { position: relative; display: grid; justify-items: start; align-items: center; }
+.hero__art { position: relative; display: grid; justify-items: start; align-items: center; align-self: center; }
 .hero__art-card {
   background: #fff;
   border: 2.5px solid var(--ink);
@@ -666,28 +668,7 @@ select:focus-visible {
    ABOUT
    ========================================================================== */
 
-.about__grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: var(--space-8);
-  align-items: center;
-}
 .about__text p + p { margin-top: var(--space-4); }
-.about__facts {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: var(--space-5);
-}
-.fact { text-align: center; }
-.fact__value {
-  font-family: var(--font-display);
-  font-size: var(--text-display-md);
-  color: var(--ink);
-  display: block;
-  line-height: 1;
-  margin-bottom: var(--space-2);
-}
-.fact__label { font-size: var(--text-body-sm); color: var(--ink-soft); }
 
 /* ==========================================================================
    PROGRAM PILLARS
@@ -709,42 +690,6 @@ select:focus-visible {
 .pillar h3 { font-size: var(--text-heading-lg); margin-bottom: var(--space-2); }
 .pillar p { margin-bottom: var(--space-4); }
 .pillar__list { margin-top: auto; display: flex; flex-wrap: wrap; gap: var(--space-2); }
-
-/* ==========================================================================
-   WHO WE SERVE
-   ========================================================================== */
-
-.serve__inner {
-  display: grid;
-  grid-template-columns: 1.1fr .9fr;
-  gap: var(--space-7);
-  align-items: center;
-}
-/* the sheet already is the panel here — don't stack a second sheet of paper
-   on top of the first one */
-.serve__panel {
-  background: transparent;
-  border: none;
-  box-shadow: none;
-  padding: 0;
-}
-.serve__list { display: grid; gap: var(--space-4); margin-top: var(--space-5); }
-.serve__list li {
-  display: flex;
-  gap: var(--space-3);
-  align-items: flex-start;
-  font-size: var(--text-body-md);
-}
-.serve__star { flex: 0 0 auto; color: var(--yellow-deep); font-size: 1.3em; line-height: 1.1; }
-
-.quote-card { background: #fff; padding: var(--space-3); }
-.quote-card img { border-radius: var(--radius-sm); }
-.quote-card figcaption {
-  font-size: var(--text-body-sm);
-  color: var(--ink-soft);
-  text-align: center;
-  padding-top: var(--space-3);
-}
 
 /* ==========================================================================
    LISTENING / NEEDS ASSESSMENT
@@ -789,87 +734,6 @@ select:focus-visible {
 }
 
 /* ==========================================================================
-   AN AFTERNOON — the weekly schedule (Mon / Tue / Thu)
-   ========================================================================== */
-.week {
-  margin-top: var(--space-6);
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: var(--space-5);
-}
-
-.day-card {
-  background: var(--paper-cream);
-  border: 2.5px solid var(--border-ink);
-  border-radius: var(--radius-md);
-  box-shadow: var(--shadow-crayon);
-  padding: var(--space-5);
-}
-.day-card__name {
-  font-size: var(--text-heading-lg);
-  padding-bottom: var(--space-3);
-  margin-bottom: var(--space-4);
-  border-bottom: 3px dashed var(--green);
-}
-
-.day-card__list { display: grid; gap: var(--space-4); }
-.day-card__list li {
-  display: grid;
-  gap: var(--space-1);
-  background: var(--surface-card);
-  border: 2px solid var(--ink);
-  border-radius: var(--radius-sm);
-  box-shadow: var(--shadow-crayon-sm);
-  padding: var(--space-3) var(--space-4);
-}
-.day-card__list strong {
-  font-family: var(--font-display);
-  font-size: var(--text-heading-md);
-  font-weight: 400;
-  color: var(--text-heading);
-  line-height: var(--leading-tight);
-}
-.day-card__list p { font-size: var(--text-body-sm); margin-top: var(--space-1); }
-
-.slot__time {
-  font-family: var(--font-hand);
-  font-weight: 700;
-  font-size: var(--text-body-sm);
-  color: var(--ink);
-}
-.slot__label {
-  justify-self: start;
-  font-family: var(--font-hand);
-  font-size: var(--text-label);
-  background: var(--yellow);
-  border: 2px solid var(--ink);
-  border-radius: var(--radius-pill);
-  padding: 0 var(--space-3);
-  margin-bottom: var(--space-1);
-}
-
-/* the two short, unglamorous slots stay visually quiet */
-.day-card__list .slot--transition,
-.day-card__list .slot--pickup {
-  grid-template-columns: auto 1fr;
-  align-items: baseline;
-  gap: var(--space-3);
-  background: transparent;
-  border: none;
-  border-left: 3px dashed var(--border-soft);
-  border-radius: 0;
-  box-shadow: none;
-  padding: var(--space-1) var(--space-4);
-}
-.day-card__list .slot--transition strong,
-.day-card__list .slot--pickup strong {
-  font-family: var(--font-hand);
-  font-size: var(--text-body-sm);
-  color: var(--ink-soft);
-  font-weight: 400;
-}
-
-/* ==========================================================================
    TEAM
    ========================================================================== */
 .team {
@@ -911,7 +775,35 @@ select:focus-visible {
 .donate__panel p { margin-block: var(--space-4) var(--space-6); font-size: var(--text-body-lg); }
 .donate__actions { display: flex; gap: var(--space-4); justify-content: center; flex-wrap: wrap; }
 
-.donate__fine { margin-top: var(--space-5) !important; font-size: var(--text-body-sm) !important; color: var(--ink-soft); }
+/* the caregiver quote under the donate button — no box, and set at exactly
+   the same size as the paragraph above it */
+.donate__quote {
+  margin: var(--space-6) auto 0;
+  max-width: 62ch;
+}
+.donate__quote blockquote {
+  font-family: var(--font-body);
+  font-size: var(--text-body-lg);
+  line-height: var(--rule-gap);
+  color: var(--text-body);
+}
+.donate__quote figcaption {
+  margin-top: var(--rule-gap);
+  font-family: var(--font-display);
+  font-size: var(--text-display-md);
+  line-height: var(--leading-snug);
+  color: var(--ink-soft);
+}
+
+/* the legal notes live on the paper below the panel, quieter than the rest */
+.donate__legal {
+  max-width: 62ch;
+  margin: var(--space-5) auto 0;
+  text-align: center;
+  font-size: var(--text-body-sm) !important;
+  line-height: var(--leading-normal) !important;
+  color: var(--ink-soft);
+}
 
 /* ==========================================================================
    CONTACT
@@ -973,7 +865,7 @@ select:focus-visible {
   position: fixed;
   left: 50%;
   bottom: var(--space-6);
-  transform: translate(-50%, 140%) rotate(-1.5deg);
+  transform: translate(-50%, 200%) rotate(-1.5deg);
   background: var(--yellow);
   border: 2.5px solid var(--ink);
   border-radius: var(--radius-pill);
@@ -983,9 +875,25 @@ select:focus-visible {
   font-weight: 700;
   color: var(--ink);
   z-index: 60;
-  transition: transform var(--duration-med) var(--ease-bounce);
+  /* Parking it with a percentage translate left a sliver of the rounded top
+     edge above the bottom of the window. Hiding it outright means the height
+     maths can never leak it again. */
+  opacity: 0;
+  visibility: hidden;
+  transition:
+    transform var(--duration-med) var(--ease-bounce),
+    opacity var(--duration-fast) var(--ease-out),
+    visibility 0s var(--duration-med);
 }
-.toast.is-visible { transform: translate(-50%, 0) rotate(-1.5deg); }
+.toast.is-visible {
+  transform: translate(-50%, 0) rotate(-1.5deg);
+  opacity: 1;
+  visibility: visible;
+  transition:
+    transform var(--duration-med) var(--ease-bounce),
+    opacity var(--duration-fast) var(--ease-out),
+    visibility 0s;
+}
 
 /* ==========================================================================
    FOOTER
@@ -1048,7 +956,7 @@ select:focus-visible {
 /* the three problems, hand-numbered down the margin */
 .numbered {
   display: grid;
-  gap: var(--space-2);
+  gap: 2px;
   margin-top: var(--space-4);
   max-width: 56ch;
 }
@@ -1062,21 +970,21 @@ select:focus-visible {
   line-height: var(--leading-snug);
 }
 .numbered__n {
+  /* two flat paper stars layered, one pair of brand colours each, number on top */
   font-family: var(--font-display);
   font-size: var(--text-heading-md);
   line-height: 1;
-  color: var(--ink);
-  width: 38px;
-  height: 38px;
+  /* darker than the body ink so the digit reads against the star */
+  color: var(--tape-ink);
+  width: 54px;
+  height: 54px;
   display: grid;
   place-items: center;
-  background: var(--yellow);
-  border: 2.5px solid var(--ink);
-  border-radius: var(--radius-pill);
-  box-shadow: var(--shadow-crayon-sm);
+  background: url('assets/shapes/star-yellow.svg') center / contain no-repeat;
+  text-shadow: 0 1px 0 rgba(255, 253, 246, .7);
 }
-.numbered li:nth-child(2) .numbered__n { background: var(--pink-soft); }
-.numbered li:nth-child(3) .numbered__n { background: var(--green-soft); }
+.numbered li:nth-child(2) .numbered__n { background-image: url('assets/shapes/star-pink.svg'); }
+.numbered li:nth-child(3) .numbered__n { background-image: url('assets/shapes/star-green.svg'); }
 
 /* the three objectives */
 .objective { display: flex; flex-direction: column; gap: var(--space-4); }
@@ -1085,19 +993,27 @@ select:focus-visible {
   font-weight: 700;
   background: var(--paper-cream);
 }
-.objective:nth-child(1) .tag { background: var(--pink-soft); }
-.objective:nth-child(2) .tag { background: var(--yellow); }
-.objective:nth-child(3) .tag { background: var(--green-soft); }
 .objective p { font-size: var(--text-body-lg); }
 
+/* the closing statement, set on a dashed note card.
+   Drawn in CSS rather than stretched from the image: a dashed rounded
+   rectangle is exactly what CSS borders do, so the dashes stay evenly spaced
+   and the corners keep their radius at every width. Colours sampled from the
+   reference: #fdf3e7 paper, #ad8951 stitching. */
 .closing-line {
-  margin: var(--space-8) auto 0;
-  max-width: 62ch;
-  text-align: center;
-  font-family: var(--font-display);
-  font-size: var(--text-display-md);
-  line-height: var(--leading-snug);
+  font-family: var(--font-display) !important;
+  font-size: var(--text-display-md) !important;
+  line-height: var(--leading-snug) !important;
   color: var(--text-heading);
+
+  width: min(100%, 74ch);
+  margin: var(--space-8) auto 0;
+  padding: var(--space-7) var(--space-7);
+  text-align: center;
+
+  background: #fdf3e7;
+  border: 3px dashed #ad8951;
+  border-radius: 34px;
 }
 
 /* ==========================================================================
@@ -1113,6 +1029,14 @@ select:focus-visible {
   max-width: 340px;
 }
 .art-bare img { border-radius: 0; }
+
+/* The HAVEN mark in the hero runs much larger than the other cut-outs.
+   It uses logo-mark.png — the same logo with its transparent margin trimmed
+   off, so the artwork fills the box instead of floating in 35% empty space. */
+.hero__art-card.art-bare {
+  max-width: 100%;
+  align-self: center;   /* sits level with the headline and paragraph */
+}
 
 .cutout {
   /* the frames used multiply to hide their white box — a cut-out doesn't
@@ -1140,17 +1064,15 @@ select:focus-visible {
 .sheet select,
 .sheet .lede,
 .sheet .muted,
+.serves dd,
+.schedule tbody td,
 .hero__note,
 .fact__label,
-.day-card__list p,
 .involve__card li,
-.serve__list li,
 .contact__detail,
 .form__note,
 .field__error,
-.donate__fine,
 .pull-quote figcaption,
-.quote-card figcaption,
 .stat-list li,
 .footer__panel p,
 .footer__list {
@@ -1163,7 +1085,7 @@ select:focus-visible {
 .footer__legal { font-size: var(--text-body-sm); line-height: var(--leading-normal); }
 
 /* !important on the donate fine print used to force it smaller */
-.donate__fine { font-size: var(--text-body-lg) !important; }
+
 
 /* ==========================================================================
    THE PROBLEM — the caregiver's words alongside what the shelters can't do
@@ -1188,40 +1110,237 @@ select:focus-visible {
 }
 
 /* ==========================================================================
-   NOTE BOX — one line of copy set apart in a plain box so it reads as a
-   statement rather than another paragraph.
+   NOTE BOX — a yellow gingham panel for the one line that should read as a
+   statement rather than another paragraph. The check is two crossing stripe
+   gradients, so there is no image to load and it never distorts.
    ========================================================================== */
 .note-box {
-  /* fills the page width, so the sentence holds to two lines */
   width: 100%;
-  padding: var(--space-6) var(--space-5);
-  background: var(--surface-card);
-  border: 2.5px solid var(--border-ink);
-  border-radius: var(--radius-md);
-  box-shadow: var(--shadow-crayon);
+  padding: var(--space-6) var(--space-7);
+
+  background-color: #fef7e0;
+  background-image:
+    repeating-linear-gradient(90deg, transparent 0 9px, rgba(248, 213, 104, .24) 9px 18px),
+    repeating-linear-gradient(0deg,  transparent 0 9px, rgba(248, 213, 104, .24) 9px 18px);
+  border: none;
+  border-radius: 12px;
+  box-shadow: none;
 
   font-family: var(--font-display) !important;
-  font-size: clamp(1.05rem, 2.55vw, 2.1rem) !important;
+  font-size: clamp(1.15rem, 2.3vw, 1.95rem) !important;
   line-height: var(--leading-snug) !important;
   color: var(--text-heading);
   text-align: center;
 }
 
-/* below this the first line can't fit on one line at a readable size, so
-   drop the forced break and let it wrap naturally */
+/* below this the first line can't fit on one line inside the card, so drop
+   the forced break and let it wrap */
 @media (max-width: 820px) {
   .note-box br { display: none; }
 }
 
-/* the closing line is a statement, not body copy — it stays large */
-.closing-line {
-  font-family: var(--font-display) !important;
-  font-size: var(--text-display-md) !important;
-  line-height: var(--leading-snug) !important;
+/* A <select> doesn't lay its text out like a paragraph. The ruled 30px
+   line-height that every other line of body copy uses pushed the glyphs down
+   inside the control and clipped their descenders. Giving it an explicit
+   height with normal leading lets the browser centre the text properly. */
+.field select {
+  line-height: normal;
+  height: 56px;
+  padding-block: 0;
+  padding-right: var(--space-7);   /* clear of the dropdown arrow */
+}
+
+/* ==========================================================================
+   OBJECTIVE TAPE — the Objective 1/2/3 labels are strips of gingham washi
+   rather than outlined pills. The check is drawn with two crossing stripe
+   gradients, so the colour comes from one custom property and there is no
+   image to load; the ends are torn with the same clip-path as the buttons.
+   ========================================================================== */
+.objective .tag {
+  --gingham: 255, 140, 166;          /* pink */
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+  color: var(--tape-ink);
+  font-family: var(--font-hand);
+  font-weight: 700;
+  font-size: var(--text-body-lg);
+  letter-spacing: var(--tracking-wide);
+  padding: 7px var(--space-5);
+  background-color: rgba(var(--gingham), .16);
+  background-image:
+    repeating-linear-gradient(90deg, transparent 0 11px, rgba(var(--gingham), .42) 11px 22px),
+    repeating-linear-gradient(0deg,  transparent 0 11px, rgba(var(--gingham), .42) 11px 22px);
+  clip-path: polygon(
+    2px 0%, calc(100% - 2px) 0%,
+    calc(100% - 4px) 22%, 100% 47%,
+    calc(100% - 2px) 71%, calc(100% - 4px) 100%,
+    2px 100%, 4px 74%, 0px 49%, 3px 24%
+  );
+  filter: drop-shadow(1px 1.5px 1.5px rgba(74, 64, 50, .28));
+  transform: rotate(-1.6deg);
+}
+.objective:nth-child(2) .tag { --gingham: 248, 213, 104; transform: rotate(1.4deg); }  /* yellow */
+.objective:nth-child(3) .tag { --gingham: 123, 161,  93; }                             /* green */
+
+/* the card clears the hero column — the earlier negative pull was riding up
+   over the third numbered item */
+#program { margin-top: var(--rule-gap); }
+
+/* ==========================================================================
+   THE LOGO DRAWS ITSELF
+   The mark is inlined as SVG so each traced path can be stroked on with
+   dashoffset, then have its colour fade in behind the line — the order runs
+   roof, walls, letters left to right, then the stars.
+
+   It only runs once the mark scrolls into view (site.js adds .is-drawing).
+   Until then, and for anyone who prefers less motion or has no JS, the
+   finished logo is simply shown.
+   ========================================================================== */
+.logo-draw { width: 100%; height: auto; display: block; }
+
+/* resting state: the finished logo */
+.logo-draw .ld-ink  { opacity: 0; }
+.logo-draw .ld-fill { opacity: 1; }
+
+/* armed, waiting to be scrolled to: nothing showing yet */
+.logo-draw.is-armed .ld-fill { opacity: 0; }
+
+.logo-draw.is-drawing .ld-ink {
+  opacity: 1;
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  animation: ld-stroke .5s linear var(--d, 0s) forwards;
+}
+.logo-draw.is-drawing .ld-fill {
+  opacity: 0;
+  animation: ld-fill .32s var(--ease-out) var(--d, 0s) forwards;
+}
+
+@keyframes ld-stroke {
+  to { stroke-dashoffset: 0; }
+}
+@keyframes ld-fill {
+  to { opacity: 1; }
+}
+
+/* the outline fades out once its colour has arrived */
+.logo-draw.is-drawing .ld-ink { animation: ld-stroke .5s linear var(--d, 0s) forwards,
+                                           ld-erase .3s var(--ease-out) calc(var(--d, 0s) + .5s) forwards; }
+@keyframes ld-erase { to { opacity: 0; } }
+
+@media (prefers-reduced-motion: reduce) {
+  .logo-draw.is-armed .ld-fill,
+  .logo-draw.is-drawing .ld-fill { opacity: 1; animation: none; }
+  .logo-draw .ld-ink { opacity: 0; animation: none; }
+}
+
+/* ==========================================================================
+   OUR STORY PAGE
+   ========================================================================== */
+.mission-line {
+  font-family: var(--font-display);
+  font-size: var(--text-display-md);
+  line-height: var(--leading-snug);
   color: var(--text-heading);
-  margin: var(--space-8) auto 0;
-  max-width: 62ch;
+  max-width: 30ch;
+  margin-top: var(--space-4);
+}
+
+/* who we serve — three groups, each labelled */
+.serves { display: grid; gap: var(--space-6); margin-top: var(--space-6); }
+.serves__item {
+  display: grid;
+  gap: var(--space-2);
+  padding-left: var(--space-5);
+  border-left: 4px solid var(--green);
+}
+.serves dt {
+  font-family: var(--font-display);
+  font-size: var(--text-heading-lg);
+  color: var(--text-heading);
+}
+.serves dd { margin: 0; }
+
+/* ==========================================================================
+   THE WEEKLY SCHEDULE
+   Real tabular data, so it is a real table — the day columns are headers and
+   the times are row headers, which is what a screen reader needs to read a
+   cell back as "Tuesday, 4:30, Kardon Center". It scrolls sideways on a
+   narrow screen rather than crushing the columns.
+   ========================================================================== */
+.schedule__scroll {
+  margin-top: var(--space-6);
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+.schedule {
+  width: 100%;
+  min-width: 620px;
+  border-collapse: separate;
+  border-spacing: 6px;
+}
+.schedule caption {
+  caption-side: top;
+  text-align: left;
+  font-family: var(--font-hand);
+  color: var(--ink-soft);
+  font-size: var(--text-body-sm);
+  padding-bottom: var(--space-3);
+}
+.schedule thead th {
+  font-family: var(--font-display);
+  font-size: var(--text-heading-lg);
+  font-weight: 400;
+  color: var(--text-heading);
+  padding-bottom: var(--space-2);
+  width: 26%;
+}
+.schedule thead th:first-child { width: 22%; }
+.schedule tbody th {
+  text-align: left;
+  font-family: var(--font-hand);
+  font-weight: 700;
+  color: var(--ink);
+  vertical-align: middle;
+  padding: var(--space-3) var(--space-4);
+  line-height: var(--leading-snug);
+}
+.schedule__note {
+  display: block;
+  font-weight: 400;
+  font-size: var(--text-body-sm);
+  color: var(--ink-soft);
+}
+.schedule tbody td {
+  background: var(--surface-card);
+  border: 2.5px solid var(--border-ink);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-crayon-sm);
+  padding: var(--space-4);
+  vertical-align: middle;
+  line-height: var(--leading-snug);
+}
+/* the two short slots are housekeeping, not sessions */
+.schedule .schedule__break td {
+  background: transparent;
+  border: 2px dashed var(--border-soft);
+  box-shadow: none;
+  color: var(--ink-soft);
+  font-size: var(--text-body-sm);
   text-align: center;
+}
+.schedule tbody tr:nth-child(1) td { background: var(--yellow-soft); }
+.schedule tbody tr:nth-child(3) td { background: var(--pink-soft); }
+
+.sr-only {
+  position: absolute;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
 }
 
 /* ==========================================================================
@@ -1230,13 +1349,11 @@ select:focus-visible {
 @media (max-width: 960px) {
   .hero__grid,
   .about__grid,
-  .serve__inner,
   .listen__grid,
   .contact__grid { grid-template-columns: 1fr; }
-  .pillars, .involve, .team, .week { grid-template-columns: 1fr; }
+  .pillars, .involve, .team { grid-template-columns: 1fr; }
   .problem__grid { grid-template-columns: 1fr; }
   .pull-quote { position: static; }
-  .day-card.tilt-2, .reveal.day-card.tilt-2.is-in { transform: none; }
   .footer__panel { grid-template-columns: 1fr; }
   .hero__art { order: -1; }
   .hero__art-mini { display: none; }
@@ -1278,7 +1395,8 @@ select:focus-visible {
   .form__row { grid-template-columns: 1fr; }
   .about__facts { grid-template-columns: 1fr; }
   .stat-list li { grid-template-columns: 1fr; gap: var(--space-2); }
-  .day-card { padding: var(--space-4); }
   .card { padding: var(--space-4); }
   .card--lg { padding: var(--space-5); }
+  .schedule tbody td, .schedule tbody th { padding: var(--space-3); }
+  .mission-line { font-size: var(--text-heading-lg); }
 }

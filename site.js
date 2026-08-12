@@ -6,6 +6,17 @@
 
   var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+  var logo = document.querySelector('.logo-draw');
+
+  // Hide it straight away so it can't flash in finished, but hold the drawing
+  // until watchLogo() is called — on the home page that happens once the
+  // notebook cover is out of the way, otherwise the logo would draw itself
+  // behind the cover and be over before anyone saw it.
+  if (logo && !reduced && 'IntersectionObserver' in window) {
+    logo.classList.add('is-armed');
+  }
+
+
   /* --- the notebook opens -------------------------------------------------
      Closed cover holds for a beat, swings open, then the whole thing fades
      and hands the page over. Clicking or pressing a key skips ahead.
@@ -19,6 +30,8 @@
     if (book && book.parentNode) book.parentNode.removeChild(book);
     document.removeEventListener('keydown', skipOpening);
     window.removeEventListener('click', skipOpening);
+    // now the page is actually visible, let the logo start drawing
+    watchLogo();
   }
 
   function skipOpening() {
@@ -79,6 +92,32 @@
         toggle.focus();
       }
     });
+  }
+
+  /* --- the logo draws itself when it scrolls into view --------------------
+     The SVG renders as the finished logo by default. Only if we can actually
+     drive the animation do we hide the fills ('is-armed') and then draw them
+     on ('is-drawing') — so a browser without IntersectionObserver, or someone
+     who prefers less motion, still just sees the logo.
+  ------------------------------------------------------------------------- */
+  function watchLogo() {
+    if (!logo || !logo.classList.contains('is-armed')) return;
+
+    var drawSeen = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) return;
+        logo.classList.remove('is-armed');
+        logo.classList.add('is-drawing');
+        drawSeen.disconnect();
+      });
+    }, { threshold: 0.35 });
+
+    drawSeen.observe(logo);
+
+    // if anything stalls, show the finished logo rather than leaving it blank
+    window.setTimeout(function () {
+      if (logo.classList.contains('is-armed')) logo.classList.remove('is-armed');
+    }, 6000);
   }
 
   /* --- scroll reveal ----------------------------------------------------- */
