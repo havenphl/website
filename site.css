@@ -1278,7 +1278,7 @@ select:focus-visible {
    line, tiled so it stretches with the phrase. The tile starts and ends at the
    same height, so repeating it leaves no visible seam. */
 .mission-line .mark {
-  background-image: url("data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 13"><g fill="none" stroke="%237ba15d" stroke-linecap="round"><path d="M1 7.4C14 5.1 26 5.6 38 6.9 51 8.3 62 8.6 76 6.4 88 4.5 101 4.9 114 6.6 127 8.3 140 8.9 154 6.8 165 5.2 173 5.6 179 7.4" stroke-width="3.6"/><path d="M9 9.4C24 7.6 39 8.4 55 9.1 70 9.7 84 8.4 97 8.8" stroke-width="1.6" opacity=".5"/><path d="M118 9.2C133 8.1 149 8.8 168 8.2" stroke-width="1.4" opacity=".42"/></g></svg>");
+  background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 13'><g fill='none' stroke='%237ba15d' stroke-linecap='round'><path d='M1 7.4C14 5.1 26 5.6 38 6.9 51 8.3 62 8.6 76 6.4 88 4.5 101 4.9 114 6.6 127 8.3 140 8.9 154 6.8 165 5.2 173 5.6 179 7.4' stroke-width='3.6'/><path d='M9 9.4C24 7.6 39 8.4 55 9.1 70 9.7 84 8.4 97 8.8' stroke-width='1.6' opacity='.5'/><path d='M118 9.2C133 8.1 149 8.8 168 8.2' stroke-width='1.4' opacity='.42'/></g></svg>");
   background-repeat: repeat-x;
   background-position: 0 100%;
   background-size: 180px 13px;
