@@ -1259,7 +1259,9 @@ select:focus-visible {
   padding: var(--space-6) var(--space-5);
 }
 
-.mission-line {
+/* scoped to .sheet so it outranks the `.sheet p` baseline-grid rule above —
+   this is the one paragraph on the site that is not body copy */
+.sheet .mission-line {
   font-family: var(--font-display);
   font-size: clamp(4rem, 7.5vw, 7.5rem);
   line-height: 1.02;
@@ -1423,7 +1425,7 @@ select:focus-visible {
   .day-card { padding: var(--space-4); }
   .card { padding: var(--space-4); }
   .card--lg { padding: var(--space-5); }
-  .mission-line { font-size: clamp(2.5rem, 9vw, 4rem); }
+  .sheet .mission-line { font-size: clamp(2.5rem, 9vw, 4rem); }
   .mission-frame { padding: 26px; --dot-tile: 26px; --dot-r: 4.5px; }
   .mission-frame__inner { padding: var(--space-5); }
 }
