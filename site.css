@@ -1530,7 +1530,7 @@ select:focus-visible {
 }
 .comic__caption {
   align-self: flex-start;
-  margin-left: 30px;          /* clears the panel number */
+  margin-left: 44px;          /* clears the panel number */
 }
 
 /* --- drawn on, stroke by stroke -----------------------------------------
@@ -1564,13 +1564,13 @@ select:focus-visible {
   position: absolute;
   top: 0;
   left: 0;
-  width: 30px;
-  height: 26px;
+  width: 42px;
+  height: 36px;
   display: grid;
   place-items: center;
   z-index: 2;
   font-family: var(--font-display);
-  font-size: var(--text-body-sm);
+  font-size: var(--text-heading-md);
   color: #fff;
   background: #1a1a18;
 }
@@ -1596,13 +1596,13 @@ select:focus-visible {
   position: absolute;
   top: 4px;
   left: 4px;
-  width: 30px;
-  height: 26px;
+  width: 42px;
+  height: 36px;
   display: grid;
   place-items: center;
   z-index: 2;
   font-family: var(--font-display);
-  font-size: var(--text-body-sm);
+  font-size: var(--text-heading-md);
   color: #fff;
   background: #1a1a18;
 }
