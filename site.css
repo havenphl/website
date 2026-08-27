@@ -1349,15 +1349,15 @@ select:focus-visible {
   color: var(--ink);
 }
 /* --- the session tapes ---------------------------------------------------
-   Two things vary independently: the colour says which day, the pattern says
-   which session. So Monday is pink, Tuesday yellow, Thursday green, and within
-   any day session A is striped while session B is dotted. Each is a real
-   gradient rather than an image, so it stays crisp and recolours from one
-   custom property. The torn edge is a clip-path, which is why the shadow is a
-   drop-shadow — a box-shadow would trace the untorn rectangle.
+   Same two patterns used elsewhere on the site: the white polka dots from the
+   mission frame, and straight stripes. Session A and B swap patterns from one
+   day to the next so no two cards look alike, and all six tapes get their own
+   colour pairing. Gradients rather than images, so they stay crisp at any zoom.
+   The torn edge is a clip-path, which is why the shadow is a drop-shadow — a
+   box-shadow would trace the untorn rectangle instead.
    ------------------------------------------------------------------------ */
 .slot__label {
-  --tape: 255, 140, 166;             /* pink — Mondays */
+  --tape: var(--pink);
   justify-self: start;
   font-family: var(--font-hand);
   font-weight: 700;
@@ -1366,7 +1366,7 @@ select:focus-visible {
   color: var(--tape-ink);
   padding: 4px var(--space-4);
   margin-bottom: var(--space-2);
-  background-color: rgba(var(--tape), .18);
+  background-color: var(--tape);
   clip-path: polygon(
     2px 0%, calc(100% - 2px) 0%,
     calc(100% - 4px) 22%, 100% 47%,
@@ -1377,25 +1377,32 @@ select:focus-visible {
   transform: rotate(-1.8deg);
 }
 
-/* session A — diagonal candy stripes */
-.day-card__list li:nth-child(1) .slot__label {
+/* the two rolls */
+.slot__label.tape--dots {
   background-image:
-    repeating-linear-gradient(48deg, transparent 0 7px, rgba(var(--tape), .5) 7px 14px);
+    radial-gradient(circle 3.2px at 50% 50%, #fff 97%, transparent 100%),
+    radial-gradient(circle 3.2px at 50% 50%, #fff 97%, transparent 100%);
+  background-size: 16px 16px;
+  background-position: 0 0, 8px 8px;
+}
+.slot__label.tape--stripes {
+  background-image:
+    repeating-linear-gradient(90deg, #fff 0 7px, transparent 7px 15px);
 }
 
-/* session B — staggered polka dots, and tilted the other way */
-.day-card__list li:nth-child(3) .slot__label {
-  background-image:
-    radial-gradient(circle 3px at 50% 50%, rgba(var(--tape), .55) 97%, transparent 100%),
-    radial-gradient(circle 3px at 50% 50%, rgba(var(--tape), .55) 97%, transparent 100%);
-  background-size: 15px 15px;
-  background-position: 0 0, 7.5px 7.5px;
-  transform: rotate(1.5deg);
-}
+/* every tape leans slightly differently, the way six torn scraps would */
+.week .day-card:nth-child(1) li:nth-child(3) .slot__label,
+.week .day-card:nth-child(3) li:nth-child(1) .slot__label { transform: rotate(1.5deg); }
+.week .day-card:nth-child(2) li:nth-child(1) .slot__label { transform: rotate(1.2deg); }
+.week .day-card:nth-child(2) li:nth-child(3) .slot__label { transform: rotate(-1.4deg); }
 
-/* colour by day */
-.week .day-card:nth-child(2) .slot__label { --tape: 248, 213, 104; }   /* yellow — Tuesdays */
-.week .day-card:nth-child(3) .slot__label { --tape: 123, 161,  93; }   /* green  — Thursdays */
+/* six tapes, six colour pairings */
+.week .day-card:nth-child(1) li:nth-child(1) .slot__label { --tape: var(--pink); }
+.week .day-card:nth-child(1) li:nth-child(3) .slot__label { --tape: var(--green); }
+.week .day-card:nth-child(2) li:nth-child(1) .slot__label { --tape: var(--yellow); }
+.week .day-card:nth-child(2) li:nth-child(3) .slot__label { --tape: var(--green); }
+.week .day-card:nth-child(3) li:nth-child(1) .slot__label { --tape: var(--yellow); }
+.week .day-card:nth-child(3) li:nth-child(3) .slot__label { --tape: var(--pink); }
 
 /* the two short, unglamorous slots stay visually quiet */
 .day-card__list .slot--transition,
