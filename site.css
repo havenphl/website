@@ -1582,6 +1582,9 @@ select:focus-visible {
   .comic.is-drawing .ink__s { fill: #1a1a18; stroke: none; }
 }
 
+/* Our Journey follows straight on from the profile cards */
+#about { margin-top: var(--rule-gap); }
+
 /* the three of them, closing out the founding story */
 .team-photo {
   position: relative;
