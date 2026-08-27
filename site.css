@@ -1437,50 +1437,71 @@ select:focus-visible {
 
 /* ==========================================================================
    THE COMIC STRIP — the founding story, four panels
+   Heavy marker borders and uneven panel widths, the way a strip is laid out:
+   two full-width beats, then a wide/narrow pair. Speed lines burst from the
+   corners of the panels where something happens.
    ========================================================================== */
 .comic {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: var(--space-6);
+  grid-template-columns: repeat(5, 1fr);
+  gap: var(--space-4);
   margin-top: var(--space-6);
   counter-reset: panel;
 }
 .comic__panel {
   position: relative;
   display: flex;
-  flex-direction: column;
-  gap: var(--space-3);
-  background: var(--paper-cream);
-  border: 3px solid var(--ink);
-  border-radius: var(--radius-sm);
-  box-shadow: var(--shadow-crayon);
+  align-items: center;
+  gap: var(--space-5);
+  background: #fffdf6;
+  border: 5px solid #1a1a18;
+  border-radius: 2px;
   padding: var(--space-5);
+  overflow: hidden;
 }
-/* the little panel number in the corner, like a strip */
+.comic__panel:nth-child(1) { grid-column: span 5; }
+.comic__panel:nth-child(2) { grid-column: span 5; }
+.comic__panel:nth-child(3) { grid-column: span 3; }
+/* the last beat is the narrow one, so it stacks instead */
+.comic__panel:nth-child(4) { grid-column: span 2; flex-direction: column; align-items: flex-start; }
+
+/* action lines, tucked behind the drawing */
+.comic__panel::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-repeat: no-repeat;
+  background-size: 46% auto;
+  opacity: .5;
+  pointer-events: none;
+  z-index: 0;
+}
+.comic__panel:nth-child(odd)::after  { background-image: url('assets/doodles/speedlines-left.svg');  background-position: left top; }
+.comic__panel:nth-child(even)::after { background-image: url('assets/doodles/speedlines-right.svg'); background-position: right top; }
+
+.comic__panel img,
+.comic__panel p { position: relative; z-index: 1; }
+.comic__panel img { flex: 0 0 auto; width: min(52%, 330px); height: auto; }
+.comic__panel:nth-child(4) img { width: 100%; }
+.comic__panel p { margin: 0; }
+
+/* the panel number, in the corner like a strip */
 .comic__panel::before {
   counter-increment: panel;
   content: counter(panel);
   position: absolute;
-  top: -13px;
-  left: -13px;
+  top: 0;
+  left: 0;
   width: 30px;
-  height: 30px;
+  height: 26px;
   display: grid;
   place-items: center;
+  z-index: 2;
   font-family: var(--font-display);
   font-size: var(--text-body-sm);
-  color: var(--ink);
-  background: var(--yellow);
-  border: 2.5px solid var(--ink);
-  border-radius: 50%;
+  color: #fffdf6;
+  background: #1a1a18;
 }
-.comic__panel:nth-child(2n)::before { background: var(--pink); }
-.comic__panel img { width: 100%; height: auto; }
-.comic__panel p { margin: 0; }
-/* each panel sits a touch off square, like paper laid down by hand */
-.comic__panel:nth-child(1) { transform: rotate(-.5deg); }
-.comic__panel:nth-child(3) { transform: rotate(.4deg); }
-.comic__panel:nth-child(4) { transform: rotate(-.35deg); }
 
 /* ==========================================================================
    ABOUT — news links and partner logos
@@ -1551,7 +1572,12 @@ select:focus-visible {
   .pillars, .involve, .team, .week, .serves { grid-template-columns: 1fr; }
   .partners-grid { grid-template-columns: repeat(2, 1fr); }
   .comic { grid-template-columns: 1fr; }
-  .comic__panel { transform: none; }
+  .comic__panel,
+  .comic__panel:nth-child(1),
+  .comic__panel:nth-child(2),
+  .comic__panel:nth-child(3),
+  .comic__panel:nth-child(4) { grid-column: auto; flex-direction: column; align-items: flex-start; }
+  .comic__panel img, .comic__panel:nth-child(4) img { width: 100%; }
   .problem__grid { grid-template-columns: 1fr; }
   .pull-quote { position: static; }
   .day-card.tilt-2, .reveal.day-card.tilt-2.is-in,
