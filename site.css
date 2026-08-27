@@ -1500,6 +1500,8 @@ select:focus-visible {
   height: auto;
   align-self: center;
 }
+.comic__panel:nth-child(1) .comic__inner img { max-width: 285px; }
+.comic__panel:nth-child(4) .comic__inner img { max-width: 168px; }
 
 /* the panel number, in the corner like a strip */
 .comic__inner::before {
