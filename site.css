@@ -275,6 +275,8 @@ body.is-loading { overflow: hidden; }
    run unbroken from the top of the content to the bottom */
 .sheet > .section:first-child,
 .sheet > .hero:first-child { margin-top: 0; }
+/* the first block on the afternoons page sits a line higher up the paper */
+.sheet > #day:first-child { margin-top: calc(var(--rule-gap) * -1); }
 
 /* sections are just spacing now — they carry no paper of their own */
 .sheet > section { position: relative; z-index: 1; }
@@ -1349,15 +1351,13 @@ select:focus-visible {
   color: var(--ink);
 }
 /* --- the session tapes ---------------------------------------------------
-   Same two patterns used elsewhere on the site: the white polka dots from the
-   mission frame, and straight stripes. Session A and B swap patterns from one
-   day to the next so no two cards look alike, and all six tapes get their own
-   colour pairing. Gradients rather than images, so they stay crisp at any zoom.
-   The torn edge is a clip-path, which is why the shadow is a drop-shadow — a
+   The real washi rolls from the design system's texture set, not drawn ones:
+   pink polka dot, yellow gingham and green gingham. Session A and B swap
+   patterns from one day to the next, and each day gets its own pairing. The
+   torn edge is a clip-path, which is why the shadow is a drop-shadow — a
    box-shadow would trace the untorn rectangle instead.
    ------------------------------------------------------------------------ */
 .slot__label {
-  --tape: var(--pink);
   justify-self: start;
   font-family: var(--font-hand);
   font-weight: 700;
@@ -1366,7 +1366,8 @@ select:focus-visible {
   color: var(--tape-ink);
   padding: 4px var(--space-4);
   margin-bottom: var(--space-2);
-  background-color: var(--tape);
+  background-size: cover;
+  background-position: center;
   clip-path: polygon(
     2px 0%, calc(100% - 2px) 0%,
     calc(100% - 4px) 22%, 100% 47%,
@@ -1377,27 +1378,15 @@ select:focus-visible {
   transform: rotate(-1.8deg);
 }
 
-/* the two rolls */
-.slot__label.tape--dots {
-  background-image:
-    radial-gradient(circle 3.2px at 50% 50%, #fff 97%, transparent 100%),
-    radial-gradient(circle 3.2px at 50% 50%, #fff 97%, transparent 100%);
-  background-size: 16px 16px;
-  background-position: 0 0, 8px 8px;
-}
-.slot__label.tape--stripes {
-  background-image:
-    repeating-linear-gradient(90deg, #fff 0 7px, transparent 7px 15px);
-}
+.tape--dots-pink     { background-image: url('assets/textures/tape-pink.jpg'); }
+.tape--gingham-yellow{ background-image: url('assets/textures/tape-yellow.jpg'); }
+.tape--gingham-green { background-image: url('assets/textures/tape-green-gingham.jpg'); }
 
-/* every tape leans slightly differently, the way six torn scraps would */
+/* every scrap leans a little differently, the way torn tape would */
 .week .day-card:nth-child(1) li:nth-child(3) .slot__label,
 .week .day-card:nth-child(3) li:nth-child(1) .slot__label { transform: rotate(1.5deg); }
 .week .day-card:nth-child(2) li:nth-child(1) .slot__label { transform: rotate(1.2deg); }
 .week .day-card:nth-child(2) li:nth-child(3) .slot__label { transform: rotate(-1.4deg); }
-
-/* six tapes, six colour pairings */
-.week .day-card:nth-child(1) li:nth-child(1) .slot__label { --tape: var(--pink); }
 .week .day-card:nth-child(1) li:nth-child(3) .slot__label { --tape: var(--green); }
 .week .day-card:nth-child(2) li:nth-child(1) .slot__label { --tape: var(--yellow); }
 .week .day-card:nth-child(2) li:nth-child(3) .slot__label { --tape: var(--green); }
