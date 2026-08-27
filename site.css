@@ -684,8 +684,10 @@ select:focus-visible {
 }
 /* let the heading, the intro line and the cards breathe. Both gaps are whole
    multiples of the ruled line, so the writing keeps landing between the rules. */
-#programs h2,
 #day h2 { margin-bottom: var(--rule-gap); }
+/* tighter under the prongs heading. Kept at zero rather than a half-line so the
+   paragraph below still lands between the rules on the paper. */
+#programs h2 { margin-bottom: 0; }
 #programs > div > p { margin-bottom: calc(var(--rule-gap) * 2); }
 #programs .pillars { margin-top: 0; }
 .pillar { display: flex; flex-direction: column; }
