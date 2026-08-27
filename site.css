@@ -30,11 +30,21 @@
 html {
   -webkit-text-size-adjust: 100%;
   scroll-behavior: smooth;
-  /* Always reserve the scrollbar track. Without this, a short page has no
-     scrollbar, the viewport is ~15px wider, and both the looseleaf and the
-     striped background shift — so pages looked like different widths. */
+
+  /* Always reserve the scrollbar track, so a short page and a long one are the
+     same width. */
   scrollbar-gutter: stable;
   overflow-y: scroll;          /* same effect where scrollbar-gutter is unsupported */
+
+  /* The striped paper lives here, not on <body>. When body both owns the page
+     background and carries overflow-x: hidden, the background's sizing area
+     follows body's own scroll extent, so it rendered at a different scale from
+     one page to the next. On <html> it is anchored to the canvas everywhere.
+     The tile is 420x740 and seamless both ways, so it just repeats. */
+  background-color: var(--paper-cream);
+  background-image: url('assets/textures/striped-paper-brand.jpg');
+  background-size: 420px auto;
+  background-repeat: repeat;
 }
 body, h1, h2, h3, h4, p, ul, ol, figure, blockquote { margin: 0; }
 ul, ol { padding: 0; list-style: none; }
@@ -60,12 +70,7 @@ body {
   font-size: var(--text-body-lg);
   line-height: var(--rule-gap);
   color: var(--text-body);
-  background-color: var(--paper-cream);
-  /* striped paper: hand-drawn pink and green rules with the odd yellow star.
-     The tile is 420x740 and seamless both ways, so it just repeats. */
-  background-image: url('assets/textures/striped-paper-brand.jpg');
-  background-size: 420px auto;
-  background-repeat: repeat;
+  background: transparent;     /* the paper is on <html> */
   overflow-x: hidden;
 }
 
