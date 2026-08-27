@@ -1521,7 +1521,7 @@ select:focus-visible {
   font-family: var(--font-display);   /* Karumbi */
   font-size: var(--text-heading-md);
   color: var(--text-heading);
-  line-height: var(--leading-snug);
+  line-height: 1.12;          /* tight, the way comic lettering stacks */
 }
 .comic__caption {
   align-self: flex-start;
@@ -1575,7 +1575,7 @@ select:focus-visible {
   font-family: var(--font-display);
   font-size: var(--text-heading-md);
   color: var(--text-heading);
-  line-height: var(--leading-snug);
+  line-height: 1.12;          /* tight, the way comic lettering stacks */
 }
 /* the arrow marks these as leaving the site */
 .news__title::after { content: ' \2197'; font-family: var(--font-body); }
