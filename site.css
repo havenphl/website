@@ -690,6 +690,8 @@ select:focus-visible {
 /* tighter under the prongs heading. Kept at zero rather than a half-line so the
    paragraph below still lands between the rules on the paper. */
 #programs h2 { margin-bottom: 0; }
+/* the prongs sit a little closer to the schedule above them */
+#programs { margin-top: 44px; }
 #programs > div > p { margin-bottom: calc(var(--rule-gap) * 2); }
 #programs .pillars { margin-top: 0; }
 .pillar { display: flex; flex-direction: column; }
