@@ -1665,7 +1665,14 @@ select:focus-visible {
   line-height: 1.5;
   color: var(--ink-soft);
 }
-.newsprint .newsprint__ears { text-align: right; }
+.newsprint .newsprint__ears {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 4px;
+}
+/* the HAVEN mark, sitting in the masthead ear */
+.newsprint__logo { width: 62px; height: auto; }
 .newsprint .newsprint__date span { text-decoration: underline; }
 .newsprint__name {
   margin: 0;
