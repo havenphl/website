@@ -1042,7 +1042,7 @@ select:focus-visible {
 
   /* soft pink ground with a fine staggered dot grid, drawn as two offset
      radial-gradient tiles rather than an image, so it stays crisp at any size */
-  background-color: #ffe9e3;
+  background-color: #ffe8e7;
   background-image:
     radial-gradient(circle 2.4px at 50% 50%, rgba(74, 64, 50, .12) 96%, transparent 100%),
     radial-gradient(circle 2.4px at 50% 50%, rgba(74, 64, 50, .12) 96%, transparent 100%);
