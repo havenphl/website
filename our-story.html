@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Contact HAVEN</title>
-<meta name="description" content="Questions, partnerships, donations or media enquiries — write to HAVEN and a member of our team will get back to you within 1 to 3 business days.">
+<title>Our story — HAVEN</title>
+<meta name="description" content="HAVEN&#39;s mission, what families at Jane Addams Place told us they needed, who we serve, and what an afternoon actually looks like.">
 
 <link rel="icon" href="assets/logo.png">
 <!-- design system tokens (colors, type, spacing, fonts, effects) -->
@@ -56,10 +56,10 @@
 
     <nav class="nav__links" id="navLinks" aria-label="Main">
       <a class="nav__link" href="index.html">home</a>
-      <a class="nav__link" href="programs.html">our story</a>
-      <a class="nav__link" href="afternoons.html">our afternoons</a>
-      <a class="nav__link" href="about.html">our team</a>
-      <a class="nav__link is-current" href="involved.html" aria-current="page">contact</a>
+      <a class="nav__link is-current" href="our-story.html" aria-current="page">our story</a>
+      <a class="nav__link" href="our-afternoons.html">our afternoons</a>
+      <a class="nav__link" href="our-team.html">our team</a>
+      <a class="nav__link" href="contact.html">contact</a>
       <a class="btn btn--primary btn--sm" href="donate.html">donate</a>
     </nav>
   </div>
@@ -70,62 +70,86 @@
 
 <div class="container sheet">
 
-
-<section class="section" id="contact">
-  <div class="contact__grid">
-    <div class="contact__aside">
-      <h2 class="display-md">Say hello.</h2>
-
-      <p>
-        Whether you have questions, want to partner, or learn more &mdash; write to us. A member of
-        our team will get back to you within 1 to 3 business days!
-      </p>
-
-      <div class="contact__detail">
-        <div><strong>email</strong><br><a href="mailto:info@havenphl.org">info@havenphl.org</a></div>
+<!-- ==================================================== MISSION ========= -->
+<section class="section" id="mission">
+  <div>
+    <div class="mission-frame reveal">
+      <div class="mission-frame__inner">
+        <p class="mission-line">
+          Our mission is to nurture the success of the whole family on the journey towards stable
+          housing through joyful child enrichment that alleviates caregiver burdens.
+        </p>
       </div>
     </div>
+  </div>
+</section>
 
-    <form class="card card--lg form" id="contactForm" novalidate>
-      <div class="form__row">
-        <div class="field" id="field-name">
-          <label for="name">your name</label>
-          <input id="name" name="name" type="text" autocomplete="name" placeholder="first and last">
-          <span class="field__error" id="err-name">please tell us your name.</span>
-        </div>
+<!-- ============================================ NEEDS ASSESSMENT ======== -->
+<section class="section" id="needs">
+  <div>
+    <h2 class="display-md">What families told us they needed</h2>
 
-        <div class="field" id="field-email">
-          <label for="email">email</label>
-          <input id="email" name="email" type="email" autocomplete="email" placeholder="you@example.com">
-          <span class="field__error" id="err-email">that email doesn't look quite right.</span>
-        </div>
+    <p>
+      In November 2025, we spoke with caregivers at Jane Addams Place about what would be most
+      helpful for their children and families. Their responses helped shape HAVEN&rsquo;s
+      programming:
+    </p>
+
+    <ul class="stat-list">
+      <li class="card card--cream reveal">
+        <span class="stat-list__value">100%</span>
+        <span>said their children needed more support with schoolwork</span>
+      </li>
+      <li class="card card--cream tilt-3 reveal">
+        <span class="stat-list__value">88%</span>
+        <span>said after-school programming would make it easier to work, attend training, or make appointments</span>
+      </li>
+      <li class="card card--cream reveal">
+        <span class="stat-list__value">88%</span>
+        <span>said their children needed more opportunities for supervised physical activity</span>
+      </li>
+      <li class="card card--cream tilt-3 reveal">
+        <span class="stat-list__value">88%</span>
+        <span>wanted more positive, constructive activities for their children</span>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<!-- ================================================ WHO WE SERVE ======== -->
+<section class="section" id="families">
+  <div>
+    <h2 class="display-md">Whole families, not just kids.</h2>
+
+    <p>
+      Supporting the child, teen, and caregiver aren&rsquo;t three programs. They&rsquo;re the
+      same one.
+    </p>
+
+    <dl class="serves">
+      <div class="serves__item serves__item--pink reveal">
+        <dt>Elementary-aged children</dt>
+        <dd>
+          We provide consistent academic, social-emotional, and creative enrichment through
+          literacy, movement, storytelling, and the arts.
+        </dd>
       </div>
-
-      <div class="field" id="field-topic">
-        <label for="topic">what's this about?</label>
-        <select id="topic" name="topic">
-          <option value="">choose one</option>
-          <option value="questions">questions</option>
-          <option value="partnering with HAVEN">partnering with HAVEN</option>
-          <option value="donations">donations</option>
-          <option value="media inquiries">media inquiries</option>
-          <option value="something else">something else</option>
-        </select>
-        <span class="field__error" id="err-topic">pick whichever is closest.</span>
+      <div class="serves__item serves__item--green reveal">
+        <dt>High-school youth</dt>
+        <dd>
+          We create paid near-peer mentorship and leadership opportunities for teens living in
+          shelter, giving them structured ways to build confidence, communication skills, and
+          relationships with younger children.
+        </dd>
       </div>
-
-      <div class="field" id="field-message">
-        <label for="message">your message</label>
-        <textarea id="message" name="message" placeholder="tell us as much or as little as you like."></textarea>
-        <span class="field__error" id="err-message">a sentence or two is plenty.</span>
+      <div class="serves__item serves__item--yellow reveal">
+        <dt>Caregivers</dt>
+        <dd>
+          By providing reliable after-school supervision, HAVEN gives caregivers more flexibility
+          to work, attend training, make appointments, and take other steps toward stable housing.
+        </dd>
       </div>
-
-      <div class="form__foot">
-        <button class="btn btn--primary btn--lg" type="submit">send it</button>
-        <!-- NOTE: the form is front-end only. Wire it to Formspree, Netlify Forms
-             or your own endpoint before launch. -->
-      </div>
-    </form>
+    </dl>
   </div>
 </section>
 </div>
@@ -150,9 +174,9 @@
       <div>
         <h4>on this page</h4>
         <ul class="footer__list">
-          <li><a href="about.html">our team</a></li>
-          <li><a href="programs.html">our story</a></li>
-          <li><a href="afternoons.html#day">an afternoon</a></li>
+          <li><a href="our-team.html">our team</a></li>
+          <li><a href="our-story.html">our story</a></li>
+          <li><a href="our-afternoons.html#day">an afternoon</a></li>
           <li><a href="donate.html">donate</a></li>
         </ul>
       </div>
@@ -161,7 +185,7 @@
         <h4>reach us</h4>
         <ul class="footer__list">
           <li><a href="mailto:info@havenphl.org">info@havenphl.org</a></li>
-          <li><a href="involved.html#contact">send a message</a></li>
+          <li><a href="contact.html#contact">send a message</a></li>
         </ul>
       </div>
     </div>

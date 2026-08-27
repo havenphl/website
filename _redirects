@@ -1,0 +1,9 @@
+# old page names -> new ones, so any link already shared keeps working
+/programs        /our-story        301
+/programs.html   /our-story        301
+/afternoons      /our-afternoons   301
+/afternoons.html /our-afternoons   301
+/about           /our-team         301
+/about.html      /our-team         301
+/involved        /contact          301
+/involved.html   /contact          301
