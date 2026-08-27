@@ -1486,26 +1486,26 @@ select:focus-visible {
 }
 
 .comic__panel:nth-child(3) {
-  grid-column: 1 / 10; grid-row: 2;
+  grid-column: 1 / 11; grid-row: 2;
   margin-top: -40px;
   min-height: 300px;
-  clip-path: polygon(0 0, 100% 20px, 100% 100%, 0 100%);
+  clip-path: polygon(0 0, 100% 22px, 100% 100%, 0 100%);
 }
 .comic__panel:nth-child(3) .comic__inner {
-  clip-path: polygon(0 0, 100% 20px, 100% 100%, 0 100%);
+  clip-path: polygon(0 0, 100% 22px, 100% 100%, 0 100%);
   padding: 34px var(--space-5) var(--space-5);
 }
 
 .comic__panel:nth-child(4) {
-  grid-column: 10 / 21; grid-row: 2;
+  grid-column: 11 / 21; grid-row: 2;
   margin-left: 8px;
-  margin-top: -20px;
+  margin-top: -18px;
   min-height: 300px;
-  clip-path: polygon(0 0, 100% 24px, 100% 100%, 0 100%);
+  clip-path: polygon(0 0, 100% 22px, 100% 100%, 0 100%);
 }
 .comic__panel:nth-child(4) .comic__inner {
-  clip-path: polygon(0 0, 100% 24px, 100% 100%, 0 100%);
-  padding: 38px var(--space-5) var(--space-5);
+  clip-path: polygon(0 0, 100% 22px, 100% 100%, 0 100%);
+  padding: 36px var(--space-5) var(--space-5);
 }
 
 /* every line of narration sits in its own box, the way a strip captions a panel.
