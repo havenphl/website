@@ -1584,6 +1584,8 @@ select:focus-visible {
 
 /* Our Journey follows straight on from the profile cards */
 #about { margin-top: var(--rule-gap); }
+/* the Chronicle follows close on the group photo */
+#news { margin-top: var(--rule-gap); }
 
 /* the three of them, closing out the founding story */
 .team-photo {
