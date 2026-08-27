@@ -1437,11 +1437,11 @@ select:focus-visible {
 
 /* ==========================================================================
    THE COMIC STRIP — the founding story, four panels
-   Laid out to the reference template. A 20-column grid lets panels 1 and 2
-   overlap in the middle columns, which is what makes the steep gutter between
-   them a real diagonal rather than a slanted edge on a rectangle. The heavy
-   frame is the outer element's background showing through a 5px padding, with
-   the inner box carrying the same clip-path so the border follows every slant.
+   The frames and the drawings are real vector outlines, so they can be drawn
+   on stroke by stroke: every path is dashed to its own length, then the dash
+   offset is animated to zero, and the fill fades in behind it as it lands.
+   Panel shapes are percentage-only so the SVG frame and the clip-path agree
+   whatever height the panels end up.
    ========================================================================== */
 .comic {
   display: grid;
@@ -1451,7 +1451,7 @@ select:focus-visible {
   counter-reset: panel;
 }
 
-.comic__panel { background: #1a1a18; padding: 4px; }
+.comic__panel { position: relative; }
 .comic__inner {
   position: relative;
   height: 100%;
@@ -1463,53 +1463,56 @@ select:focus-visible {
   overflow: hidden;
 }
 
-/* --- the four shapes, and the padding that keeps text off the slants --- */
-.comic__panel:nth-child(1) {
-  grid-column: 1 / 12; grid-row: 1;
-  min-height: 310px;
-  clip-path: polygon(0 0, 98% 0, 64.1% calc(100% - 32px), 0 calc(100% - 48px));
+/* the frame is the drawn outline, not a CSS border */
+.panel-frame {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 3;
+  pointer-events: none;
 }
+.panel-frame__line { fill: none; stroke: #1a1a18; stroke-width: 4.5; }
+
+.comic__panel:nth-child(1) { --i: 0; grid-column: 1 / 12; grid-row: 1; min-height: 310px;
+  clip-path: polygon(0 0, 98% 0, 64.1% 89.7%, 0 84.5%); }
 .comic__panel:nth-child(1) .comic__inner {
-  clip-path: polygon(0 0, 98% 0, 64.1% calc(100% - 32px), 0 calc(100% - 48px));
+  clip-path: polygon(0 0, 98% 0, 64.1% 89.7%, 0 84.5%);
   justify-content: flex-start;
   padding: 6% 40% 18% var(--space-5);
 }
 
-.comic__panel:nth-child(2) {
-  grid-column: 7 / 21; grid-row: 1;
-  min-height: 310px;
-  clip-path: polygon(35.9% 0, 100% 0, 100% calc(100% - 4px), 9.2% calc(100% - 32px));
-}
+.comic__panel:nth-child(2) { --i: 1; grid-column: 7 / 21; grid-row: 1; min-height: 310px;
+  clip-path: polygon(35.9% 0, 100% 0, 100% 98.7%, 9.2% 89.7%); }
 .comic__panel:nth-child(2) .comic__inner {
-  clip-path: polygon(35.9% 0, 100% 0, 100% calc(100% - 4px), 9.2% calc(100% - 32px));
+  clip-path: polygon(35.9% 0, 100% 0, 100% 98.7%, 9.2% 89.7%);
   padding: 7% var(--space-4) 10% 34%;
 }
 
-.comic__panel:nth-child(3) {
-  grid-column: 1 / 11; grid-row: 2;
-  margin-top: -40px;
-  min-height: 300px;
-  clip-path: polygon(0 0, 100% 22px, 100% 100%, 0 100%);
-}
+.comic__panel:nth-child(3) { --i: 2; grid-column: 1 / 11; grid-row: 2;
+  margin-top: -40px; min-height: 300px;
+  clip-path: polygon(0 0, 100% 7.3%, 100% 100%, 0 100%); }
 .comic__panel:nth-child(3) .comic__inner {
-  clip-path: polygon(0 0, 100% 22px, 100% 100%, 0 100%);
+  clip-path: polygon(0 0, 100% 7.3%, 100% 100%, 0 100%);
   padding: 34px var(--space-5) var(--space-5);
 }
 
-.comic__panel:nth-child(4) {
-  grid-column: 11 / 21; grid-row: 2;
-  margin-left: 8px;
-  margin-top: -18px;
-  min-height: 300px;
-  clip-path: polygon(0 0, 100% 22px, 100% 100%, 0 100%);
-}
+.comic__panel:nth-child(4) { --i: 3; grid-column: 11 / 21; grid-row: 2;
+  margin-left: 8px; margin-top: -18px; min-height: 300px;
+  clip-path: polygon(0 0, 100% 7.3%, 100% 100%, 0 100%); }
 .comic__panel:nth-child(4) .comic__inner {
-  clip-path: polygon(0 0, 100% 22px, 100% 100%, 0 100%);
+  clip-path: polygon(0 0, 100% 7.3%, 100% 100%, 0 100%);
   padding: 36px var(--space-5) var(--space-5);
 }
 
-/* every line of narration sits in its own box, the way a strip captions a panel.
-   Beige against the white panel, so the words read as laid on top of the art. */
+/* --- the drawings, as strokes -------------------------------------------- */
+.ink { position: relative; z-index: 1; width: 100%; max-width: 205px; height: auto;
+       align-self: center; display: block; }
+.comic__panel:nth-child(1) .ink { max-width: 245px; }
+.comic__panel:nth-child(4) .ink { max-width: 168px; }
+.ink__s { fill: #1a1a18; }
+
+/* every line of narration sits in its own box, the way a strip captions a panel */
 .comic__caption,
 .comic__inner p {
   position: relative;
@@ -1521,73 +1524,58 @@ select:focus-visible {
   font-family: var(--font-display);   /* Karumbi */
   font-size: var(--text-heading-md);
   color: var(--text-heading);
-  line-height: 1.12;          /* tight, the way comic lettering stacks */
+  line-height: 1.12;
 }
 .comic__caption {
   align-self: flex-start;
   margin-left: 30px;          /* clears the panel number */
 }
 
-.comic__inner img { position: relative; z-index: 1; width: 100%; max-width: 205px; height: auto; align-self: center; }
-.comic__panel:nth-child(1) .comic__inner img { max-width: 245px; }
-.comic__panel:nth-child(4) .comic__inner img { max-width: 168px; }
-
-/* Panel 2's top-left corner is clipped away by its diagonal, and panel 1's top
-   edge starts 2% down — so their numbers move to a corner that actually exists. */
-.comic__panel:nth-child(1) .comic__inner::before { top: 0; }
-.comic__panel:nth-child(2) .comic__inner::before { left: auto; right: 0; }
-
-/* --- the strip inks itself in ---------------------------------------------
-   Each panel is wiped on with a moving gradient mask, left to right, so the
-   frame appears to be drawn rather than faded up. The drawing follows once its
-   panel is complete, then the words. Nothing here runs unless site.js can
-   drive it — see .is-armed below — so without JS the strip is simply there.
+/* --- drawn on, stroke by stroke -----------------------------------------
+   Held back only when site.js can drive it, so without JS the strip is
+   simply finished and there.
    ------------------------------------------------------------------------ */
-.comic__panel:nth-child(1) { --i: 0; }
-.comic__panel:nth-child(2) { --i: 1; }
-.comic__panel:nth-child(3) { --i: 2; }
-.comic__panel:nth-child(4) { --i: 3; }
-
-.comic.is-armed .comic__panel,
-.comic.is-armed .comic__inner img,
+.comic.is-armed .panel-frame__line,
+.comic.is-armed .ink__s,
 .comic.is-armed .comic__caption,
-.comic.is-armed .comic__inner p { visibility: hidden; }
+.comic.is-armed .comic__inner p { opacity: 0; }
 
-.comic.is-drawing .comic__panel,
-.comic.is-drawing .comic__inner img,
+/* the frame draws itself first */
+.comic.is-drawing .panel-frame__line {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  animation: draw-line .75s ease-in-out calc(var(--i) * .95s) forwards;
+}
+
+/* then each mark of the drawing: outline first, fill arriving behind it */
+.comic.is-drawing .ink__s {
+  fill: none;
+  stroke: #1a1a18;
+  stroke-width: 3;
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  animation:
+    draw-line .42s linear calc(var(--i) * .95s + .55s + var(--d, 0s)) forwards,
+    draw-fill .3s ease-out calc(var(--i) * .95s + .80s + var(--d, 0s)) forwards;
+}
+
+/* then the words */
 .comic.is-drawing .comic__caption,
 .comic.is-drawing .comic__inner p {
-  -webkit-mask-image: linear-gradient(100deg, #000 0 34%, rgba(0,0,0,.4) 48%, transparent 60%);
-          mask-image: linear-gradient(100deg, #000 0 34%, rgba(0,0,0,.4) 48%, transparent 60%);
-  -webkit-mask-size: 300% 100%;
-          mask-size: 300% 100%;
-  -webkit-mask-repeat: no-repeat;
-          mask-repeat: no-repeat;
-  animation: ink-on .5s ease-out both;
+  animation: write-in .5s ease-out calc(var(--i) * .95s + .45s) both;
 }
-.comic.is-drawing .comic__panel   { animation-delay: calc(var(--i) * .34s); }
-.comic.is-drawing .comic__caption { animation-delay: calc(var(--i) * .34s + .40s); }
-.comic.is-drawing .comic__inner img { animation-delay: calc(var(--i) * .34s + .52s); }
-.comic.is-drawing .comic__inner p { animation-delay: calc(var(--i) * .34s + .70s); }
+.comic.is-drawing .comic__inner p { animation-delay: calc(var(--i) * .95s + 1.9s); }
 
-@keyframes ink-on {
-  from { visibility: visible; -webkit-mask-position: 100% 0; mask-position: 100% 0; }
-  to   { visibility: visible; -webkit-mask-position: 0 0;    mask-position: 0 0; }
-}
-
-/* someone who prefers less motion just gets the finished strip */
-@media (prefers-reduced-motion: reduce) {
-  .comic.is-armed .comic__panel,
-  .comic.is-armed .comic__inner img,
-  .comic.is-armed .comic__caption,
-  .comic.is-armed .comic__inner p { visibility: visible; }
-  .comic.is-drawing .comic__panel,
-  .comic.is-drawing .comic__inner img,
-  .comic.is-drawing .comic__caption,
-  .comic.is-drawing .comic__inner p { -webkit-mask-image: none; mask-image: none; animation: none; }
+@keyframes draw-line { to { stroke-dashoffset: 0; } }
+@keyframes draw-fill { to { fill: #1a1a18; stroke-width: 0; } }
+@keyframes write-in {
+  from { opacity: 0; clip-path: inset(0 100% 0 0); }
+  to   { opacity: 1; clip-path: inset(0 0 0 0); }
 }
 
 /* the panel number, in the corner like a strip */
+.comic__panel:nth-child(1) .comic__inner::before { top: 0; }
+.comic__panel:nth-child(2) .comic__inner::before { left: auto; right: 0; }
 .comic__inner::before {
   counter-increment: panel;
   content: counter(panel);
@@ -1603,6 +1591,19 @@ select:focus-visible {
   font-size: var(--text-body-sm);
   color: #fff;
   background: #1a1a18;
+}
+
+/* someone who prefers less motion just gets the finished strip */
+@media (prefers-reduced-motion: reduce) {
+  .comic.is-armed .panel-frame__line,
+  .comic.is-armed .ink__s,
+  .comic.is-armed .comic__caption,
+  .comic.is-armed .comic__inner p { opacity: 1; }
+  .comic.is-drawing .panel-frame__line,
+  .comic.is-drawing .ink__s,
+  .comic.is-drawing .comic__caption,
+  .comic.is-drawing .comic__inner p { animation: none; }
+  .comic.is-drawing .ink__s { fill: #1a1a18; stroke: none; }
 }
 
 /* ==========================================================================
@@ -1674,14 +1675,13 @@ select:focus-visible {
   .pillars, .involve, .team, .week, .serves { grid-template-columns: 1fr; }
   .partners-grid { grid-template-columns: repeat(2, 1fr); }
   /* the diagonals crowd the text at this width — square the panels off */
-  .comic { grid-template-columns: 1fr; gap: var(--space-4); }
-  .comic__panel,
+  .comic { grid-template-columns: 1fr; row-gap: var(--space-4); }
   .comic__panel:nth-child(1),
   .comic__panel:nth-child(2),
   .comic__panel:nth-child(3),
   .comic__panel:nth-child(4) {
     grid-column: auto; grid-row: auto;
-    clip-path: none; min-height: 0; margin-top: 0;
+    clip-path: none; min-height: 0; margin-top: 0; margin-left: 0;
   }
   .comic__panel:nth-child(1) .comic__inner,
   .comic__panel:nth-child(2) .comic__inner,
@@ -1690,6 +1690,8 @@ select:focus-visible {
     clip-path: none;
     padding: var(--space-6) var(--space-5) var(--space-5);
   }
+  .panel-frame__line { display: none; }
+  .comic__panel { border: 4px solid #1a1a18; }
   .problem__grid { grid-template-columns: 1fr; }
   .pull-quote { position: static; }
   .day-card.tilt-2, .reveal.day-card.tilt-2.is-in,
