@@ -1451,7 +1451,7 @@ select:focus-visible {
   counter-reset: panel;
 }
 
-.comic__panel { background: #1a1a18; padding: 5px; }
+.comic__panel { background: #1a1a18; padding: 4px; }
 .comic__inner {
   position: relative;
   height: 100%;
@@ -1466,7 +1466,7 @@ select:focus-visible {
 /* --- the four shapes, and the padding that keeps text off the slants --- */
 .comic__panel:nth-child(1) {
   grid-column: 1 / 14; grid-row: 1;
-  min-height: 430px;
+  min-height: 310px;
   clip-path: polygon(0 2%, 100% 0, 69% 96%, 0 82%);
 }
 .comic__panel:nth-child(1) .comic__inner {
@@ -1477,7 +1477,7 @@ select:focus-visible {
 
 .comic__panel:nth-child(2) {
   grid-column: 9 / 21; grid-row: 1;
-  min-height: 430px;
+  min-height: 310px;
   clip-path: polygon(44% 0, 100% 1%, 100% 100%, 11% 90%);
 }
 .comic__panel:nth-child(2) .comic__inner {
@@ -1487,7 +1487,7 @@ select:focus-visible {
 
 .comic__panel:nth-child(3) {
   grid-column: 1 / 12; grid-row: 2;
-  min-height: 420px;
+  min-height: 300px;
   clip-path: polygon(0 0, 100% 7%, 100% 100%, 0 100%);
 }
 .comic__panel:nth-child(3) .comic__inner {
@@ -1497,8 +1497,8 @@ select:focus-visible {
 
 .comic__panel:nth-child(4) {
   grid-column: 12 / 21; grid-row: 2;
-  margin-top: 34px;
-  min-height: 420px;
+  margin-top: 24px;
+  min-height: 300px;
   clip-path: polygon(0 0, 100% 7%, 100% 100%, 0 100%);
 }
 .comic__panel:nth-child(4) .comic__inner {
@@ -1513,17 +1513,17 @@ select:focus-visible {
   align-self: flex-start;
   margin-left: 34px;          /* clears the panel number */
   font-family: var(--font-display);
-  font-size: var(--text-heading-md);
+  font-size: var(--text-heading-sm);
   color: var(--text-heading);
   background: #fff;
-  border: 3px solid #1a1a18;
-  padding: 2px var(--space-4);
+  border: 2.5px solid #1a1a18;
+  padding: 1px var(--space-3);
 }
 
 .comic__inner img,
 .comic__inner p { position: relative; z-index: 1; }
-.comic__inner img { width: 100%; max-width: 300px; height: auto; align-self: center; }
-.comic__inner p { margin: 0; }
+.comic__inner img { width: 100%; max-width: 205px; height: auto; align-self: center; }
+.comic__inner p { margin: 0; font-size: var(--text-body-md); line-height: var(--leading-snug); }
 
 /* the panel number, in the corner like a strip */
 .comic__inner::before {
