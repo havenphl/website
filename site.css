@@ -1506,24 +1506,27 @@ select:focus-visible {
   padding: 14% var(--space-6) var(--space-6);
 }
 
-/* the narration box that opens the strip, sitting above the drawing */
-.comic__caption {
+/* every line of narration sits in its own box, the way a strip captions a panel */
+.comic__caption,
+.comic__inner p {
   position: relative;
   z-index: 1;
+  margin: 0;
+  background: #fff;
+  border: 2.5px solid #1a1a18;
+  padding: 3px var(--space-3);
+  line-height: var(--leading-snug);
+}
+.comic__caption {
   align-self: flex-start;
   margin-left: 34px;          /* clears the panel number */
   font-family: var(--font-display);
   font-size: var(--text-heading-sm);
   color: var(--text-heading);
-  background: #fff;
-  border: 2.5px solid #1a1a18;
-  padding: 1px var(--space-3);
 }
+.comic__inner p { font-size: var(--text-body-md); }
 
-.comic__inner img,
-.comic__inner p { position: relative; z-index: 1; }
-.comic__inner img { width: 100%; max-width: 205px; height: auto; align-self: center; }
-.comic__inner p { margin: 0; font-size: var(--text-body-md); line-height: var(--leading-snug); }
+.comic__inner img { position: relative; z-index: 1; width: 100%; max-width: 205px; height: auto; align-self: center; }
 
 /* the panel number, in the corner like a strip */
 .comic__inner::before {
