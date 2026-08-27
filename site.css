@@ -2027,8 +2027,9 @@ select:focus-visible {
   .comic__panel { border: 4px solid #1a1a18; }
   .problem__grid { grid-template-columns: 1fr; }
   .pull-quote { position: static; }
-  .day-card.tilt-2, .reveal.day-card.tilt-2.is-in,
-  .serves__item.tilt-2, .reveal.serves__item.tilt-2.is-in { transform: none; }
+  .day-card.tilt-2, .reveal.day-card.tilt-2.is-in { transform: none; }
+  /* the notes sit straight when they stack */
+  .serves__item--pink, .serves__item--green, .serves__item--yellow { transform: none; }
   .footer__panel { grid-template-columns: 1fr; }
   .hero__art { order: -1; }
   .hero__art-mini { display: none; }
