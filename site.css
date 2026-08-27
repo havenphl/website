@@ -1595,18 +1595,20 @@ select:focus-visible {
   border-radius: 2px;
   box-shadow: var(--shadow-crayon);
 }
-/* a last narration box, laid over the photo like the ones in the strip.
-   Sits low-left, clear of the handwritten names across the top. */
+/* a last narration box, laid over the photo like the ones in the strip —
+   centred across the top, the way a strip opens a scene */
 .team-photo__caption {
   position: absolute;
-  left: var(--space-5);
-  bottom: var(--space-5);
-  max-width: min(60%, 30ch);
+  top: var(--space-5);
+  left: 50%;
+  transform: translateX(-50%);
+  max-width: 84%;
+  white-space: nowrap;
   background: var(--paper-cream);
-  border: 2.5px solid #1a1a18;
-  padding: 3px var(--space-3);
+  border: 3px solid #1a1a18;
+  padding: 4px var(--space-5);
   font-family: var(--font-display);
-  font-size: var(--text-heading-md);
+  font-size: var(--text-display-md);
   color: var(--text-heading);
   line-height: 1.12;
 }
@@ -1745,6 +1747,12 @@ select:focus-visible {
   .day-card { padding: var(--space-4); }
   .card { padding: var(--space-4); }
   .card--lg { padding: var(--space-5); }
+  .team-photo__caption {
+    white-space: normal;
+    font-size: var(--text-heading-md);
+    padding: 3px var(--space-3);
+    text-align: center;
+  }
   .sheet .mission-line { font-size: clamp(1.6rem, 5vw, 2.2rem); }
   .mission-frame { padding: 26px; --dot-tile: 26px; --dot-r: 4.5px; }
   .mission-frame__inner { padding: var(--space-5); }
