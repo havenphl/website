@@ -53,8 +53,10 @@ body {
   line-height: var(--rule-gap);
   color: var(--text-body);
   background-color: var(--paper-cream);
-  background-image: url('assets/textures/notebook-grid-brand.jpg');
-  background-size: 420px;
+  /* striped paper: hand-drawn pink and green rules with the odd yellow star.
+     The tile is 420x740 and seamless both ways, so it just repeats. */
+  background-image: url('assets/textures/striped-paper-brand.jpg');
+  background-size: 420px auto;
   background-repeat: repeat;
   overflow-x: hidden;
 }
@@ -64,7 +66,7 @@ body::before {
   position: fixed;
   inset: 0;
   background: var(--paper-cream);
-  opacity: .55;
+  opacity: .18;
   z-index: -1;
   pointer-events: none;
 }
@@ -84,8 +86,8 @@ body.is-loading { overflow: hidden; }
   inset: 0;
   z-index: 200;
   background-color: var(--paper-cream);
-  background-image: url('assets/textures/notebook-grid-brand.jpg');
-  background-size: 420px;
+  background-image: url('assets/textures/striped-paper-brand.jpg');
+  background-size: 420px auto;
 }
 
 .book__scene {
