@@ -1674,7 +1674,7 @@ select:focus-visible {
   font-size: clamp(2.2rem, 5vw, 3.6rem);
   line-height: 1;
   letter-spacing: .01em;
-  color: var(--red-crayon);
+  color: var(--denim);
 }
 .newsprint .newsprint__founded {
   margin: 4px 0 0;
@@ -1719,7 +1719,7 @@ select:focus-visible {
   font-weight: 700;
   letter-spacing: .12em;
   text-transform: uppercase;
-  color: var(--red-crayon);
+  color: var(--denim);
 }
 
 /* --- rail stories --- */
@@ -1742,7 +1742,7 @@ select:focus-visible {
   text-transform: uppercase;
   color: var(--green-deep);
 }
-.newsprint .newsprint__kicker--red { color: var(--red-crayon); }
+.newsprint .newsprint__kicker--red { color: var(--denim); }
 .newsprint .newsprint__byline {
   margin: 0;
   font-size: .8rem;
@@ -1822,10 +1822,10 @@ select:focus-visible {
   grid-row: span 2;
   width: 24px; height: 24px;
   display: grid; place-items: center;
-  border: 1.5px solid var(--red-crayon);
+  border: 1.5px solid var(--denim);
   border-radius: 50%;
   font-size: 1rem;
-  color: var(--red-crayon);
+  color: var(--denim);
 }
 .newsprint__most span {
   grid-column: 2;
@@ -1836,7 +1836,7 @@ select:focus-visible {
 }
 
 .newsprint a { text-decoration: none; color: inherit; }
-.newsprint a:hover { color: var(--red-crayon); text-decoration: underline; text-underline-offset: 3px; }
+.newsprint a:hover { color: var(--denim); text-decoration: underline; text-underline-offset: 3px; }
 
 /* Partner tiles, sized as a logo wall — dropping an <img> into a tile in place
    of the text needs no other change. */
