@@ -1446,7 +1446,7 @@ select:focus-visible {
 .comic {
   display: grid;
   grid-template-columns: repeat(20, 1fr);
-  row-gap: var(--space-3);
+  row-gap: 0;
   margin-top: var(--space-6);
   counter-reset: panel;
 }
@@ -1487,6 +1487,7 @@ select:focus-visible {
 
 .comic__panel:nth-child(3) {
   grid-column: 1 / 12; grid-row: 2;
+  margin-top: -40px;
   min-height: 300px;
   clip-path: polygon(0 0, 100% 7%, 100% 100%, 0 100%);
 }
@@ -1497,7 +1498,7 @@ select:focus-visible {
 
 .comic__panel:nth-child(4) {
   grid-column: 12 / 21; grid-row: 2;
-  margin-top: 24px;
+  margin-top: -16px;
   min-height: 300px;
   clip-path: polygon(0 0, 100% 7%, 100% 100%, 0 100%);
 }
