@@ -207,7 +207,9 @@ body.is-loading { overflow: hidden; }
 }
 
 /* sections sit directly under one another — one blank ruled line between */
-.section { padding-block: 0; margin-top: var(--rule-gap); }
+/* gaps between sections step by whole ruled lines, so every line of writing
+   keeps landing between the rules on the paper */
+.section { padding-block: 0; margin-top: calc(var(--rule-gap) * 2); }
 .section--tight { padding-block: 0; }
 
 /* ==========================================================================
