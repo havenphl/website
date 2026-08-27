@@ -1471,7 +1471,8 @@ select:focus-visible {
 }
 .comic__panel:nth-child(1) .comic__inner {
   clip-path: polygon(0 2%, 100% 0, 69% 96%, 0 82%);
-  padding: 12% 34% 16% var(--space-6);
+  justify-content: flex-start;
+  padding: 7% 34% 16% var(--space-6);
 }
 
 .comic__panel:nth-child(2) {
@@ -1503,6 +1504,20 @@ select:focus-visible {
 .comic__panel:nth-child(4) .comic__inner {
   clip-path: polygon(0 0, 100% 7%, 100% 100%, 0 100%);
   padding: 14% var(--space-6) var(--space-6);
+}
+
+/* the narration box that opens the strip, sitting above the drawing */
+.comic__caption {
+  position: relative;
+  z-index: 1;
+  align-self: flex-start;
+  margin-left: 34px;          /* clears the panel number */
+  font-family: var(--font-display);
+  font-size: var(--text-heading-md);
+  color: var(--text-heading);
+  background: #fff;
+  border: 3px solid #1a1a18;
+  padding: 2px var(--space-4);
 }
 
 .comic__inner img,
