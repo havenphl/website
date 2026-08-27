@@ -1825,6 +1825,29 @@ select:focus-visible {
 }
 .newsprint__split p + p { border-left: 1px solid var(--np-rule); padding-left: var(--space-5); }
 
+/* thumbnails in the left rail */
+.newsprint__thumb {
+  width: 100%;
+  height: auto;
+  display: block;
+  margin-bottom: var(--space-3);
+}
+
+/* the picture block that closes the right rail */
+.newsprint__aside {
+  margin: var(--space-5) 0 0;
+  padding-top: var(--space-4);
+  border-top: 2px solid var(--ink);
+}
+.newsprint__aside img { width: 100%; height: auto; display: block; }
+.newsprint__aside figcaption {
+  margin-top: var(--space-2);
+  font-size: .9rem;
+  line-height: 1.4;
+  color: var(--ink);
+}
+.newsprint__aside .newsprint__kicker { display: block; margin-bottom: 2px; }
+
 /* --- most read --- */
 .newsprint__most { margin: 0; padding: 0; list-style: none; counter-reset: mr; }
 .newsprint__most li {
