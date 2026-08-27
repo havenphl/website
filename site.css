@@ -686,7 +686,7 @@ select:focus-visible {
    multiples of the ruled line, so the writing keeps landing between the rules. */
 /* the display heading's own line box isn't a whole ruled line tall, which
    left this paragraph sitting hard against a rule — nudge it clear. */
-#day h2 { margin-bottom: calc(var(--rule-gap) - 6px); }
+#day h2 { margin-bottom: calc(var(--rule-gap) - 10px); }
 /* tighter under the prongs heading. Kept at zero rather than a half-line so the
    paragraph below still lands between the rules on the paper. */
 #programs h2 { margin-bottom: 0; }
