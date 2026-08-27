@@ -1544,7 +1544,7 @@ select:focus-visible {
 .comic.is-drawing .panel-frame__line {
   stroke-dasharray: 1;
   stroke-dashoffset: 1;
-  animation: draw-line .75s ease-in-out calc(var(--i) * .95s) forwards;
+  animation: draw-line .5s ease-in-out calc(var(--i) * .62s) forwards;
 }
 
 /* then each mark of the drawing: outline first, fill arriving behind it */
@@ -1555,16 +1555,16 @@ select:focus-visible {
   stroke-dasharray: 1;
   stroke-dashoffset: 1;
   animation:
-    draw-line .42s linear calc(var(--i) * .95s + .55s + var(--d, 0s)) forwards,
-    draw-fill .3s ease-out calc(var(--i) * .95s + .80s + var(--d, 0s)) forwards;
+    draw-line .28s linear calc(var(--i) * .62s + .36s + var(--d, 0s)) forwards,
+    draw-fill .2s ease-out calc(var(--i) * .62s + .54s + var(--d, 0s)) forwards;
 }
 
 /* then the words */
 .comic.is-drawing .comic__caption,
 .comic.is-drawing .comic__inner p {
-  animation: write-in .5s ease-out calc(var(--i) * .95s + .45s) both;
+  animation: write-in .34s ease-out calc(var(--i) * .62s + .30s) both;
 }
-.comic.is-drawing .comic__inner p { animation-delay: calc(var(--i) * .95s + 1.9s); }
+.comic.is-drawing .comic__inner p { animation-delay: calc(var(--i) * .62s + 1.25s); }
 
 @keyframes draw-line { to { stroke-dashoffset: 0; } }
 @keyframes draw-fill { to { fill: #1a1a18; stroke-width: 0; } }
