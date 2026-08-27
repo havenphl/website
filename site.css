@@ -1583,6 +1583,8 @@ select:focus-visible {
 
 /* Our Journey follows straight on from the profile cards */
 #about { margin-top: var(--rule-gap); }
+/* a small lift under the mission frame on the our story page */
+#needs { margin-top: calc(var(--rule-gap) * 2 - 12px); }
 /* the Chronicle follows close on the group photo */
 #news { margin-top: var(--rule-gap); }
 
