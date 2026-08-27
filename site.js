@@ -75,6 +75,32 @@
   var year = document.getElementById('year');
   if (year) year.textContent = new Date().getFullYear();
 
+  /* --- the Chronicle masthead dates itself -------------------------------
+     The date in the markup is a real one, so a browser without JS still shows
+     a sensible masthead rather than a blank. This just brings it up to today.
+  ------------------------------------------------------------------------- */
+  var npDate = document.getElementById('npDate');
+  var npEdition = document.getElementById('npEdition');
+
+  if (npDate || npEdition) {
+    var now = new Date();
+
+    if (npDate) {
+      try {
+        npDate.textContent = now.toLocaleDateString('en-US', {
+          weekday: 'long', month: 'long', day: 'numeric', year: 'numeric'
+        });
+      } catch (e) { /* very old browser — leave the printed date alone */ }
+    }
+
+    if (npEdition) {
+      // meteorological seasons, so the edition turns over on the 1st
+      var seasons = ['Winter', 'Winter', 'Spring', 'Spring', 'Spring', 'Summer',
+                     'Summer', 'Summer', 'Autumn', 'Autumn', 'Autumn', 'Winter'];
+      npEdition.textContent = seasons[now.getMonth()] + ' Edition';
+    }
+  }
+
   /* --- mobile nav -------------------------------------------------------- */
   var toggle = document.getElementById('navToggle');
   var links = document.getElementById('navLinks');

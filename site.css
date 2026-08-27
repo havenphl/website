@@ -1673,7 +1673,7 @@ select:focus-visible {
 }
 /* the HAVEN mark, sitting in the masthead ear */
 .newsprint__logo { width: 62px; height: auto; }
-.newsprint .newsprint__date span { text-decoration: underline; }
+.newsprint .newsprint__date #npEdition { text-decoration: underline; }
 .newsprint__name {
   margin: 0;
   text-align: center;
