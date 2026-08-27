@@ -277,6 +277,8 @@ body.is-loading { overflow: hidden; }
 .sheet > .hero:first-child { margin-top: 0; }
 /* the first block on the afternoons page sits a line higher up the paper */
 .sheet > #day:first-child { margin-top: -45px; }
+/* Meet the Team opens the about page — lift it the same way */
+.sheet > #team:first-child { margin-top: -30px; }
 
 /* sections are just spacing now — they carry no paper of their own */
 .sheet > section { position: relative; z-index: 1; }
