@@ -1535,17 +1535,10 @@ select:focus-visible {
    Held back only when site.js can drive it, so without JS the strip is
    simply finished and there.
    ------------------------------------------------------------------------ */
-.comic.is-armed .panel-frame__line,
 .comic.is-armed .ink__s { opacity: 0; }
 
-/* the frame draws itself first */
-.comic.is-drawing .panel-frame__line {
-  stroke-dasharray: 1;
-  stroke-dashoffset: 1;
-  animation: draw-line .5s ease-in-out calc(var(--i) * .62s) forwards;
-}
-
-/* then each mark of the drawing: outline first, fill arriving behind it */
+/* the frames are simply there — only the drawings are drawn on.
+   Each mark: outline first, fill arriving behind it as it lands. */
 .comic.is-drawing .ink__s {
   fill: none;
   stroke: #1a1a18;
@@ -1553,8 +1546,8 @@ select:focus-visible {
   stroke-dasharray: 1;
   stroke-dashoffset: 1;
   animation:
-    draw-line .28s linear calc(var(--i) * .62s + .36s + var(--d, 0s)) forwards,
-    draw-fill .2s ease-out calc(var(--i) * .62s + .54s + var(--d, 0s)) forwards;
+    draw-line .28s linear calc(var(--i) * .62s + var(--d, 0s)) forwards,
+    draw-fill .2s ease-out calc(var(--i) * .62s + .18s + var(--d, 0s)) forwards;
 }
 
 @keyframes draw-line { to { stroke-dashoffset: 0; } }
@@ -1582,9 +1575,7 @@ select:focus-visible {
 
 /* someone who prefers less motion just gets the finished strip */
 @media (prefers-reduced-motion: reduce) {
-  .comic.is-armed .panel-frame__line,
   .comic.is-armed .ink__s { opacity: 1; }
-  .comic.is-drawing .panel-frame__line,
   .comic.is-drawing .ink__s { animation: none; }
   .comic.is-drawing .ink__s { fill: #1a1a18; stroke: none; }
 }
