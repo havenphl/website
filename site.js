@@ -7,6 +7,14 @@
   var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   var logo = document.querySelector('.logo-draw');
+  var comic = document.querySelector('.comic');
+
+  // Hold the strip hidden only if we can actually draw it on. Any browser
+  // without IntersectionObserver, or anyone who prefers less motion, sees the
+  // finished strip instead of a blank space.
+  if (comic && !reduced && 'IntersectionObserver' in window) {
+    comic.classList.add('is-armed');
+  }
 
   // Hide it straight away so it can't flash in finished, but hold the drawing
   // until watchLogo() is called — on the home page that happens once the
@@ -30,8 +38,9 @@
     if (book && book.parentNode) book.parentNode.removeChild(book);
     document.removeEventListener('keydown', skipOpening);
     window.removeEventListener('click', skipOpening);
-    // now the page is actually visible, let the logo start drawing
+    // now the page is actually visible, let the drawings start
     watchLogo();
+    watchComic();
   }
 
   function skipOpening() {
@@ -117,6 +126,29 @@
     // if anything stalls, show the finished logo rather than leaving it blank
     window.setTimeout(function () {
       if (logo.classList.contains('is-armed')) logo.classList.remove('is-armed');
+    }, 6000);
+  }
+
+  /* --- the comic strip inks itself in when it scrolls into view -----------
+     Same shape as watchLogo: the CSS does the drawing, this only says when.
+  ------------------------------------------------------------------------- */
+  function watchComic() {
+    if (!comic || !comic.classList.contains('is-armed')) return;
+
+    var seen = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) return;
+        comic.classList.remove('is-armed');
+        comic.classList.add('is-drawing');
+        seen.disconnect();
+      });
+    }, { threshold: 0.2 });
+
+    seen.observe(comic);
+
+    // if anything stalls, show the finished strip rather than leaving a hole
+    window.setTimeout(function () {
+      if (comic.classList.contains('is-armed')) comic.classList.remove('is-armed');
     }, 6000);
   }
 
