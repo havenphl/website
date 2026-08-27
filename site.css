@@ -1437,23 +1437,21 @@ select:focus-visible {
 
 /* ==========================================================================
    THE COMIC STRIP — the founding story, four panels
-   Plain rectangular panels to the reference template: a narrower panel beside
-   a wider one on each row, and the bottom row split further left than the top.
-   No clip-paths now, so the frame is a straight border on the panel itself.
+   Laid out to the reference template. A 20-column grid lets panels 1 and 2
+   overlap in the middle columns, which is what makes the steep gutter between
+   them a real diagonal rather than a slanted edge on a rectangle. The heavy
+   frame is the outer element's background showing through a 5px padding, with
+   the inner box carrying the same clip-path so the border follows every slant.
    ========================================================================== */
 .comic {
   display: grid;
   grid-template-columns: repeat(20, 1fr);
-  gap: var(--space-4);
+  row-gap: 0;
   margin-top: var(--space-6);
   counter-reset: panel;
 }
 
-.comic__panel {
-  background: #fffdf6;
-  border: 4px solid #1a1a18;
-  min-height: 300px;
-}
+.comic__panel { background: #1a1a18; padding: 4px; }
 .comic__inner {
   position: relative;
   height: 100%;
@@ -1461,16 +1459,54 @@ select:focus-visible {
   flex-direction: column;
   justify-content: center;
   gap: var(--space-4);
-  padding: var(--space-6) var(--space-5) var(--space-5);
+  background: #fff;
+  overflow: hidden;
 }
 
-.comic__panel:nth-child(1) { grid-column: span 9; }
-.comic__panel:nth-child(2) { grid-column: span 11; }
-.comic__panel:nth-child(3) { grid-column: span 7; }
-.comic__panel:nth-child(4) { grid-column: span 13; }
+/* --- the four shapes, and the padding that keeps text off the slants --- */
+.comic__panel:nth-child(1) {
+  grid-column: 1 / 12; grid-row: 1;
+  min-height: 310px;
+  clip-path: polygon(0 0, 98% 0, 64.1% calc(100% - 32px), 0 calc(100% - 48px));
+}
+.comic__panel:nth-child(1) .comic__inner {
+  clip-path: polygon(0 0, 98% 0, 64.1% calc(100% - 32px), 0 calc(100% - 48px));
+  justify-content: flex-start;
+  padding: 6% 40% 18% var(--space-5);
+}
 
-/* panel 1 leads with the narration box, so it starts from the top */
-.comic__panel:nth-child(1) .comic__inner { justify-content: flex-start; }
+.comic__panel:nth-child(2) {
+  grid-column: 7 / 21; grid-row: 1;
+  min-height: 310px;
+  clip-path: polygon(35.9% 0, 100% 0, 100% calc(100% - 4px), 9.2% calc(100% - 32px));
+}
+.comic__panel:nth-child(2) .comic__inner {
+  clip-path: polygon(35.9% 0, 100% 0, 100% calc(100% - 4px), 9.2% calc(100% - 32px));
+  padding: 7% var(--space-5) 10% 42%;
+}
+
+.comic__panel:nth-child(3) {
+  grid-column: 1 / 10; grid-row: 2;
+  margin-top: -40px;
+  min-height: 300px;
+  clip-path: polygon(0 0, 100% 20px, 100% 100%, 0 100%);
+}
+.comic__panel:nth-child(3) .comic__inner {
+  clip-path: polygon(0 0, 100% 20px, 100% 100%, 0 100%);
+  padding: 34px var(--space-5) var(--space-5);
+}
+
+.comic__panel:nth-child(4) {
+  grid-column: 10 / 21; grid-row: 2;
+  margin-left: 8px;
+  margin-top: -20px;
+  min-height: 300px;
+  clip-path: polygon(0 0, 100% 24px, 100% 100%, 0 100%);
+}
+.comic__panel:nth-child(4) .comic__inner {
+  clip-path: polygon(0 0, 100% 24px, 100% 100%, 0 100%);
+  padding: 38px var(--space-5) var(--space-5);
+}
 
 /* every line of narration sits in its own box, the way a strip captions a panel */
 .comic__caption,
@@ -1478,30 +1514,28 @@ select:focus-visible {
   position: relative;
   z-index: 1;
   margin: 0;
-  background: #fffdf6;
+  background: #fff;
   border: 2.5px solid #1a1a18;
   padding: 3px var(--space-3);
   line-height: var(--leading-snug);
 }
 .comic__caption {
   align-self: flex-start;
-  margin-left: 30px;          /* clears the panel number */
+  margin-left: 34px;          /* clears the panel number */
   font-family: var(--font-display);
   font-size: var(--text-heading-sm);
   color: var(--text-heading);
 }
 .comic__inner p { font-size: var(--text-body-md); }
 
-.comic__inner img {
-  position: relative;
-  z-index: 1;
-  width: 100%;
-  max-width: 205px;
-  height: auto;
-  align-self: center;
-}
+.comic__inner img { position: relative; z-index: 1; width: 100%; max-width: 205px; height: auto; align-self: center; }
 .comic__panel:nth-child(1) .comic__inner img { max-width: 285px; }
 .comic__panel:nth-child(4) .comic__inner img { max-width: 168px; }
+
+/* Panel 2's top-left corner is clipped away by its diagonal, and panel 1's top
+   edge starts 2% down — so their numbers move to a corner that actually exists. */
+.comic__panel:nth-child(1) .comic__inner::before { top: 0; }
+.comic__panel:nth-child(2) .comic__inner::before { left: 37%; }
 
 /* the panel number, in the corner like a strip */
 .comic__inner::before {
@@ -1510,14 +1544,14 @@ select:focus-visible {
   position: absolute;
   top: 0;
   left: 0;
-  width: 28px;
-  height: 24px;
+  width: 30px;
+  height: 26px;
   display: grid;
   place-items: center;
   z-index: 2;
   font-family: var(--font-display);
   font-size: var(--text-body-sm);
-  color: #fffdf6;
+  color: #fff;
   background: #1a1a18;
 }
 
@@ -1589,11 +1623,23 @@ select:focus-visible {
   .contact__grid { grid-template-columns: 1fr; }
   .pillars, .involve, .team, .week, .serves { grid-template-columns: 1fr; }
   .partners-grid { grid-template-columns: repeat(2, 1fr); }
-  .comic { grid-template-columns: 1fr; }
+  /* the diagonals crowd the text at this width — square the panels off */
+  .comic { grid-template-columns: 1fr; gap: var(--space-4); }
+  .comic__panel,
   .comic__panel:nth-child(1),
   .comic__panel:nth-child(2),
   .comic__panel:nth-child(3),
-  .comic__panel:nth-child(4) { grid-column: auto; min-height: 0; }
+  .comic__panel:nth-child(4) {
+    grid-column: auto; grid-row: auto;
+    clip-path: none; min-height: 0; margin-top: 0;
+  }
+  .comic__panel:nth-child(1) .comic__inner,
+  .comic__panel:nth-child(2) .comic__inner,
+  .comic__panel:nth-child(3) .comic__inner,
+  .comic__panel:nth-child(4) .comic__inner {
+    clip-path: none;
+    padding: var(--space-6) var(--space-5) var(--space-5);
+  }
   .problem__grid { grid-template-columns: 1fr; }
   .pull-quote { position: static; }
   .day-card.tilt-2, .reveal.day-card.tilt-2.is-in,
