@@ -1335,36 +1335,35 @@ select:focus-visible {
   margin-top: var(--space-7);
 }
 .serves__item {
-  --band: 46px;                     /* the solid header strip */
   position: relative;
   display: flex;
   flex-direction: column;
-  gap: var(--space-3);
-  padding: calc(var(--band) + var(--space-5)) var(--space-5) var(--space-5);
-  background-color: #fff;
-  /* two layers only: the solid header band over a gingham weave */
+  /* the band is the title's own background, so the two can never drift apart */
+  padding: 0 0 var(--space-5);
+  background-color: var(--note-paper);
   background-image:
-    linear-gradient(var(--note-band) 0 var(--band), transparent var(--band)),
     repeating-linear-gradient(90deg, transparent 0 22px, var(--note-check) 22px 44px),
     repeating-linear-gradient(0deg,  transparent 0 22px, var(--note-check) 22px 44px);
   box-shadow: 0 2px 6px rgba(74, 64, 50, .14);
 }
 .serves__item--pink {
-  --note-band: #ffe4ec;
-  --note-check: rgba(255, 140, 166, .085);
+  --note-band: #ffdde7;
+  --note-paper: #fff5f8;                    /* the light squares, tinted */
+  --note-check: rgba(255, 140, 166, .075);
   transform: rotate(-1.6deg);
 }
 .serves__item--green {
-  --note-band: #dcead2;
-  --note-check: rgba(123, 161, 93, .08);
+  --note-band: #d8e7cd;
+  --note-paper: #f4f8f0;
+  --note-check: rgba(123, 161, 93, .07);
   transform: rotate(1.1deg);
 }
 .serves__item--yellow {
-  --note-band: #fef6dc;
-  --note-check: rgba(248, 213, 104, .14);
+  --note-band: #fdf2cf;
+  --note-paper: #fffbee;
+  --note-check: rgba(248, 213, 104, .12);
   transform: rotate(-0.7deg);
 }
-
 
 /* --- the washi holding each note up --- */
 .serves__item::before {
@@ -1382,6 +1381,7 @@ select:focus-visible {
     3px 100%, 5px 76%, 0px 50%, 4px 26%
   );
   filter: drop-shadow(1px 2px 2px rgba(74,64,50,.3));
+  z-index: 1;
 }
 .serves__item--pink::before {
   left: 50%; transform: translateX(-50%) rotate(-5deg);
@@ -1396,14 +1396,20 @@ select:focus-visible {
   background-image: url('assets/textures/tape-green-gingham.jpg');
 }
 
+/* the title sits in the solid band across the top */
 .serves dt {
+  display: flex;
+  align-items: center;
+  min-height: 74px;                 /* one height whether the title wraps or not */
+  margin: 0 0 var(--space-4);
+  padding: var(--space-3) var(--space-5);
+  background: var(--note-band);
   font-family: var(--font-display);
   font-size: var(--text-heading-lg);
+  line-height: var(--leading-snug);
   color: var(--text-heading);
-  padding-bottom: var(--space-2);
-  border-bottom: 2px solid rgba(74, 64, 50, .16);
 }
-.serves dd { margin: 0; }
+.serves dd { margin: 0; padding: 0 var(--space-5); }
 
 /* ==========================================================================
    AN AFTERNOON — the weekly schedule (Mon / Tue / Thu)
