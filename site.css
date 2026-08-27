@@ -1348,11 +1348,16 @@ select:focus-visible {
   font-size: var(--text-body-sm);
   color: var(--ink);
 }
-/* the session labels are scraps of gingham washi, same as the objective tags:
-   two crossing gradients for the weave, a torn-edge clip-path, and a drop-shadow
-   rather than a box-shadow so the shadow follows the torn edge */
+/* --- the session tapes ---------------------------------------------------
+   Two things vary independently: the colour says which day, the pattern says
+   which session. So Monday is pink, Tuesday yellow, Thursday green, and within
+   any day session A is striped while session B is dotted. Each is a real
+   gradient rather than an image, so it stays crisp and recolours from one
+   custom property. The torn edge is a clip-path, which is why the shadow is a
+   drop-shadow — a box-shadow would trace the untorn rectangle.
+   ------------------------------------------------------------------------ */
 .slot__label {
-  --gingham: 248, 213, 104;          /* yellow */
+  --tape: 255, 140, 166;             /* pink — Mondays */
   justify-self: start;
   font-family: var(--font-hand);
   font-weight: 700;
@@ -1361,10 +1366,7 @@ select:focus-visible {
   color: var(--tape-ink);
   padding: 4px var(--space-4);
   margin-bottom: var(--space-2);
-  background-color: rgba(var(--gingham), .18);
-  background-image:
-    repeating-linear-gradient(90deg, transparent 0 8px, rgba(var(--gingham), .45) 8px 16px),
-    repeating-linear-gradient(0deg,  transparent 0 8px, rgba(var(--gingham), .45) 8px 16px);
+  background-color: rgba(var(--tape), .18);
   clip-path: polygon(
     2px 0%, calc(100% - 2px) 0%,
     calc(100% - 4px) 22%, 100% 47%,
@@ -1374,11 +1376,26 @@ select:focus-visible {
   filter: drop-shadow(1px 1.5px 1.5px rgba(74, 64, 50, .28));
   transform: rotate(-1.8deg);
 }
-/* session B gets a different roll, so the two blocks read apart at a glance */
+
+/* session A — diagonal candy stripes */
+.day-card__list li:nth-child(1) .slot__label {
+  background-image:
+    repeating-linear-gradient(48deg, transparent 0 7px, rgba(var(--tape), .5) 7px 14px);
+}
+
+/* session B — staggered polka dots, and tilted the other way */
 .day-card__list li:nth-child(3) .slot__label {
-  --gingham: 255, 140, 166;          /* pink */
+  background-image:
+    radial-gradient(circle 3px at 50% 50%, rgba(var(--tape), .55) 97%, transparent 100%),
+    radial-gradient(circle 3px at 50% 50%, rgba(var(--tape), .55) 97%, transparent 100%);
+  background-size: 15px 15px;
+  background-position: 0 0, 7.5px 7.5px;
   transform: rotate(1.5deg);
 }
+
+/* colour by day */
+.week .day-card:nth-child(2) .slot__label { --tape: 248, 213, 104; }   /* yellow — Tuesdays */
+.week .day-card:nth-child(3) .slot__label { --tape: 123, 161,  93; }   /* green  — Thursdays */
 
 /* the two short, unglamorous slots stay visually quiet */
 .day-card__list .slot--transition,
