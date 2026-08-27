@@ -1529,6 +1529,11 @@ select:focus-visible {
 
 .comic__inner img { position: relative; z-index: 1; width: 100%; max-width: 205px; height: auto; align-self: center; }
 
+/* Panel 2's top-left corner is clipped away by its diagonal, and panel 1's top
+   edge starts 2% down — so their numbers move to a corner that actually exists. */
+.comic__panel:nth-child(1) .comic__inner::before { top: 2%; }
+.comic__panel:nth-child(2) .comic__inner::before { left: 45%; }
+
 /* the panel number, in the corner like a strip */
 .comic__inner::before {
   counter-increment: panel;
