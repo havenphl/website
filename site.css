@@ -278,7 +278,7 @@ body.is-loading { overflow: hidden; }
 .sheet > .section:first-child,
 .sheet > .hero:first-child { margin-top: 0; }
 /* the first block on the afternoons page sits a line higher up the paper */
-.sheet > #day:first-child { margin-top: -45px; }
+.sheet > #day:first-child { margin-top: -18px; }
 /* Meet the Team opens the about page — lift it the same way */
 .sheet > #team:first-child { margin-top: -8px; }
 
@@ -1312,9 +1312,9 @@ select:focus-visible {
 
 
 /* --- who we serve, on three taped notes -----------------------------------
-   Each group sits on a paper note pinned up with a strip of tape. The tape is
-   a pseudo-element carrying the same torn-end clip-path as the washi buttons,
-   so its ends look ripped rather than cut, and it sits differently on each.
+   Real paper: a fine grain over a directional sheen, a shadow that is tight at
+   the top and soft at the bottom so the sheet reads as lifting off the page,
+   and a strip of the site's own washi tape holding each one up.
    -------------------------------------------------------------------------- */
 .serves {
   display: grid;
@@ -1328,33 +1328,60 @@ select:focus-visible {
   flex-direction: column;
   gap: var(--space-3);
   padding: var(--space-6) var(--space-5) var(--space-5);
-  /* a faint sheen down the sheet, the way paper catches light */
-  background-image: linear-gradient(168deg, rgba(255,255,255,.5), rgba(74,64,50,.06));
-  box-shadow: 2px 5px 12px rgba(74,64,50,.16);
+  background-image:
+    url('assets/textures/paper-grain.png'),
+    linear-gradient(168deg, rgba(255,255,255,.55), rgba(74,64,50,.07));
+  background-size: 160px 160px, auto;
+  box-shadow:
+    0 1px 1px rgba(74,64,50,.16),          /* the sheet meets the page */
+    3px 10px 16px -8px rgba(74,64,50,.42); /* and lifts away below */
 }
 .serves__item--pink   { background-color: var(--pink-soft);   transform: rotate(-1.6deg); }
 .serves__item--green  { background-color: var(--green-soft);  transform: rotate(1.1deg); }
 .serves__item--yellow { background-color: var(--yellow-soft); transform: rotate(-0.7deg); }
 
+/* the bottom edge curls very slightly away from the paper */
+.serves__item::after {
+  content: '';
+  position: absolute;
+  left: 8%;
+  right: 8%;
+  bottom: -6px;
+  height: 12px;
+  border-radius: 50%;
+  background: radial-gradient(ellipse at center, rgba(74,64,50,.26), transparent 72%);
+  z-index: -1;
+}
+
+/* --- the washi holding each note up --- */
 .serves__item::before {
   content: '';
   position: absolute;
-  top: -15px;
-  width: 86px;
-  height: 32px;
-  background: rgba(255, 253, 246, .85);
-  border: 1px solid rgba(74, 64, 50, .10);
+  top: -16px;
+  width: 92px;
+  height: 34px;
+  background-size: cover;
+  background-position: center;
   clip-path: polygon(
     3px 0%, calc(100% - 3px) 0%,
     calc(100% - 6px) 24%, 100% 50%,
     calc(100% - 5px) 74%, calc(100% - 3px) 100%,
     3px 100%, 5px 76%, 0px 50%, 4px 26%
   );
+  filter: drop-shadow(1px 2px 2px rgba(74,64,50,.3));
 }
-/* taped centred, off to one side, and across a corner */
-.serves__item--pink::before   { left: 50%; transform: translateX(-50%) rotate(-5deg); }
-.serves__item--green::before  { left: 26%; transform: translateX(-50%) rotate(6deg); }
-.serves__item--yellow::before { left: 74%; transform: translateX(-50%) rotate(-3deg); }
+.serves__item--pink::before {
+  left: 50%; transform: translateX(-50%) rotate(-5deg);
+  background-image: url('assets/textures/tape-gingham-yellow-brand.jpg');
+}
+.serves__item--green::before {
+  left: 28%; transform: translateX(-50%) rotate(6deg);
+  background-image: url('assets/textures/tape-pink.jpg');
+}
+.serves__item--yellow::before {
+  left: 72%; transform: translateX(-50%) rotate(-3deg);
+  background-image: url('assets/textures/tape-green-gingham.jpg');
+}
 
 .serves dt {
   font-family: var(--font-display);
