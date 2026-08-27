@@ -1040,8 +1040,15 @@ select:focus-visible {
   padding: var(--space-7) var(--space-7);
   text-align: center;
 
-  background: #fdf3e7;
-  border: 3px dashed #ad8951;
+  /* soft pink ground with a fine staggered dot grid, drawn as two offset
+     radial-gradient tiles rather than an image, so it stays crisp at any size */
+  background-color: var(--pink-soft);
+  background-image:
+    radial-gradient(circle 2.4px at 50% 50%, rgba(74, 64, 50, .17) 96%, transparent 100%),
+    radial-gradient(circle 2.4px at 50% 50%, rgba(74, 64, 50, .17) 96%, transparent 100%);
+  background-size: 26px 26px;
+  background-position: 0 0, 13px 13px;
+  border: 3px dashed var(--pink);
   border-radius: 34px;
 }
 
