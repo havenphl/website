@@ -27,7 +27,15 @@
 
 /* --- reset ---------------------------------------------------------------- */
 *, *::before, *::after { box-sizing: border-box; }
-html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+html {
+  -webkit-text-size-adjust: 100%;
+  scroll-behavior: smooth;
+  /* Always reserve the scrollbar track. Without this, a short page has no
+     scrollbar, the viewport is ~15px wider, and both the looseleaf and the
+     striped background shift — so pages looked like different widths. */
+  scrollbar-gutter: stable;
+  overflow-y: scroll;          /* same effect where scrollbar-gutter is unsupported */
+}
 body, h1, h2, h3, h4, p, ul, ol, figure, blockquote { margin: 0; }
 ul, ol { padding: 0; list-style: none; }
 img { max-width: 100%; display: block; }
