@@ -1633,30 +1633,112 @@ select:focus-visible {
 }
 
 /* ==========================================================================
-   ABOUT — news links and partner logos
+   ABOUT — the press clippings, set as a newspaper front page
+   Deliberately not the site's hand-drawn typefaces: newsprint reads as
+   newsprint because of the serif, the rules and the column gutters, so this
+   one block borrows a serif stack and keeps everything else on brand.
    ========================================================================== */
-.news { display: grid; gap: var(--space-4); margin-top: var(--space-6); }
-.news a {
-  display: grid;
-  gap: var(--space-1);
-  background: var(--surface-card);
-  border: 2.5px solid var(--border-ink);
-  border-radius: var(--radius-md);
+.newsprint {
+  --newsprint-serif: Georgia, 'Iowan Old Style', 'Times New Roman', Times, serif;
+  margin-top: var(--space-6);
+  background: #fdfbf4;
+  border: 2.5px solid var(--ink);
   box-shadow: var(--shadow-crayon);
-  padding: var(--space-4) var(--space-5);
-  text-decoration: none;
-  transition: transform 160ms var(--ease-out), box-shadow 160ms var(--ease-out);
+  padding: var(--space-6) var(--space-6) var(--space-5);
 }
-.news a:hover { transform: translateY(-3px) rotate(-.6deg); box-shadow: 4px 6px 0 var(--ink); }
-.news__title {
-  font-family: var(--font-display);
-  font-size: var(--text-heading-md);
-  color: var(--text-heading);
-  line-height: 1.12;          /* tight, the way comic lettering stacks */
+
+/* --- the masthead --- */
+.newsprint__masthead { text-align: center; }
+.newsprint__ears,
+.newsprint__dateline {
+  font-family: var(--newsprint-serif);
+  font-size: .75rem;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  margin: 0;
+  line-height: 1.4;
 }
-/* the arrow marks these as leaving the site */
-.news__title::after { content: ' \2197'; font-family: var(--font-body); }
-.news__source { font-family: var(--font-hand); font-size: var(--text-body-sm); color: var(--ink-soft); }
+.newsprint__name {
+  font-family: var(--newsprint-serif);
+  font-weight: 700;
+  font-size: clamp(2rem, 5vw, 3.4rem);
+  line-height: 1;
+  letter-spacing: .01em;
+  color: var(--ink);
+  margin: var(--space-2) 0;
+  padding-bottom: var(--space-2);
+  border-top: 3px solid var(--ink);
+  border-bottom: 1px solid var(--ink);
+  padding-top: var(--space-3);
+}
+.newsprint__dateline {
+  padding-bottom: var(--space-4);
+  border-bottom: 3px double var(--ink);
+}
+
+/* --- three columns, ruled like a broadsheet --- */
+.newsprint__cols {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0;
+  margin-top: var(--space-5);
+  padding: 0;
+  list-style: none;
+}
+.newsprint__story {
+  padding: 0 var(--space-5);
+  border-left: 1px solid var(--border-ink);
+}
+.newsprint__story:first-child { border-left: none; padding-left: 0; }
+.newsprint__story:last-child { padding-right: 0; }
+
+.newsprint__kicker {
+  font-family: var(--newsprint-serif);
+  font-size: .7rem;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--red-crayon);
+  margin: 0 0 var(--space-2);
+  line-height: 1.4;
+}
+.newsprint__head {
+  font-family: var(--newsprint-serif);
+  font-weight: 700;
+  font-size: 1.3rem;
+  line-height: 1.16;
+  color: var(--ink);
+  margin: 0 0 var(--space-3);
+  padding-bottom: var(--space-3);
+  border-bottom: 1px solid var(--border-ink);
+}
+.newsprint__lede {
+  font-family: var(--newsprint-serif);
+  font-size: .95rem;
+  line-height: 1.5;
+  color: var(--ink);
+  margin: 0;
+}
+/* a drop cap, the way a front page opens a story */
+.newsprint__lede::first-letter {
+  float: left;
+  font-size: 2.9em;
+  line-height: .84;
+  padding: 2px 6px 0 0;
+  font-weight: 700;
+}
+.newsprint__link {
+  display: inline-block;
+  margin-top: var(--space-3);
+  font-family: var(--newsprint-serif);
+  font-size: .78rem;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--ink);
+  text-underline-offset: 3px;
+}
+.newsprint__link::after { content: ' \2197'; }
+.newsprint__link:hover { color: var(--red-crayon); }
 
 /* Partner tiles, sized as a logo wall — dropping an <img> into a tile in place
    of the text needs no other change. */
@@ -1700,6 +1782,15 @@ select:focus-visible {
   .contact__grid { grid-template-columns: 1fr; }
   .pillars, .involve, .team, .week, .serves { grid-template-columns: 1fr; }
   .partners-grid { grid-template-columns: repeat(2, 1fr); }
+  /* a broadsheet does not fit on a phone — stack the columns and rule them
+     horizontally instead */
+  .newsprint__cols { grid-template-columns: 1fr; }
+  .newsprint__story {
+    border-left: none;
+    border-top: 1px solid var(--border-ink);
+    padding: var(--space-5) 0 0;
+  }
+  .newsprint__story:first-child { border-top: none; padding-top: 0; }
   /* the diagonals crowd the text at this width — square the panels off */
   .comic { grid-template-columns: 1fr; row-gap: var(--space-4); }
   .comic__panel:nth-child(1),
