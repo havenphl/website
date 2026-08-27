@@ -1482,7 +1482,7 @@ select:focus-visible {
 }
 .comic__panel:nth-child(2) .comic__inner {
   clip-path: polygon(35.9% 0, 100% 0, 100% calc(100% - 4px), 9.2% calc(100% - 32px));
-  padding: 7% var(--space-5) 10% 42%;
+  padding: 7% var(--space-4) 10% 34%;
 }
 
 .comic__panel:nth-child(3) {
@@ -1519,7 +1519,7 @@ select:focus-visible {
   border: 2.5px solid #1a1a18;
   padding: 3px var(--space-3);
   font-family: var(--font-display);   /* Karumbi */
-  font-size: var(--text-heading-sm);
+  font-size: var(--text-heading-md);
   color: var(--text-heading);
   line-height: var(--leading-snug);
 }
