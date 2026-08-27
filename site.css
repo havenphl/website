@@ -1437,84 +1437,77 @@ select:focus-visible {
 
 /* ==========================================================================
    THE COMIC STRIP — the founding story, four panels
-   Laid out to the reference template: two full-width beats split by a slanted
-   gutter, then a narrow/wide pair split by a matching diagonal.
-   The frame is the outer element's background showing through a 5px padding;
-   the inner box carries the same clip-path, so the heavy black border follows
-   the slanted edges instead of being cut off by them.
+   Laid out to the reference template. A 20-column grid lets panels 1 and 2
+   overlap in the middle columns, which is what makes the steep gutter between
+   them a real diagonal rather than a slanted edge on a rectangle. The heavy
+   frame is the outer element's background showing through a 5px padding, with
+   the inner box carrying the same clip-path so the border follows every slant.
    ========================================================================== */
 .comic {
   display: grid;
-  grid-template-columns: 36fr 64fr;
-  gap: var(--space-3);
+  grid-template-columns: repeat(20, 1fr);
+  row-gap: var(--space-3);
   margin-top: var(--space-6);
   counter-reset: panel;
 }
 
-.comic__panel {
-  background: #1a1a18;
-  padding: 5px;
-  min-height: 210px;
-}
+.comic__panel { background: #1a1a18; padding: 5px; }
 .comic__inner {
   position: relative;
   height: 100%;
   display: flex;
-  align-items: center;
-  gap: var(--space-5);
-  background: #fffdf6;
-  padding: var(--space-5) var(--space-6);
+  flex-direction: column;
+  justify-content: center;
+  gap: var(--space-4);
+  background: #fff;
   overflow: hidden;
 }
 
-/* --- the template's four shapes --- */
+/* --- the four shapes, and the padding that keeps text off the slants --- */
 .comic__panel:nth-child(1) {
-  grid-column: 1 / -1;
-  clip-path: polygon(0 0, 100% 0, 100% 93%, 0 100%);
+  grid-column: 1 / 14; grid-row: 1;
+  min-height: 430px;
+  clip-path: polygon(0 2%, 100% 0, 69% 96%, 0 82%);
 }
-.comic__panel:nth-child(1) .comic__inner { clip-path: polygon(0 0, 100% 0, 100% 93%, 0 100%); }
+.comic__panel:nth-child(1) .comic__inner {
+  clip-path: polygon(0 2%, 100% 0, 69% 96%, 0 82%);
+  padding: 12% 34% 16% var(--space-6);
+}
 
 .comic__panel:nth-child(2) {
-  grid-column: 1 / -1;
-  clip-path: polygon(0 7%, 100% 0, 100% 100%, 0 100%);
+  grid-column: 9 / 21; grid-row: 1;
+  min-height: 430px;
+  clip-path: polygon(44% 0, 100% 1%, 100% 100%, 11% 90%);
 }
-.comic__panel:nth-child(2) .comic__inner { clip-path: polygon(0 7%, 100% 0, 100% 100%, 0 100%); }
+.comic__panel:nth-child(2) .comic__inner {
+  clip-path: polygon(44% 0, 100% 1%, 100% 100%, 11% 90%);
+  padding: 8% var(--space-6) 10% 48%;
+}
 
 .comic__panel:nth-child(3) {
-  clip-path: polygon(0 0, 100% 0, 82% 100%, 0 100%);
-  flex-direction: column;
+  grid-column: 1 / 12; grid-row: 2;
+  min-height: 420px;
+  clip-path: polygon(0 0, 100% 7%, 100% 100%, 0 100%);
 }
 .comic__panel:nth-child(3) .comic__inner {
-  clip-path: polygon(0 0, 100% 0, 82% 100%, 0 100%);
-  flex-direction: column;
-  align-items: flex-start;
-  padding-right: 22%;
+  clip-path: polygon(0 0, 100% 7%, 100% 100%, 0 100%);
+  padding: 14% var(--space-6) var(--space-6);
 }
 
-.comic__panel:nth-child(4) { clip-path: polygon(12% 0, 100% 0, 100% 100%, 0 100%); }
+.comic__panel:nth-child(4) {
+  grid-column: 12 / 21; grid-row: 2;
+  margin-top: 34px;
+  min-height: 420px;
+  clip-path: polygon(0 0, 100% 7%, 100% 100%, 0 100%);
+}
 .comic__panel:nth-child(4) .comic__inner {
-  clip-path: polygon(12% 0, 100% 0, 100% 100%, 0 100%);
-  padding-left: 15%;
+  clip-path: polygon(0 0, 100% 7%, 100% 100%, 0 100%);
+  padding: 14% var(--space-6) var(--space-6);
 }
-
-/* action lines, tucked behind the drawing */
-.comic__inner::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background-repeat: no-repeat;
-  background-size: 44% auto;
-  opacity: .55;
-  pointer-events: none;
-  z-index: 0;
-}
-.comic__panel:nth-child(odd) .comic__inner::after  { background-image: url('assets/doodles/speedlines-left.svg');  background-position: left top; }
-.comic__panel:nth-child(even) .comic__inner::after { background-image: url('assets/doodles/speedlines-right.svg'); background-position: right top; }
 
 .comic__inner img,
 .comic__inner p { position: relative; z-index: 1; }
-.comic__inner img { flex: 0 0 auto; width: min(46%, 300px); height: auto; }
-.comic__panel:nth-child(3) .comic__inner img { width: min(78%, 240px); }
+.comic__inner img { width: 100%; max-width: 300px; height: auto; align-self: center; }
 .comic__inner p { margin: 0; }
 
 /* the panel number, in the corner like a strip */
@@ -1531,7 +1524,7 @@ select:focus-visible {
   z-index: 2;
   font-family: var(--font-display);
   font-size: var(--text-body-sm);
-  color: #fffdf6;
+  color: #fff;
   background: #1a1a18;
 }
 
@@ -1603,23 +1596,23 @@ select:focus-visible {
   .contact__grid { grid-template-columns: 1fr; }
   .pillars, .involve, .team, .week, .serves { grid-template-columns: 1fr; }
   .partners-grid { grid-template-columns: repeat(2, 1fr); }
-  .comic { grid-template-columns: 1fr; }
+  /* the diagonals crowd the text at this width — square the panels off */
+  .comic { grid-template-columns: 1fr; gap: var(--space-4); }
   .comic__panel,
   .comic__panel:nth-child(1),
   .comic__panel:nth-child(2),
   .comic__panel:nth-child(3),
-  .comic__panel:nth-child(4) { grid-column: auto; clip-path: none; min-height: 0; }
+  .comic__panel:nth-child(4) {
+    grid-column: auto; grid-row: auto;
+    clip-path: none; min-height: 0; margin-top: 0;
+  }
   .comic__panel:nth-child(1) .comic__inner,
   .comic__panel:nth-child(2) .comic__inner,
   .comic__panel:nth-child(3) .comic__inner,
   .comic__panel:nth-child(4) .comic__inner {
     clip-path: none;
-    flex-direction: column;
-    align-items: flex-start;
-    padding: var(--space-5);
+    padding: var(--space-6) var(--space-5) var(--space-5);
   }
-  .comic__inner img,
-  .comic__panel:nth-child(3) .comic__inner img { width: 100%; }
   .problem__grid { grid-template-columns: 1fr; }
   .pull-quote { position: static; }
   .day-card.tilt-2, .reveal.day-card.tilt-2.is-in,
