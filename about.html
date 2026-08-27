@@ -182,48 +182,77 @@
 
     <div class="newsprint">
       <div class="newsprint__masthead">
-        <p class="newsprint__ears">Vol. I &mdash; No. 1</p>
-        <h3 class="newsprint__name">The HAVEN Chronicle</h3>
-        <p class="newsprint__dateline">Philadelphia, Pennsylvania &middot; Spring 2026 &middot; Three clippings</p>
+        <p class="newsprint__date">Thursday, May 7, 2026<br><span>Spring Edition</span></p>
+        <div>
+          <h3 class="newsprint__name">The HAVEN Chronicle</h3>
+          <p class="newsprint__founded">Founded in 2026</p>
+        </div>
+        <p class="newsprint__ears">Philadelphia, PA</p>
       </div>
 
-      <ol class="newsprint__cols">
-        <li class="newsprint__story reveal">
-          <p class="newsprint__kicker">Penn Today &middot; May 6, 2026</p>
-          <h4 class="newsprint__head">Reimagining a shelter as a supportive space for childhood</h4>
-          <p class="newsprint__lede">
-            How three friends turned four years of volunteering into an after-school program, and
-            what HAVEN will look like on the ground at Jane Addams Place.
-          </p>
-          <a class="newsprint__link"
-             href="https://penntoday.upenn.edu/news/reimagining-shelter-supportive-space-childhood"
-             target="_blank" rel="noopener noreferrer">Read the article</a>
-        </li>
+      <nav class="newsprint__nav" aria-label="Sections">
+        <span>Arts</span><span>Voices</span><span>Enrichment</span><span>Nurturing</span>
+        <span>Jane Addams Place</span><span>Press</span>
+      </nav>
 
-        <li class="newsprint__story reveal">
-          <p class="newsprint__kicker">The Daily Pennsylvanian &middot; April 16, 2026</p>
-          <h4 class="newsprint__head">&lsquo;Penn at its best&rsquo;: Jameson announces prize recipients</h4>
-          <p class="newsprint__lede">
-            Chloe, Darlene and Connie on the families who shaped HAVEN &mdash; and on the mothers
-            who shaped them.
-          </p>
-          <a class="newsprint__link"
-             href="https://www.thedp.com/article/2026/04/penn-2026-presidents-engagement-prize-recipients"
-             target="_blank" rel="noopener noreferrer">Read the article</a>
-        </li>
+      <div class="newsprint__page">
+        <!-- left rail -->
+        <div class="newsprint__rail">
+          <p class="newsprint__railhead">Top Stories</p>
 
-        <li class="newsprint__story reveal">
-          <p class="newsprint__kicker">Penn Today &middot; April 16, 2026</p>
-          <h4 class="newsprint__head">Class of 2026 President&rsquo;s Engagement Prize winners announced</h4>
-          <p class="newsprint__lede">
-            HAVEN named one of four winning projects from a pool of 67, with $100,000 to launch the
-            program after graduation.
+          <article class="newsprint__item reveal">
+            <p class="newsprint__kicker newsprint__kicker--red">The Daily Pennsylvanian</p>
+            <h4><a href="https://www.thedp.com/article/2026/04/penn-2026-presidents-engagement-prize-recipients" target="_blank" rel="noopener noreferrer">&lsquo;Penn at its best&rsquo;: Jameson announces 2026 engagement, innovation prize recipients</a></h4>
+            <p class="newsprint__byline">By Hailey Hilsabeck &middot; April 16, 2026</p>
+            <p class="newsprint__dek">
+              &ldquo;We are unbelievably grateful for this opportunity to bring HAVEN to life and to
+              serve our families at Jane Addams Place,&rdquo; Ni wrote.
+            </p>
+          </article>
+
+          <article class="newsprint__item reveal">
+            <p class="newsprint__kicker">Penn Today</p>
+            <h4><a href="https://penntoday.upenn.edu/news/class-2026-presidents-engagement-and-innovation-prize-winners-announced" target="_blank" rel="noopener noreferrer">Class of 2026 President&rsquo;s Engagement and Innovation Prize winners announced</a></h4>
+            <p class="newsprint__byline">Penn Today staff &middot; April 16, 2026</p>
+            <p class="newsprint__dek">
+              HAVEN named one of four winning projects from a pool of 67 applicants, with $100,000
+              to launch the program after graduation.
+            </p>
+          </article>
+        </div>
+
+        <!-- lead story -->
+        <article class="newsprint__lead reveal">
+          <img src="assets/team/team-photo.jpg"
+               alt="Connie Ni, Darlene Leohansson and Chloe Chang standing together on campus">
+          <h4 class="newsprint__leadhead">
+            <a href="https://penntoday.upenn.edu/news/reimagining-shelter-supportive-space-childhood" target="_blank" rel="noopener noreferrer">Reimagining a shelter as a supportive space for childhood</a>
+          </h4>
+          <p class="newsprint__byline">By Brandon K. Baker &middot; Penn Today &middot; May 6, 2026</p>
+          <p class="newsprint__leaddek">
+            HAVEN, a winning project of the 2026 President&rsquo;s Engagement Prize developed by
+            three fourth-year undergraduates, will launch an after-school program for K&ndash;5
+            children at Jane Addams Place, a homeless shelter in North Philadelphia.
           </p>
-          <a class="newsprint__link"
-             href="https://penntoday.upenn.edu/news/class-2026-presidents-engagement-and-innovation-prize-winners-announced"
-             target="_blank" rel="noopener noreferrer">Read the article</a>
-        </li>
-      </ol>
+          <div class="newsprint__split">
+            <p>&ldquo;What brings us together is how we use our knowledge for service,&rdquo; says Chang.</p>
+            <p>&ldquo;We&rsquo;re reimagining the shelter as a place for childhood.&rdquo;</p>
+          </div>
+        </article>
+
+        <!-- right rail -->
+        <div class="newsprint__rail newsprint__rail--right">
+          <p class="newsprint__railhead">Most Read</p>
+          <ol class="newsprint__most">
+            <li><a href="https://penntoday.upenn.edu/news/reimagining-shelter-supportive-space-childhood" target="_blank" rel="noopener noreferrer">Reimagining a shelter as a supportive space for childhood</a>
+              <span>Penn Today &middot; May 6, 2026</span></li>
+            <li><a href="https://www.thedp.com/article/2026/04/penn-2026-presidents-engagement-prize-recipients" target="_blank" rel="noopener noreferrer">&lsquo;Penn at its best&rsquo;: Jameson announces prize recipients</a>
+              <span>The Daily Pennsylvanian &middot; April 16, 2026</span></li>
+            <li><a href="https://penntoday.upenn.edu/news/class-2026-presidents-engagement-and-innovation-prize-winners-announced" target="_blank" rel="noopener noreferrer">Class of 2026 President&rsquo;s Engagement Prize winners announced</a>
+              <span>Penn Today &middot; April 16, 2026</span></li>
+          </ol>
+        </div>
+      </div>
     </div>
   </div>
 </section>
