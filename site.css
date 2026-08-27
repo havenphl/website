@@ -1530,7 +1530,7 @@ select:focus-visible {
 .comic__inner p { font-size: var(--text-body-md); }
 
 .comic__inner img { position: relative; z-index: 1; width: 100%; max-width: 205px; height: auto; align-self: center; }
-.comic__panel:nth-child(1) .comic__inner img { max-width: 285px; }
+.comic__panel:nth-child(1) .comic__inner img { max-width: 245px; }
 .comic__panel:nth-child(4) .comic__inner img { max-width: 168px; }
 
 /* Panel 2's top-left corner is clipped away by its diagonal, and panel 1's top
