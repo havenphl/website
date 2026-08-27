@@ -680,6 +680,11 @@ select:focus-visible {
   grid-template-columns: repeat(3, 1fr);
   gap: var(--space-6);
 }
+/* let the heading, the intro line and the cards breathe. Both gaps are whole
+   multiples of the ruled line, so the writing keeps landing between the rules. */
+#programs h2 { margin-bottom: var(--rule-gap); }
+#programs > div > p { margin-bottom: calc(var(--rule-gap) * 2); }
+#programs .pillars { margin-top: 0; }
 .pillar { display: flex; flex-direction: column; }
 .pillar__art {
   border: 2.5px solid var(--ink);
