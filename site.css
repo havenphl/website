@@ -1449,7 +1449,7 @@ select:focus-visible {
   display: grid;
   grid-template-columns: repeat(20, 1fr);
   row-gap: 0;
-  margin-top: var(--space-6);
+  margin-top: var(--space-3);
   counter-reset: panel;
 }
 
