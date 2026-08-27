@@ -1437,56 +1437,88 @@ select:focus-visible {
 
 /* ==========================================================================
    THE COMIC STRIP — the founding story, four panels
-   Heavy marker borders and uneven panel widths, the way a strip is laid out:
-   two full-width beats, then a wide/narrow pair. Speed lines burst from the
-   corners of the panels where something happens.
+   Laid out to the reference template: two full-width beats split by a slanted
+   gutter, then a narrow/wide pair split by a matching diagonal.
+   The frame is the outer element's background showing through a 5px padding;
+   the inner box carries the same clip-path, so the heavy black border follows
+   the slanted edges instead of being cut off by them.
    ========================================================================== */
 .comic {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: var(--space-4);
+  grid-template-columns: 36fr 64fr;
+  gap: var(--space-3);
   margin-top: var(--space-6);
   counter-reset: panel;
 }
+
 .comic__panel {
+  background: #1a1a18;
+  padding: 5px;
+  min-height: 210px;
+}
+.comic__inner {
   position: relative;
+  height: 100%;
   display: flex;
   align-items: center;
   gap: var(--space-5);
   background: #fffdf6;
-  border: 5px solid #1a1a18;
-  border-radius: 2px;
-  padding: var(--space-5);
+  padding: var(--space-5) var(--space-6);
   overflow: hidden;
 }
-.comic__panel:nth-child(1) { grid-column: span 5; }
-.comic__panel:nth-child(2) { grid-column: span 5; }
-.comic__panel:nth-child(3) { grid-column: span 3; }
-/* the last beat is the narrow one, so it stacks instead */
-.comic__panel:nth-child(4) { grid-column: span 2; flex-direction: column; align-items: flex-start; }
+
+/* --- the template's four shapes --- */
+.comic__panel:nth-child(1) {
+  grid-column: 1 / -1;
+  clip-path: polygon(0 0, 100% 0, 100% 93%, 0 100%);
+}
+.comic__panel:nth-child(1) .comic__inner { clip-path: polygon(0 0, 100% 0, 100% 93%, 0 100%); }
+
+.comic__panel:nth-child(2) {
+  grid-column: 1 / -1;
+  clip-path: polygon(0 7%, 100% 0, 100% 100%, 0 100%);
+}
+.comic__panel:nth-child(2) .comic__inner { clip-path: polygon(0 7%, 100% 0, 100% 100%, 0 100%); }
+
+.comic__panel:nth-child(3) {
+  clip-path: polygon(0 0, 100% 0, 82% 100%, 0 100%);
+  flex-direction: column;
+}
+.comic__panel:nth-child(3) .comic__inner {
+  clip-path: polygon(0 0, 100% 0, 82% 100%, 0 100%);
+  flex-direction: column;
+  align-items: flex-start;
+  padding-right: 22%;
+}
+
+.comic__panel:nth-child(4) { clip-path: polygon(12% 0, 100% 0, 100% 100%, 0 100%); }
+.comic__panel:nth-child(4) .comic__inner {
+  clip-path: polygon(12% 0, 100% 0, 100% 100%, 0 100%);
+  padding-left: 15%;
+}
 
 /* action lines, tucked behind the drawing */
-.comic__panel::after {
+.comic__inner::after {
   content: '';
   position: absolute;
   inset: 0;
   background-repeat: no-repeat;
-  background-size: 46% auto;
-  opacity: .5;
+  background-size: 44% auto;
+  opacity: .55;
   pointer-events: none;
   z-index: 0;
 }
-.comic__panel:nth-child(odd)::after  { background-image: url('assets/doodles/speedlines-left.svg');  background-position: left top; }
-.comic__panel:nth-child(even)::after { background-image: url('assets/doodles/speedlines-right.svg'); background-position: right top; }
+.comic__panel:nth-child(odd) .comic__inner::after  { background-image: url('assets/doodles/speedlines-left.svg');  background-position: left top; }
+.comic__panel:nth-child(even) .comic__inner::after { background-image: url('assets/doodles/speedlines-right.svg'); background-position: right top; }
 
-.comic__panel img,
-.comic__panel p { position: relative; z-index: 1; }
-.comic__panel img { flex: 0 0 auto; width: min(52%, 330px); height: auto; }
-.comic__panel:nth-child(4) img { width: 100%; }
-.comic__panel p { margin: 0; }
+.comic__inner img,
+.comic__inner p { position: relative; z-index: 1; }
+.comic__inner img { flex: 0 0 auto; width: min(46%, 300px); height: auto; }
+.comic__panel:nth-child(3) .comic__inner img { width: min(78%, 240px); }
+.comic__inner p { margin: 0; }
 
 /* the panel number, in the corner like a strip */
-.comic__panel::before {
+.comic__inner::before {
   counter-increment: panel;
   content: counter(panel);
   position: absolute;
@@ -1576,8 +1608,18 @@ select:focus-visible {
   .comic__panel:nth-child(1),
   .comic__panel:nth-child(2),
   .comic__panel:nth-child(3),
-  .comic__panel:nth-child(4) { grid-column: auto; flex-direction: column; align-items: flex-start; }
-  .comic__panel img, .comic__panel:nth-child(4) img { width: 100%; }
+  .comic__panel:nth-child(4) { grid-column: auto; clip-path: none; min-height: 0; }
+  .comic__panel:nth-child(1) .comic__inner,
+  .comic__panel:nth-child(2) .comic__inner,
+  .comic__panel:nth-child(3) .comic__inner,
+  .comic__panel:nth-child(4) .comic__inner {
+    clip-path: none;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: var(--space-5);
+  }
+  .comic__inner img,
+  .comic__panel:nth-child(3) .comic__inner img { width: 100%; }
   .problem__grid { grid-template-columns: 1fr; }
   .pull-quote { position: static; }
   .day-card.tilt-2, .reveal.day-card.tilt-2.is-in,
