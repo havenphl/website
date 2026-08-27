@@ -1386,6 +1386,7 @@ select:focus-visible {
 .tape--dots-yellow   { background-image: url('assets/textures/tape-dots-yellow-brand.jpg'); }
 .tape--gingham-yellow{ background-image: url('assets/textures/tape-gingham-yellow-brand.jpg'); }
 .tape--gingham-green { background-image: url('assets/textures/tape-green-gingham.jpg'); }
+.tape--gingham-pink  { background-image: url('assets/textures/tape-gingham-pink-brand.jpg'); }
 
 /* every scrap leans a little differently, the way torn tape would */
 .week .day-card:nth-child(1) li:nth-child(3) .slot__label,
