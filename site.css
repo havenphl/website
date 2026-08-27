@@ -1352,7 +1352,8 @@ select:focus-visible {
 }
 /* --- the session tapes ---------------------------------------------------
    The real washi rolls from the design system's texture set, not drawn ones:
-   pink polka dot, yellow gingham and green gingham. Session A and B swap
+   pink and yellow polka dot, yellow and green gingham — the two yellows recoloured
+   from the same rolls to HAVEN yellow. Session A and B swap
    patterns from one day to the next, and each day gets its own pairing. The
    torn edge is a clip-path, which is why the shadow is a drop-shadow — a
    box-shadow would trace the untorn rectangle instead.
@@ -1379,7 +1380,8 @@ select:focus-visible {
 }
 
 .tape--dots-pink     { background-image: url('assets/textures/tape-pink.jpg'); }
-.tape--gingham-yellow{ background-image: url('assets/textures/tape-yellow.jpg'); }
+.tape--dots-yellow   { background-image: url('assets/textures/tape-dots-yellow-brand.jpg'); }
+.tape--gingham-yellow{ background-image: url('assets/textures/tape-gingham-yellow-brand.jpg'); }
 .tape--gingham-green { background-image: url('assets/textures/tape-green-gingham.jpg'); }
 
 /* every scrap leans a little differently, the way torn tape would */
