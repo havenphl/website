@@ -1883,38 +1883,65 @@ select:focus-visible {
 .newsprint a { text-decoration: none; color: inherit; }
 .newsprint a:hover { color: var(--denim); text-decoration: underline; text-underline-offset: 3px; }
 
-/* Partner tiles, sized as a logo wall — dropping an <img> into a tile in place
-   of the text needs no other change. */
-.partners-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: var(--space-5);
-  margin-top: var(--space-6);
+/* ==========================================================================
+   PARTNERS — a nine-piece jigsaw, one partner per piece
+   Each piece is a masked box: the mask is an SVG whose tabs and blanks match
+   its neighbours, and the box is a third of the board plus the tab reach on
+   every side, so the pieces overlap and interlock. Laid out by --n (1-9).
+   ========================================================================== */
+.puzzle {
+  --board: 100%;
+  --cell: 33.3333%;
+  --tab: 6.6667%;          /* 20/300 of the board */
+  position: relative;
+  width: min(100%, 620px);
+  aspect-ratio: 1;
+  margin: var(--space-6) auto 0;
+  padding: 0;
+  list-style: none;
 }
-.partner {
+.puzzle__piece {
+  position: absolute;
+  width: calc(var(--cell) + var(--tab) * 2);
+  aspect-ratio: 1;
   display: grid;
   place-items: center;
   text-align: center;
-  min-height: 118px;
-  padding: var(--space-4);
-  background: var(--paper-cream);
-  border: 2.5px dashed var(--border-soft);
-  border-radius: var(--radius-md);
+  padding: calc(var(--tab) + 4%);
+  -webkit-mask-size: 100% 100%;
+          mask-size: 100% 100%;
+  -webkit-mask-repeat: no-repeat;
+          mask-repeat: no-repeat;
 }
-.partner span {
+.puzzle__piece--pink   { background: var(--pink); }
+.puzzle__piece--green  { background: var(--green); }
+.puzzle__piece--yellow { background: var(--yellow); }
+
+/* position and mask, piece by piece */
+.puzzle__piece:nth-child(1) { left: calc(0 * var(--cell) - var(--tab)); top: calc(0 * var(--cell) - var(--tab)); -webkit-mask-image: url('assets/shapes/puzzle-1.svg'); mask-image: url('assets/shapes/puzzle-1.svg'); }
+.puzzle__piece:nth-child(2) { left: calc(1 * var(--cell) - var(--tab)); top: calc(0 * var(--cell) - var(--tab)); -webkit-mask-image: url('assets/shapes/puzzle-2.svg'); mask-image: url('assets/shapes/puzzle-2.svg'); }
+.puzzle__piece:nth-child(3) { left: calc(2 * var(--cell) - var(--tab)); top: calc(0 * var(--cell) - var(--tab)); -webkit-mask-image: url('assets/shapes/puzzle-3.svg'); mask-image: url('assets/shapes/puzzle-3.svg'); }
+.puzzle__piece:nth-child(4) { left: calc(0 * var(--cell) - var(--tab)); top: calc(1 * var(--cell) - var(--tab)); -webkit-mask-image: url('assets/shapes/puzzle-4.svg'); mask-image: url('assets/shapes/puzzle-4.svg'); }
+.puzzle__piece:nth-child(5) { left: calc(1 * var(--cell) - var(--tab)); top: calc(1 * var(--cell) - var(--tab)); -webkit-mask-image: url('assets/shapes/puzzle-5.svg'); mask-image: url('assets/shapes/puzzle-5.svg'); }
+.puzzle__piece:nth-child(6) { left: calc(2 * var(--cell) - var(--tab)); top: calc(1 * var(--cell) - var(--tab)); -webkit-mask-image: url('assets/shapes/puzzle-6.svg'); mask-image: url('assets/shapes/puzzle-6.svg'); }
+.puzzle__piece:nth-child(7) { left: calc(0 * var(--cell) - var(--tab)); top: calc(2 * var(--cell) - var(--tab)); -webkit-mask-image: url('assets/shapes/puzzle-7.svg'); mask-image: url('assets/shapes/puzzle-7.svg'); }
+.puzzle__piece:nth-child(8) { left: calc(1 * var(--cell) - var(--tab)); top: calc(2 * var(--cell) - var(--tab)); -webkit-mask-image: url('assets/shapes/puzzle-8.svg'); mask-image: url('assets/shapes/puzzle-8.svg'); }
+.puzzle__piece:nth-child(9) { left: calc(2 * var(--cell) - var(--tab)); top: calc(2 * var(--cell) - var(--tab)); -webkit-mask-image: url('assets/shapes/puzzle-9.svg'); mask-image: url('assets/shapes/puzzle-9.svg'); }
+
+.puzzle__label {
   font-family: var(--font-display);
-  font-size: var(--text-heading-sm);
-  color: var(--text-heading);
-  line-height: var(--leading-snug);
+  font-size: clamp(.8rem, 1.7vw, 1.05rem);
+  line-height: 1.15;
+  color: var(--ink);
 }
-.partner small {
+.puzzle__label small {
   display: block;
-  margin-top: var(--space-1);
+  margin-top: 3px;
   font-family: var(--font-hand);
-  font-size: var(--text-body-sm);
-  color: var(--ink-soft);
+  font-size: .78em;
+  color: var(--ink);
+  opacity: .8;
 }
-.partner img { max-height: 76px; width: auto; object-fit: contain; }
 
 /* ==========================================================================
    RESPONSIVE
@@ -1924,7 +1951,6 @@ select:focus-visible {
   .listen__grid,
   .contact__grid { grid-template-columns: 1fr; }
   .pillars, .involve, .team, .week, .serves { grid-template-columns: 1fr; }
-  .partners-grid { grid-template-columns: repeat(2, 1fr); }
   /* a broadsheet does not fit on a phone — stack the rails under the lead */
   .newsprint__page { grid-template-columns: 1fr; }
   .newsprint__lead { order: -1; padding: 0 0 var(--space-5); border-left: none; }
@@ -1997,7 +2023,6 @@ select:focus-visible {
 @media (max-width: 560px) {
 
   .form__row { grid-template-columns: 1fr; }
-  .partners-grid { grid-template-columns: 1fr; }
   .stat-list li { grid-template-columns: 1fr; gap: var(--space-2); }
   .day-card { padding: var(--space-4); }
   .card { padding: var(--space-4); }
