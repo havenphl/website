@@ -1596,10 +1596,10 @@ select:focus-visible {
   box-shadow: var(--shadow-crayon);
 }
 /* a last narration box, laid over the photo like the ones in the strip —
-   centred across the top, the way a strip opens a scene */
+   centred along the bottom, closing the scene */
 .team-photo__caption {
   position: absolute;
-  top: var(--space-5);
+  bottom: var(--space-5);
   left: 50%;
   transform: translateX(-50%);
   max-width: 84%;
