@@ -1907,6 +1907,9 @@ select:focus-visible {
   fill: var(--ink);
   text-anchor: middle;
 }
+/* interior edges are stroked by both neighbouring pieces, so the board's own
+   outline needs re-tracing to read at the same weight */
+.pz-frame { fill: none; stroke: var(--ink); stroke-width: 3.2; }
 
 /* ==========================================================================
    RESPONSIVE
