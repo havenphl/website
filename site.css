@@ -1345,18 +1345,18 @@ select:focus-visible {
   box-shadow: 0 2px 6px rgba(74, 64, 50, .14);
 }
 .serves__item--pink {
-  --note-band: var(--pink-soft);
-  --note-check: rgba(255, 140, 166, .16);
+  --note-band: #ffe4ec;
+  --note-check: rgba(255, 140, 166, .085);
   transform: rotate(-1.6deg);
 }
 .serves__item--green {
-  --note-band: var(--green-soft);
-  --note-check: rgba(123, 161, 93, .15);
+  --note-band: #dcead2;
+  --note-check: rgba(123, 161, 93, .08);
   transform: rotate(1.1deg);
 }
 .serves__item--yellow {
-  --note-band: var(--yellow-soft);
-  --note-check: rgba(248, 213, 104, .26);
+  --note-band: #fef6dc;
+  --note-check: rgba(248, 213, 104, .14);
   transform: rotate(-0.7deg);
 }
 
@@ -1396,7 +1396,7 @@ select:focus-visible {
   font-size: var(--text-heading-lg);
   color: var(--text-heading);
   padding-bottom: var(--space-2);
-  border-bottom: 2px solid rgba(74, 64, 50, .22);
+  border-bottom: 2px solid rgba(74, 64, 50, .16);
 }
 .serves dd { margin: 0; }
 
