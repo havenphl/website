@@ -1884,9 +1884,10 @@ select:focus-visible {
 
 /* ==========================================================================
    PARTNERS — a nine-piece jigsaw, one partner per piece
-   Drawn as a single inline SVG rather than nine masked boxes: the tabs and
-   blanks are computed so neighbouring pieces interlock, and the labels are
-   pre-wrapped to the measured Gaegu width of each piece, so nothing overflows.
+   Drawn as a single inline SVG. Every corner and every edge is generated once
+   with a little jitter and then shared by both neighbouring pieces, so the
+   board still interlocks exactly while no line is quite straight. Labels are
+   pre-wrapped to the measured Gaegu width of each piece.
    ========================================================================== */
 .puzzle {
   display: block;
@@ -1907,9 +1908,37 @@ select:focus-visible {
   fill: var(--ink);
   text-anchor: middle;
 }
-/* interior edges are stroked by both neighbouring pieces, so the board's own
-   outline needs re-tracing to read at the same weight */
-.pz-frame { fill: none; stroke: var(--ink); stroke-width: 3.2; }
+/* every piece carries its own wobbling outline, so no separate frame is needed */
+.pz-piece {
+  stroke: var(--ink);
+  stroke-width: 1.9;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+}
+
+/* --- the board assembles itself ------------------------------------------
+   Each piece flies in from beyond its own corner and settles into place,
+   corners first and the centre last. Only armed when site.js can drive it,
+   so without JS the board is simply finished.
+   ------------------------------------------------------------------------ */
+.pz-cell { transform-box: fill-box; transform-origin: center; }
+
+.puzzle.is-armed .pz-cell { opacity: 0; }
+
+.puzzle.is-solving .pz-cell {
+  animation: pz-drop .62s cubic-bezier(.22,.9,.3,1.08) calc(var(--i) * .11s) both;
+}
+
+@keyframes pz-drop {
+  from { opacity: 0; transform: translate(var(--tx), var(--ty)) rotate(var(--rot)) scale(.94); }
+  60%  { opacity: 1; }
+  to   { opacity: 1; transform: translate(0, 0) rotate(0deg) scale(1); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .puzzle.is-armed .pz-cell { opacity: 1; }
+  .puzzle.is-solving .pz-cell { animation: none; }
+}
 
 /* ==========================================================================
    RESPONSIVE

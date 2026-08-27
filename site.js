@@ -8,12 +8,16 @@
 
   var logo = document.querySelector('.logo-draw');
   var comic = document.querySelector('.comic');
+  var puzzle = document.querySelector('.puzzle');
 
   // Hold the strip hidden only if we can actually draw it on. Any browser
   // without IntersectionObserver, or anyone who prefers less motion, sees the
   // finished strip instead of a blank space.
   if (comic && !reduced && 'IntersectionObserver' in window) {
     comic.classList.add('is-armed');
+  }
+  if (puzzle && !reduced && 'IntersectionObserver' in window) {
+    puzzle.classList.add('is-armed');
   }
 
   // Hide it straight away so it can't flash in finished, but hold the drawing
@@ -41,6 +45,7 @@
     // now the page is actually visible, let the drawings start
     watchLogo();
     watchComic();
+    watchPuzzle();
   }
 
   function skipOpening() {
@@ -175,6 +180,29 @@
     // if anything stalls, show the finished strip rather than leaving a hole
     window.setTimeout(function () {
       if (comic.classList.contains('is-armed')) comic.classList.remove('is-armed');
+    }, 6000);
+  }
+
+  /* --- the partner board assembles itself when it scrolls into view -------
+     Same shape as watchComic: the CSS does the moving, this only says when.
+  ------------------------------------------------------------------------- */
+  function watchPuzzle() {
+    if (!puzzle || !puzzle.classList.contains('is-armed')) return;
+
+    var seen = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) return;
+        puzzle.classList.remove('is-armed');
+        puzzle.classList.add('is-solving');
+        seen.disconnect();
+      });
+    }, { threshold: 0.25 });
+
+    seen.observe(puzzle);
+
+    // if anything stalls, show the finished board rather than a hole
+    window.setTimeout(function () {
+      if (puzzle.classList.contains('is-armed')) puzzle.classList.remove('is-armed');
     }, 6000);
   }
 
