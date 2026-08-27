@@ -1886,7 +1886,7 @@ select:focus-visible {
    PARTNERS — a nine-piece jigsaw, one partner per piece
    Drawn as a single inline SVG rather than nine masked boxes: the tabs and
    blanks are computed so neighbouring pieces interlock, and the labels are
-   pre-wrapped to the measured width of each piece, so nothing overflows.
+   pre-wrapped to the measured Gaegu width of each piece, so nothing overflows.
    ========================================================================== */
 .puzzle {
   display: block;
@@ -1895,14 +1895,15 @@ select:focus-visible {
   margin: var(--space-6) auto 0;
 }
 .pz-name {
-  font-family: var(--font-display);
-  font-size: 11px;
+  font-family: var(--font-body);   /* Gaegu */
+  font-weight: 700;
+  font-size: 11.5px;
   fill: var(--ink);
   text-anchor: middle;
 }
 .pz-sub {
-  font-family: var(--font-hand);
-  font-size: 7.5px;
+  font-family: var(--font-body);   /* Gaegu */
+  font-size: 8px;
   fill: var(--ink);
   text-anchor: middle;
 }
