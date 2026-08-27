@@ -1030,9 +1030,14 @@ select:focus-visible {
    and the corners keep their radius at every width. Colours sampled from the
    reference: #fdf3e7 paper, #ad8951 stitching. */
 .closing-line {
+  font-family: var(--font-display) !important;
+  font-size: var(--text-display-md) !important;
+  line-height: var(--leading-snug) !important;
+  color: var(--text-heading);
+
   width: min(100%, 74ch);
   margin: var(--space-8) auto 0;
-  padding: var(--space-7);
+  padding: var(--space-7) var(--space-7);
   text-align: center;
 
   /* soft pink ground with a fine staggered dot grid, drawn as two offset
@@ -1046,69 +1051,6 @@ select:focus-visible {
   border: 3px dashed var(--pink);
   border-radius: 34px;
 }
-.closing-line__lead,
-.closing-line__tail {
-  font-family: var(--font-display) !important;
-  font-size: var(--text-display-md) !important;
-  line-height: var(--leading-snug) !important;
-  color: var(--text-heading);
-  margin: 0;
-}
-.closing-line__tail { margin-top: var(--space-5); }
-
-/* --- the three post-its --------------------------------------------------
-   Square notes with a strip of tape over the top edge. The tape is a
-   pseudo-element with the same torn-end clip-path as the washi buttons, so
-   its ends look ripped rather than cut.
-   ------------------------------------------------------------------------ */
-.postits {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: var(--space-6);
-  margin: var(--space-6) 0 0;
-  padding: 0;
-  list-style: none;
-}
-.postit {
-  position: relative;
-  width: 168px;
-  min-height: 168px;
-  display: grid;
-  place-items: center;
-  padding: var(--space-5) var(--space-4) var(--space-4);
-  font-family: var(--font-display);
-  font-size: var(--text-heading-lg);
-  line-height: var(--leading-snug);
-  color: var(--text-heading);
-  /* a faint tint down the sheet, the way a paper note catches light */
-  background-image: linear-gradient(165deg, rgba(255,255,255,.55), rgba(0,0,0,.05));
-  box-shadow: 2px 4px 10px rgba(74,64,50,.18);
-}
-.postit--pink   { background-color: var(--pink-soft);   transform: rotate(-2.2deg); }
-.postit--green  { background-color: var(--green-soft);  transform: rotate(1.4deg); }
-.postit--yellow { background-color: var(--yellow-soft); transform: rotate(-1.1deg); }
-
-.postit::before {
-  content: '';
-  position: absolute;
-  top: -14px;
-  left: 50%;
-  width: 74px;
-  height: 30px;
-  background: rgba(255, 253, 246, .82);
-  border: 1px solid rgba(74, 64, 50, .10);
-  clip-path: polygon(
-    3px 0%, calc(100% - 3px) 0%,
-    calc(100% - 6px) 24%, 100% 50%,
-    calc(100% - 5px) 74%, calc(100% - 3px) 100%,
-    3px 100%, 5px 76%, 0px 50%, 4px 26%
-  );
-  transform: translateX(-50%) rotate(-4deg);
-}
-.postit--green::before  { transform: translateX(-50%) rotate(3deg); }
-.postit--yellow::before { transform: translateX(-50%) rotate(-2deg); }
-
 
 /* ==========================================================================
    CUT-OUT DOODLES
