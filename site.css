@@ -1465,46 +1465,47 @@ select:focus-visible {
 
 /* --- the four shapes, and the padding that keeps text off the slants --- */
 .comic__panel:nth-child(1) {
-  grid-column: 1 / 14; grid-row: 1;
+  grid-column: 1 / 12; grid-row: 1;
   min-height: 310px;
-  clip-path: polygon(0 2%, 100% 0, 69% 96%, 0 82%);
+  clip-path: polygon(0 0, 98% 0, 64.1% calc(100% - 32px), 0 calc(100% - 48px));
 }
 .comic__panel:nth-child(1) .comic__inner {
-  clip-path: polygon(0 2%, 100% 0, 69% 96%, 0 82%);
+  clip-path: polygon(0 0, 98% 0, 64.1% calc(100% - 32px), 0 calc(100% - 48px));
   justify-content: flex-start;
-  padding: 7% 34% 16% var(--space-6);
+  padding: 6% 40% 18% var(--space-5);
 }
 
 .comic__panel:nth-child(2) {
-  grid-column: 9 / 21; grid-row: 1;
+  grid-column: 7 / 21; grid-row: 1;
   min-height: 310px;
-  clip-path: polygon(44% 0, 100% 1%, 100% 100%, 11% 90%);
+  clip-path: polygon(35.9% 0, 100% 0, 100% calc(100% - 4px), 9.2% calc(100% - 32px));
 }
 .comic__panel:nth-child(2) .comic__inner {
-  clip-path: polygon(44% 0, 100% 1%, 100% 100%, 11% 90%);
-  padding: 8% var(--space-6) 10% 48%;
+  clip-path: polygon(35.9% 0, 100% 0, 100% calc(100% - 4px), 9.2% calc(100% - 32px));
+  padding: 7% var(--space-5) 10% 42%;
 }
 
 .comic__panel:nth-child(3) {
-  grid-column: 1 / 12; grid-row: 2;
+  grid-column: 1 / 10; grid-row: 2;
   margin-top: -40px;
   min-height: 300px;
-  clip-path: polygon(0 0, 100% 7%, 100% 100%, 0 100%);
+  clip-path: polygon(0 0, 100% 20px, 100% 100%, 0 100%);
 }
 .comic__panel:nth-child(3) .comic__inner {
-  clip-path: polygon(0 0, 100% 7%, 100% 100%, 0 100%);
-  padding: 14% var(--space-6) var(--space-6);
+  clip-path: polygon(0 0, 100% 20px, 100% 100%, 0 100%);
+  padding: 34px var(--space-5) var(--space-5);
 }
 
 .comic__panel:nth-child(4) {
-  grid-column: 12 / 21; grid-row: 2;
-  margin-top: -16px;
+  grid-column: 10 / 21; grid-row: 2;
+  margin-left: 8px;
+  margin-top: -20px;
   min-height: 300px;
-  clip-path: polygon(0 0, 100% 7%, 100% 100%, 0 100%);
+  clip-path: polygon(0 0, 100% 24px, 100% 100%, 0 100%);
 }
 .comic__panel:nth-child(4) .comic__inner {
-  clip-path: polygon(0 0, 100% 7%, 100% 100%, 0 100%);
-  padding: 14% var(--space-6) var(--space-6);
+  clip-path: polygon(0 0, 100% 24px, 100% 100%, 0 100%);
+  padding: 38px var(--space-5) var(--space-5);
 }
 
 /* every line of narration sits in its own box, the way a strip captions a panel */
@@ -1531,8 +1532,8 @@ select:focus-visible {
 
 /* Panel 2's top-left corner is clipped away by its diagonal, and panel 1's top
    edge starts 2% down — so their numbers move to a corner that actually exists. */
-.comic__panel:nth-child(1) .comic__inner::before { top: 2%; }
-.comic__panel:nth-child(2) .comic__inner::before { left: 45%; }
+.comic__panel:nth-child(1) .comic__inner::before { top: 0; }
+.comic__panel:nth-child(2) .comic__inner::before { left: 37%; }
 
 /* the panel number, in the corner like a strip */
 .comic__inner::before {
