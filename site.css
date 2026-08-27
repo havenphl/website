@@ -1839,8 +1839,16 @@ select:focus-visible {
   padding-top: var(--space-4);
   border-top: 2px solid var(--ink);
 }
-.newsprint__aside .newsprint__kicker { display: block; margin-bottom: var(--space-2); }
-/* two pictures side by side, the way a front page runs a photo pair */
+.newsprint__aside .newsprint__kicker { display: block; margin-bottom: 2px; }
+.newsprint__asidefig { margin: 0 0 var(--space-4); }
+.newsprint__asidefig img { width: 100%; height: auto; display: block; }
+.newsprint__asidefig figcaption {
+  margin-top: var(--space-2);
+  font-size: .9rem;
+  line-height: 1.4;
+  color: var(--ink);
+}
+/* two more pictures side by side underneath, the way a front page runs a pair */
 .newsprint__pair { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-3); }
 .newsprint__pair figure { margin: 0; }
 .newsprint__pair img { width: 100%; height: auto; display: block; }
