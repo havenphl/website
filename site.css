@@ -1508,13 +1508,14 @@ select:focus-visible {
   padding: 38px var(--space-5) var(--space-5);
 }
 
-/* every line of narration sits in its own box, the way a strip captions a panel */
+/* every line of narration sits in its own box, the way a strip captions a panel.
+   Beige against the white panel, so the words read as laid on top of the art. */
 .comic__caption,
 .comic__inner p {
   position: relative;
   z-index: 1;
   margin: 0;
-  background: #fff;
+  background: var(--paper-cream);
   border: 2.5px solid #1a1a18;
   padding: 3px var(--space-3);
   line-height: var(--leading-snug);
