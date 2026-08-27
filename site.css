@@ -1703,6 +1703,17 @@ select:focus-visible {
   letter-spacing: .03em;
   color: var(--ink);
 }
+/* thin dividers between the sections, the way a section bar is ruled */
+.newsprint__nav > * + *::before {
+  content: '';
+  display: inline-block;
+  width: 1px;
+  height: .85em;
+  margin-right: var(--space-5);
+  vertical-align: -1px;
+  background: var(--np-rule);
+}
+.newsprint__nav a { font-weight: 700; }
 
 /* --- the page: rail | lead | rail --- */
 .newsprint__page {
