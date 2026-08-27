@@ -1311,20 +1311,57 @@ select:focus-visible {
 }
 
 
-/* who we serve — three groups, each in its own card */
+/* --- who we serve, on three taped notes -----------------------------------
+   Each group sits on a paper note pinned up with a strip of tape. The tape is
+   a pseudo-element carrying the same torn-end clip-path as the washi buttons,
+   so its ends look ripped rather than cut, and it sits differently on each.
+   -------------------------------------------------------------------------- */
 .serves {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: var(--space-6);
-  margin-top: var(--space-6);
+  gap: var(--space-7);
+  margin-top: var(--space-7);
 }
-.serves__item { display: flex; flex-direction: column; gap: var(--space-3); }
+.serves__item {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding: var(--space-6) var(--space-5) var(--space-5);
+  /* a faint sheen down the sheet, the way paper catches light */
+  background-image: linear-gradient(168deg, rgba(255,255,255,.5), rgba(74,64,50,.06));
+  box-shadow: 2px 5px 12px rgba(74,64,50,.16);
+}
+.serves__item--pink   { background-color: var(--pink-soft);   transform: rotate(-1.6deg); }
+.serves__item--green  { background-color: var(--green-soft);  transform: rotate(1.1deg); }
+.serves__item--yellow { background-color: var(--yellow-soft); transform: rotate(-0.7deg); }
+
+.serves__item::before {
+  content: '';
+  position: absolute;
+  top: -15px;
+  width: 86px;
+  height: 32px;
+  background: rgba(255, 253, 246, .85);
+  border: 1px solid rgba(74, 64, 50, .10);
+  clip-path: polygon(
+    3px 0%, calc(100% - 3px) 0%,
+    calc(100% - 6px) 24%, 100% 50%,
+    calc(100% - 5px) 74%, calc(100% - 3px) 100%,
+    3px 100%, 5px 76%, 0px 50%, 4px 26%
+  );
+}
+/* taped centred, off to one side, and across a corner */
+.serves__item--pink::before   { left: 50%; transform: translateX(-50%) rotate(-5deg); }
+.serves__item--green::before  { left: 26%; transform: translateX(-50%) rotate(6deg); }
+.serves__item--yellow::before { left: 74%; transform: translateX(-50%) rotate(-3deg); }
+
 .serves dt {
   font-family: var(--font-display);
   font-size: var(--text-heading-lg);
   color: var(--text-heading);
   padding-bottom: var(--space-2);
-  border-bottom: 3px dashed var(--green);
+  border-bottom: 3px dashed rgba(74, 64, 50, .28);
 }
 .serves dd { margin: 0; }
 
