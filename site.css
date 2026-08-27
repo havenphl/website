@@ -1536,9 +1536,7 @@ select:focus-visible {
    simply finished and there.
    ------------------------------------------------------------------------ */
 .comic.is-armed .panel-frame__line,
-.comic.is-armed .ink__s,
-.comic.is-armed .comic__caption,
-.comic.is-armed .comic__inner p { opacity: 0; }
+.comic.is-armed .ink__s { opacity: 0; }
 
 /* the frame draws itself first */
 .comic.is-drawing .panel-frame__line {
@@ -1559,19 +1557,8 @@ select:focus-visible {
     draw-fill .2s ease-out calc(var(--i) * .62s + .54s + var(--d, 0s)) forwards;
 }
 
-/* then the words */
-.comic.is-drawing .comic__caption,
-.comic.is-drawing .comic__inner p {
-  animation: write-in .34s ease-out calc(var(--i) * .62s + .30s) both;
-}
-.comic.is-drawing .comic__inner p { animation-delay: calc(var(--i) * .62s + 1.25s); }
-
 @keyframes draw-line { to { stroke-dashoffset: 0; } }
 @keyframes draw-fill { to { fill: #1a1a18; stroke-width: 0; } }
-@keyframes write-in {
-  from { opacity: 0; clip-path: inset(0 100% 0 0); }
-  to   { opacity: 1; clip-path: inset(0 0 0 0); }
-}
 
 /* the panel number, in the corner like a strip */
 .comic__panel:nth-child(1) .comic__inner::before { top: 0; }
@@ -1596,13 +1583,9 @@ select:focus-visible {
 /* someone who prefers less motion just gets the finished strip */
 @media (prefers-reduced-motion: reduce) {
   .comic.is-armed .panel-frame__line,
-  .comic.is-armed .ink__s,
-  .comic.is-armed .comic__caption,
-  .comic.is-armed .comic__inner p { opacity: 1; }
+  .comic.is-armed .ink__s { opacity: 1; }
   .comic.is-drawing .panel-frame__line,
-  .comic.is-drawing .ink__s,
-  .comic.is-drawing .comic__caption,
-  .comic.is-drawing .comic__inner p { animation: none; }
+  .comic.is-drawing .ink__s { animation: none; }
   .comic.is-drawing .ink__s { fill: #1a1a18; stroke: none; }
 }
 
