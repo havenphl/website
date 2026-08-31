@@ -94,7 +94,11 @@
       </div>
     </div>
 
-    <form class="card card--lg form" id="contactForm" novalidate>
+    <!-- To make this send: create a form at formspree.io with info@havenphl.org
+         as the recipient, then paste its endpoint into action= below in place of
+         YOUR_FORM_ID. Nothing else needs changing. -->
+    <form class="card card--lg form" id="contactForm" novalidate
+          action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
       <div class="form__row">
         <div class="field" id="field-name">
           <label for="name">your name</label>

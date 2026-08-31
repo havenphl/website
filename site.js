@@ -299,23 +299,40 @@
         return;
       }
 
-      /* TODO: this is front-end only — no message is sent anywhere yet.
-         Point it at Formspree, Netlify Forms, or your own endpoint:
+      /* Send it to whatever endpoint the form's action points at (Formspree
+         by default). Until that action is filled in, the form still validates
+         and thanks the sender, but nothing is transmitted — so the button is
+         disabled while sending and the sender is told if it fails. */
+      var endpoint = form.getAttribute('action') || '';
 
-         fetch('https://your-endpoint', {
-           method: 'POST',
-           headers: { 'Content-Type': 'application/json' },
-           body: JSON.stringify(Object.fromEntries(new FormData(form)))
-         });
-      */
+      if (endpoint.indexOf('YOUR_FORM_ID') !== -1) {
+        form.reset();
+        showToast();
+        return;
+      }
 
-      form.reset();
-      showToast();
+      var button = form.querySelector('[type="submit"]');
+      if (button) { button.disabled = true; button.dataset.label = button.textContent; button.textContent = 'sending…'; }
+
+      fetch(endpoint, {
+        method: 'POST',
+        headers: { Accept: 'application/json' },
+        body: new FormData(form)
+      }).then(function (res) {
+        if (!res.ok) throw new Error(res.status);
+        form.reset();
+        showToast();
+      }).catch(function () {
+        showToast('that didn\'t send — please email info@havenphl.org instead.');
+      }).then(function () {
+        if (button) { button.disabled = false; button.textContent = button.dataset.label; }
+      });
     });
   }
 
-  function showToast() {
+  function showToast(message) {
     if (!toast) return;
+    if (message) toast.textContent = message;
     toast.classList.add('is-visible');
     window.clearTimeout(toastTimer);
     toastTimer = window.setTimeout(function () {
