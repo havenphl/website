@@ -97,12 +97,12 @@
     <!-- Submissions go to Formspree, which forwards them to info@havenphl.org. -->
     <form class="card card--lg form" id="contactForm" novalidate
           action="https://formspree.io/f/xjyvgqpl" method="POST">
-      <!-- Formspree reads these: reply straight to the sender, and label the
-           email so it is obvious in the inbox. _gotcha is a honeypot — a real
-           person never sees it, so anything that fills it in is a bot. -->
+      <!-- Labels the email so it stands out in the inbox. No honeypot here:
+           Formspree answers 200 OK and then silently discards anything with a
+           filled _gotcha, and browsers were autofilling the hidden field — so a
+           submission looked successful but never arrived. Formspree does its own
+           spam filtering server-side. -->
       <input type="hidden" name="_subject" value="New message from havenphl.org">
-      <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true"
-             style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0">
       <div class="form__row">
         <div class="field" id="field-name">
           <label for="name">your name</label>
@@ -112,7 +112,7 @@
 
         <div class="field" id="field-email">
           <label for="email">email</label>
-          <input id="email" name="_replyto" type="email" autocomplete="email" placeholder="you@example.com">
+          <input id="email" name="email" type="email" autocomplete="email" placeholder="you@example.com">
           <span class="field__error" id="err-email">that email doesn't look quite right.</span>
         </div>
       </div>
