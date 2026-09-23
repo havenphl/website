@@ -816,16 +816,17 @@ select:focus-visible {
   gap: var(--space-3);
   max-width: 72ch;
 }
-/* Advisor matches the directors' green; the Penn GSE title sits quieter in
-   cream, so the two tags read as role and affiliation rather than competing */
+/* Advisor keeps the directors' green; the Penn GSE title sits quieter in cream.
+   Both need more horizontal padding than a short tag: the pill's cap radius is
+   half its height, so at the default padding the curve clips the first and last
+   words. */
 .team__card--wide .tag {
+  padding: 3px var(--space-5);
   background: var(--paper-cream);
-  border-color: var(--border-soft);
   color: var(--ink-soft);
 }
 .team__card--wide .tag--advisor {
   background: var(--green-soft);
-  border-color: var(--border-ink);
   color: var(--text-heading);
 }
 /* two tags on the advisor card — they wrap rather than stretch the card */
