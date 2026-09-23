@@ -789,7 +789,10 @@ select:focus-visible {
 }
 .team__card--wide .team__photo {
   flex: 0 0 auto;
-  width: 190px;
+  /* exactly as wide as a director's photo: this card spans all three grid
+     columns, so one column of its content box is 100%/3, less the card padding
+     a narrow card would have on either side */
+  width: calc(100% / 3 - var(--space-6) * 2);
   margin-bottom: 0;
 }
 .team__card--wide .team__card-body {
