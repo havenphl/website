@@ -799,6 +799,9 @@ select:focus-visible {
   max-width: 72ch;
 }
 .team__card--wide .tag { background: var(--pink-soft); }
+/* two tags on the advisor card — they wrap rather than stretch the card */
+.team__tags { display: flex; flex-wrap: wrap; gap: var(--space-2); }
+.team__card--wide .team__tags .tag { align-self: flex-start; }
 /* childhood photos, square so the three cards line up whatever the original
    aspect ratio was */
 .team__photo {
