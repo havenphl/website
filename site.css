@@ -782,13 +782,21 @@ select:focus-visible {
    looseleaf, so the grid gives it every column */
 .team__card--wide {
   grid-column: 1 / -1;
-  align-items: center;
+  /* photo beside the text rather than above it, since the card is wide */
+  flex-direction: row;
+  align-items: flex-start;
+  gap: var(--space-6);
+}
+.team__card--wide .team__photo {
+  flex: 0 0 auto;
+  width: 190px;
+  margin-bottom: 0;
 }
 .team__card--wide .team__card-body {
   display: flex;
   flex-direction: column;
   gap: var(--space-3);
-  max-width: 78ch;
+  max-width: 72ch;
 }
 .team__card--wide .tag { background: var(--pink-soft); }
 /* childhood photos, square so the three cards line up whatever the original
