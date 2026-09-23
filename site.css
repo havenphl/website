@@ -777,6 +777,20 @@ select:focus-visible {
 .team__card { display: flex; flex-direction: column; gap: var(--space-3); }
 .team__card h3 { font-size: var(--text-heading-lg); }
 .team__card .tag { align-self: flex-start; background: var(--green-soft); }
+
+/* the advisor sits below the three directors and runs the full width of the
+   looseleaf, so the grid gives it every column */
+.team__card--wide {
+  grid-column: 1 / -1;
+  align-items: center;
+}
+.team__card--wide .team__card-body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  max-width: 78ch;
+}
+.team__card--wide .tag { background: var(--pink-soft); }
 /* childhood photos, square so the three cards line up whatever the original
    aspect ratio was */
 .team__photo {
