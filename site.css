@@ -822,11 +822,13 @@ select:focus-visible {
 .team__card--wide .tag {
   padding: 3px var(--space-5);
   background: var(--pink-soft);
-}
-.team__card--wide .tag--advisor {
-  background: var(--green-soft);
   color: var(--text-heading);
 }
+.team__card--wide .tag--advisor { background: var(--green-soft); }
+
+/* the card has its own white ground, so the looseleaf ruling never shows
+   through it — the blurb can close up tighter than the page's baseline grid */
+.team__card--wide .team__card-body p { line-height: var(--leading-snug); }
 /* two tags on the advisor card — they wrap rather than stretch the card */
 .team__tags { display: flex; flex-wrap: wrap; gap: var(--space-2); }
 .team__card--wide .team__tags .tag { align-self: flex-start; }
