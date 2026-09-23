@@ -782,9 +782,10 @@ select:focus-visible {
    looseleaf, so the grid gives it every column */
 .team__card--wide {
   grid-column: 1 / -1;
-  /* photo beside the text rather than above it, since the card is wide */
+  /* photo beside the text rather than above it, since the card is wide.
+     stretch, so the photo and the text finish on the same line */
   flex-direction: row;
-  align-items: flex-start;
+  align-items: stretch;
   gap: var(--space-6);
 }
 .team__card--wide .team__photo {
@@ -793,6 +794,13 @@ select:focus-visible {
      columns, so one column of its content box is 100%/3, less the card padding
      a narrow card would have on either side */
   width: calc(100% / 3 - var(--space-6) * 2);
+  /* fill the card's height so the bottom edge lines up with the last line of
+     text; the crop keeps her face rather than the frame */
+  height: auto;
+  align-self: stretch;
+  aspect-ratio: auto;
+  object-fit: cover;
+  object-position: 50% 35%;
   margin-bottom: 0;
 }
 .team__card--wide .team__card-body {
