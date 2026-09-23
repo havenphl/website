@@ -800,7 +800,7 @@ select:focus-visible {
   align-self: stretch;
   aspect-ratio: auto;
   object-fit: cover;
-  object-position: 50% 35%;
+  object-position: 50% 30%;
   margin-bottom: 0;
 }
 .team__card--wide .team__card-body {
