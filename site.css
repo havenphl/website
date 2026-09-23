@@ -788,16 +788,23 @@ select:focus-visible {
   align-items: stretch;
   gap: var(--space-6);
 }
-.team__card--wide .team__photo {
+/* The frame takes its width from the grid and its height from the text beside
+   it, and the photo fills it absolutely. Stretching the <img> directly let its
+   own aspect ratio drive the card, so the picture ran longer than the words. */
+.team__card--wide .team__photo-frame {
+  position: relative;
   flex: 0 0 auto;
   /* exactly as wide as a director's photo: this card spans all three grid
      columns, so one column of its content box is 100%/3, less the card padding
      a narrow card would have on either side */
   width: calc(100% / 3 - var(--space-6) * 2);
-  /* fill the card's height so the bottom edge lines up with the last line of
-     text; the crop keeps her face rather than the frame */
-  height: auto;
   align-self: stretch;
+}
+.team__card--wide .team__photo {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
   aspect-ratio: auto;
   object-fit: cover;
   object-position: 50% 30%;
