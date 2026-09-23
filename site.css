@@ -816,9 +816,18 @@ select:focus-visible {
   gap: var(--space-3);
   max-width: 72ch;
 }
-.team__card--wide .tag { background: var(--pink-soft); }
-/* the Advisor tag matches the directors' green; the Penn GSE role stays pink */
-.team__card--wide .tag--advisor { background: var(--green-soft); }
+/* Advisor matches the directors' green; the Penn GSE title sits quieter in
+   cream, so the two tags read as role and affiliation rather than competing */
+.team__card--wide .tag {
+  background: var(--paper-cream);
+  border-color: var(--border-soft);
+  color: var(--ink-soft);
+}
+.team__card--wide .tag--advisor {
+  background: var(--green-soft);
+  border-color: var(--border-ink);
+  color: var(--text-heading);
+}
 /* two tags on the advisor card — they wrap rather than stretch the card */
 .team__tags { display: flex; flex-wrap: wrap; gap: var(--space-2); }
 .team__card--wide .team__tags .tag { align-self: flex-start; }
@@ -2087,6 +2096,15 @@ select:focus-visible {
   .listen__grid,
   .contact__grid { grid-template-columns: 1fr; }
   .pillars, .involve, .team, .week, .serves { grid-template-columns: 1fr; }
+  /* the advisor card stacks; the frame needs its own height once it is no
+     longer being stretched by the text beside it */
+  .team__card--wide { flex-direction: column; }
+  .team__card--wide .team__photo-frame {
+    width: 100%;
+    aspect-ratio: 1;
+    align-self: auto;
+    margin-bottom: var(--space-2);
+  }
   /* a broadsheet does not fit on a phone — stack the rails under the lead */
   .newsprint__page { grid-template-columns: 1fr; }
   .newsprint__lead { order: -1; padding: 0 0 var(--space-5); border-left: none; }
