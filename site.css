@@ -778,6 +778,20 @@ select:focus-visible {
 .team__card h3 { font-size: var(--text-heading-lg); }
 .team__card .tag { align-self: flex-start; background: var(--green-soft); }
 
+/* the address closes each card. margin-top:auto pushes it to the bottom, so
+   the three line up even though the bios run to different lengths */
+.team__email {
+  margin-top: auto;
+  padding-top: var(--space-3);
+  border-top: 2px dashed var(--border-soft);
+  font-family: var(--font-hand);
+  font-size: var(--text-body-sm);
+  color: var(--ink-soft);
+  text-decoration: none;
+  overflow-wrap: anywhere;      /* dleohansson@ is long in a narrow card */
+}
+.team__email:hover { color: var(--green-deep); text-decoration: underline; text-underline-offset: 3px; }
+
 /* the advisor sits below the three directors and runs the full width of the
    looseleaf, so the grid gives it every column */
 .team__card--wide {
