@@ -778,19 +778,26 @@ select:focus-visible {
 .team__card h3 { font-size: var(--text-heading-lg); }
 .team__card .tag { align-self: flex-start; background: var(--green-soft); }
 
-/* the address closes each card. margin-top:auto pushes it to the bottom, so
-   the three line up even though the bios run to different lengths */
+/* the address sits under the role as a pink button, shaped like the role tag
+   beside it so the two read as a pair */
 .team__email {
-  margin-top: auto;
-  padding-top: var(--space-3);
-  border-top: 2px dashed var(--border-soft);
+  align-self: flex-start;
+  display: inline-block;
+  padding: 2px var(--space-3);
+  border: 2px solid var(--ink);
+  border-radius: var(--radius-pill);
+  background: var(--pink-soft);
   font-family: var(--font-hand);
   font-size: var(--text-body-sm);
-  color: var(--ink-soft);
+  color: var(--text-heading);
   text-decoration: none;
   overflow-wrap: anywhere;      /* dleohansson@ is long in a narrow card */
+  transition: transform 140ms var(--ease-out), box-shadow 140ms var(--ease-out);
 }
-.team__email:hover { color: var(--green-deep); text-decoration: underline; text-underline-offset: 3px; }
+.team__email:hover {
+  transform: translateY(-2px) rotate(-1.2deg);
+  box-shadow: 2px 3px 0 var(--ink);
+}
 
 /* the advisor sits below the three directors and runs the full width of the
    looseleaf, so the grid gives it every column */
