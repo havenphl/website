@@ -62,49 +62,47 @@ a { color: inherit; }
 
 /* ==========================================================================
    TURNING THE PAGE
-   Moving between pages reads as turning a leaf of the notebook: the page you
-   are leaving swings away on its left edge while the next one settles under
-   it. This uses cross-document view transitions, so there is no JavaScript
-   and no interception of links — browsers without support simply navigate
-   instantly, exactly as before.
+   Moving between pages turns a leaf of the notebook: the sheet you are leaving
+   lifts at its right edge and sweeps left, pivoting on the binding, while the
+   next page lies waiting underneath. Cross-document view transitions, so no
+   JavaScript and no intercepting of links — browsers without support simply
+   navigate instantly, exactly as before.
    ========================================================================== */
 @view-transition { navigation: auto; }
 
-::view-transition-group(root) { animation-duration: 520ms; }
+::view-transition-group(root) { animation-duration: 760ms; }
 
+/* the leaving page is the leaf being turned */
 ::view-transition-old(root) {
-  z-index: 2;                       /* the leaving page lifts over the new one */
+  z-index: 2;
   transform-origin: left center;
-  animation: page-turn-out 520ms cubic-bezier(.45, 0, .25, 1) both;
+  backface-visibility: hidden;      /* once past upright it is gone, not mirrored */
+  animation: page-flip 760ms cubic-bezier(.36, .06, .28, 1) both;
 }
+
+/* the arriving page simply lies there and is uncovered */
 ::view-transition-new(root) {
   z-index: 1;
-  transform-origin: left center;
-  animation: page-turn-in 520ms cubic-bezier(.3, 0, .2, 1) both;
+  animation: page-underneath 760ms linear both;
 }
 
-@keyframes page-turn-out {
-  from {
-    transform: perspective(1800px) rotateY(0deg);
-    opacity: 1;
-    filter: brightness(1);
+@keyframes page-flip {
+  0% {
+    transform: perspective(2200px) rotateY(0deg);
+    filter: brightness(1) drop-shadow(0 0 0 rgba(74, 64, 50, 0));
   }
-  to {
-    transform: perspective(1800px) rotateY(-14deg) translateX(-2%);
-    opacity: 0;
-    filter: brightness(.94);        /* the leaf catches a little shade as it lifts */
+  35% {
+    /* the sheet is well off the page here and catches a shadow under it */
+    filter: brightness(.95) drop-shadow(-18px 10px 22px rgba(74, 64, 50, .34));
+  }
+  100% {
+    transform: perspective(2200px) rotateY(-118deg);
+    filter: brightness(.74) drop-shadow(-30px 14px 30px rgba(74, 64, 50, .26));
   }
 }
 
-@keyframes page-turn-in {
-  from {
-    transform: perspective(1800px) rotateY(7deg) translateX(1.5%);
-    opacity: 0;
-  }
-  to {
-    transform: perspective(1800px) rotateY(0deg) translateX(0);
-    opacity: 1;
-  }
+@keyframes page-underneath {
+  from, to { opacity: 1; }          /* hold it visible rather than cross-fading */
 }
 
 /* someone who prefers less motion just gets the next page */
