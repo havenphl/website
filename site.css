@@ -146,6 +146,9 @@ body.is-loading { overflow: hidden; }
    THE NOTEBOOK COVER  (loading screen)
    ========================================================================== */
 .book { display: none; }
+/* the cover has already been opened this visit — never render it again */
+.has-opened .book,
+.js.has-opened .book { display: none !important; }
 
 .js .book {
   display: grid;
@@ -1215,7 +1218,11 @@ select:focus-visible {
    off, so the artwork fills the box instead of floating in 35% empty space. */
 .hero__art-card.art-bare {
   max-width: 100%;
-  align-self: start;    /* its top lines up with the first line of the headline */
+  align-self: start;
+  /* Nudge the logo down so its top edge meets the cap height of the headline
+     rather than the top of its line box — a line of display type carries a
+     good deal of empty space above the letters. One number to tune. */
+  margin-top: var(--logo-drop, 34px);
 }
 
 .cutout {

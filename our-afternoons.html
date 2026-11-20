@@ -32,6 +32,12 @@ try {
   if (sessionStorage.getItem('haven-turn')) {
     document.documentElement.className += ' is-arriving';
   }
+  /* The cover only plays once per visit. Without this the markup still renders
+     it for a frame on every later page before site.js can remove it, which
+     flashes the HAVEN label. */
+  if (sessionStorage.getItem('haven-opened')) {
+    document.documentElement.className += ' has-opened';
+  }
 } catch (e) { /* private browsing — just load normally */ }
 </script>
 </head>
