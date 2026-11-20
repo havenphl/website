@@ -701,7 +701,7 @@ select:focus-visible {
 .hero__actions { display: flex; flex-wrap: wrap; gap: var(--space-4); align-items: center; }
 .hero__note { font-size: var(--text-body-sm); color: var(--ink-soft); margin-top: var(--space-4); }
 
-.hero__art { position: relative; display: grid; justify-items: start; align-items: center; align-self: center; }
+.hero__art { position: relative; display: grid; justify-items: start; align-content: start; align-self: start; }
 .hero__art-card {
   background: #fff;
   border: 2.5px solid var(--ink);
@@ -1215,7 +1215,7 @@ select:focus-visible {
    off, so the artwork fills the box instead of floating in 35% empty space. */
 .hero__art-card.art-bare {
   max-width: 100%;
-  align-self: center;   /* sits level with the headline and paragraph */
+  align-self: start;    /* its top lines up with the first line of the headline */
 }
 
 .cutout {
@@ -1287,6 +1287,78 @@ select:focus-visible {
 .problem__quote figcaption {
   margin-top: var(--space-4);
   color: var(--ink-soft);
+}
+
+/* ==========================================================================
+   SNAPSHOTS — photographs taped into the notebook under the logo
+   Each one is a print on white stock with a handwritten caption beneath, sat
+   at its own slight angle with a scrap of washi across a corner, the way a
+   photo gets stuck into a scrapbook.
+   ========================================================================== */
+.snaps {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-6);
+  justify-content: center;
+  margin: var(--space-7) 0 0;
+  padding: 0;
+  list-style: none;
+}
+.snaps__item {
+  position: relative;
+  width: min(100%, 300px);
+  padding: var(--space-3) var(--space-3) var(--space-2);
+  background: #fffdf8;
+  box-shadow: 2px 4px 10px rgba(74, 64, 50, .22);
+}
+.snaps__item img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  display: block;
+}
+.snaps__caption {
+  display: block;
+  padding-top: var(--space-2);
+  font-family: var(--font-hand);
+  font-size: var(--text-body-sm);
+  line-height: var(--leading-snug);
+  color: var(--ink-soft);
+  text-align: center;
+}
+
+/* a scrap of washi holding each print down, torn at both ends */
+.snaps__item::before {
+  content: '';
+  position: absolute;
+  top: -13px;
+  left: 50%;
+  width: 84px;
+  height: 30px;
+  background-image: url('assets/textures/tape-pink.jpg');
+  background-size: cover;
+  background-position: center;
+  clip-path: polygon(
+    3px 0%, calc(100% - 3px) 0%,
+    calc(100% - 6px) 24%, 100% 50%,
+    calc(100% - 5px) 74%, calc(100% - 3px) 100%,
+    3px 100%, 5px 76%, 0px 50%, 4px 26%
+  );
+  filter: drop-shadow(1px 2px 2px rgba(74, 64, 50, .28));
+  transform: translateX(-50%) rotate(-4deg);
+}
+
+/* each print sits at its own angle; the tape alternates roll and lean */
+.snaps__item--a { transform: rotate(-2.2deg); }
+.snaps__item--b { transform: rotate(1.8deg); }
+.snaps__item--c { transform: rotate(-1.1deg); }
+.snaps__item--b::before {
+  background-image: url('assets/textures/tape-gingham-yellow-brand.jpg');
+  transform: translateX(-50%) rotate(5deg);
+}
+.snaps__item--c::before {
+  background-image: url('assets/textures/tape-green-gingham.jpg');
+  transform: translateX(-50%) rotate(-2deg);
 }
 
 /* ==========================================================================
