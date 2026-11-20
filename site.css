@@ -68,10 +68,11 @@ a { color: inherit; }
    no cursor to replace — and never when less motion is asked for.
    ========================================================================== */
 @media (hover: hover) and (pointer: fine) {
-  .js body { cursor: url('assets/shapes/crayon-cursor.png') 12 38, auto; }
-  /* text and controls keep the cursor that tells you what they do */
+  /* on <html> as well as <body>, so there is no strip of page — margins,
+     the scrollbar gutter — where the pointer reverts to an arrow */
+  .js, .js body { cursor: url('assets/shapes/crayon-cursor.png') 3 27, auto; }
   .js a, .js button, .js [role="button"], .js summary, .js label {
-    cursor: url('assets/shapes/crayon-cursor.png') 12 38, pointer;
+    cursor: url('assets/shapes/crayon-cursor.png') 3 27, pointer;
   }
   .js input, .js textarea, .js select { cursor: auto; }
 }
@@ -79,7 +80,7 @@ a { color: inherit; }
 .scribble {
   position: fixed;
   inset: 0;
-  z-index: 150;                  /* over the page, under the turning leaf */
+  z-index: 170;                  /* over the page, under the turning leaf */
   pointer-events: none;          /* never intercepts a click */
 }
 

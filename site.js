@@ -160,7 +160,9 @@
     var canvas = document.createElement('canvas');
     canvas.className = 'scribble';
     canvas.setAttribute('aria-hidden', 'true');
-    document.body.appendChild(canvas);
+    /* on <html>, not <body>: body carries overflow-x: hidden, and putting a
+       fixed canvas inside a clipping box invites trouble */
+    document.documentElement.appendChild(canvas);
 
     var ctx = canvas.getContext('2d');
     var dpr = Math.min(window.devicePixelRatio || 1, 2);
@@ -177,8 +179,8 @@
     size();
     window.addEventListener('resize', size);
 
-    document.addEventListener('pointermove', function (e) {
-      if (e.pointerType && e.pointerType !== 'mouse') return;
+    function track(e) {
+      if (e.pointerType && e.pointerType === 'touch') return;
       var p = { x: e.clientX, y: e.clientY };
       if (last) {
         var dx = p.x - last.x, dy = p.y - last.y;
@@ -191,7 +193,10 @@
         last = p;
       }
       if (marks.length > 220) marks.shift();
-    });
+    }
+    // pointermove where it exists, mousemove as the fallback
+    if (window.PointerEvent) document.addEventListener('pointermove', track);
+    else document.addEventListener('mousemove', track);
 
     // a crayon lays down an uneven, slightly grainy line
     function stroke(m) {
