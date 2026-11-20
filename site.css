@@ -1322,7 +1322,7 @@ select:focus-visible {
 /* each print after the first lies corner-over-corner on the one before:
    shifted right and down, so its top-left corner covers the other's
    bottom-right, the way photos land when you drop them on a page */
-.snaps__item + .snaps__item { margin-left: -16%; }
+.snaps__item + .snaps__item { margin-left: -9%; }
 .snaps__item img {
   width: 100%;
   aspect-ratio: 4 / 3;
@@ -1353,8 +1353,8 @@ select:focus-visible {
 
 /* angle, depth and a different roll of tape for each */
 .snaps__item--a { transform: rotate(-6.5deg); z-index: 1; }
-.snaps__item--b { transform: rotate(5.5deg); z-index: 2; margin-top: 46px; }
-.snaps__item--c { transform: rotate(-4deg); z-index: 3; margin-top: 92px; }
+.snaps__item--b { transform: rotate(5.5deg); z-index: 2; margin-top: 34px; }
+.snaps__item--c { transform: rotate(-4deg); z-index: 3; margin-top: 68px; }
 .snaps__item--b::before {
   background-image: url('assets/textures/tape-gingham-yellow-brand.jpg');
   transform: translateX(-50%) rotate(5deg);
