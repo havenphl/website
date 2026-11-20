@@ -68,13 +68,14 @@ a { color: inherit; }
    no cursor to replace — and never when less motion is asked for.
    ========================================================================== */
 @media (hover: hover) and (pointer: fine) {
-  /* on <html> as well as <body>, so there is no strip of page — margins,
-     the scrollbar gutter — where the pointer reverts to an arrow */
-  .js, .js body { cursor: url('assets/shapes/crayon-cursor.png') 3 27, auto; }
-  .js a, .js button, .js [role="button"], .js summary, .js label {
-    cursor: url('assets/shapes/crayon-cursor.png') 3 27, pointer;
+  /* One declaration for the whole page, and !important so nothing can change
+     it. The buttons and the nav toggle set cursor: pointer of their own, and
+     every time the computed cursor changes the browser re-resolves the image
+     — which is what made the crayon flicker as the pointer crossed the page.
+     Form fields are the one exception: a text caret there is worth more. */
+  .js, .js *:not(input):not(textarea):not(select) {
+    cursor: url('assets/shapes/crayon-cursor.png') 3 27, auto !important;
   }
-  .js input, .js textarea, .js select { cursor: auto; }
 }
 
 .scribble {
