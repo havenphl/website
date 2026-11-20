@@ -1308,7 +1308,7 @@ select:focus-visible {
   justify-content: center;
   align-items: flex-start;
   margin: var(--space-6) 0 0;
-  padding: 0 0 var(--space-4);
+  padding: 0 0 var(--space-6);
   list-style: none;
 }
 .snaps__item {
@@ -1318,8 +1318,10 @@ select:focus-visible {
   background: #fffdf8;
   box-shadow: 2px 4px 12px rgba(74, 64, 50, .26);
 }
-/* each print after the first tucks back under the one before it */
-.snaps__item + .snaps__item { margin-left: -14%; }
+/* each print after the first lies corner-over-corner on the one before:
+   shifted right and down, so its top-left corner covers the other's
+   bottom-right, the way photos land when you drop them on a page */
+.snaps__item + .snaps__item { margin-left: -16%; }
 .snaps__item img {
   width: 100%;
   aspect-ratio: 4 / 3;
@@ -1350,8 +1352,8 @@ select:focus-visible {
 
 /* angle, depth and a different roll of tape for each */
 .snaps__item--a { transform: rotate(-6.5deg); z-index: 1; }
-.snaps__item--b { transform: rotate(5.5deg); z-index: 2; margin-top: var(--space-5); }
-.snaps__item--c { transform: rotate(-4deg); z-index: 3; }
+.snaps__item--b { transform: rotate(5.5deg); z-index: 2; margin-top: 46px; }
+.snaps__item--c { transform: rotate(-4deg); z-index: 3; margin-top: 92px; }
 .snaps__item--b::before {
   background-image: url('assets/textures/tape-gingham-yellow-brand.jpg');
   transform: translateX(-50%) rotate(5deg);
