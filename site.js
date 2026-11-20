@@ -10,23 +10,26 @@
   var comic = document.querySelector('.comic');
   var puzzle = document.querySelector('.puzzle');
 
-  // Hold the strip hidden only if we can actually draw it on. Any browser
-  // without IntersectionObserver, or anyone who prefers less motion, sees the
-  // finished strip instead of a blank space.
-  if (comic && !reduced && 'IntersectionObserver' in window) {
-    comic.classList.add('is-armed');
+  /* CSS hides the drawn artwork from the very first paint whenever JS is
+     present, so nothing flashes finished in the gap before the animation is
+     armed. Anything we cannot animate must therefore be told to show itself.
+     The drawing itself waits for a scroll trigger — and on the home page, for
+     the notebook cover to be out of the way. */
+  var canAnimate = !reduced && 'IntersectionObserver' in window;
+
+  function arm(el) {
+    if (!el) return;
+    el.classList.add(canAnimate ? 'is-armed' : 'is-shown');
   }
-  if (puzzle && !reduced && 'IntersectionObserver' in window) {
-    puzzle.classList.add('is-armed');
+  function reveal(el) {
+    if (!el || !el.classList.contains('is-armed')) return;
+    el.classList.remove('is-armed');
+    el.classList.add('is-shown');
   }
 
-  // Hide it straight away so it can't flash in finished, but hold the drawing
-  // until watchLogo() is called — on the home page that happens once the
-  // notebook cover is out of the way, otherwise the logo would draw itself
-  // behind the cover and be over before anyone saw it.
-  if (logo && !reduced && 'IntersectionObserver' in window) {
-    logo.classList.add('is-armed');
-  }
+  arm(logo);
+  arm(comic);
+  arm(puzzle);
 
 
   /* --- the notebook opens -------------------------------------------------
@@ -225,7 +228,7 @@
 
     // if anything stalls, show the finished logo rather than leaving it blank
     window.setTimeout(function () {
-      if (logo.classList.contains('is-armed')) logo.classList.remove('is-armed');
+      reveal(logo);
     }, 6000);
   }
 
@@ -248,7 +251,7 @@
 
     // if anything stalls, show the finished strip rather than leaving a hole
     window.setTimeout(function () {
-      if (comic.classList.contains('is-armed')) comic.classList.remove('is-armed');
+      reveal(comic);
     }, 6000);
   }
 
@@ -271,7 +274,7 @@
 
     // if anything stalls, show the finished board rather than a hole
     window.setTimeout(function () {
-      if (puzzle.classList.contains('is-armed')) puzzle.classList.remove('is-armed');
+      reveal(puzzle);
     }, 6000);
   }
 

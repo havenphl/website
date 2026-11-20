@@ -1386,6 +1386,16 @@ select:focus-visible {
 /* armed, waiting to be scrolled to: nothing showing yet */
 .logo-draw.is-armed .ld-fill { opacity: 0; }
 
+/* Hidden from the first paint, so the finished artwork never flashes in the
+   gap between the page rendering and site.js arming the animation. Gated on
+   .js, and if the script then finds it cannot animate it adds .is-shown. */
+.js .logo-draw .ld-fill,
+.js .comic .ink__s,
+.js .puzzle .pz-cell { opacity: 0; }
+.logo-draw.is-shown .ld-fill,
+.comic.is-shown .ink__s,
+.puzzle.is-shown .pz-cell { opacity: 1; }
+
 .logo-draw.is-drawing .ld-ink {
   opacity: 1;
   stroke-dasharray: 1;
@@ -1411,6 +1421,7 @@ select:focus-visible {
 
 @media (prefers-reduced-motion: reduce) {
   .logo-draw.is-armed .ld-fill,
+  .js .logo-draw .ld-fill,
   .logo-draw.is-drawing .ld-fill { opacity: 1; animation: none; }
   .logo-draw .ld-ink { opacity: 0; animation: none; }
 }
@@ -1764,6 +1775,7 @@ select:focus-visible {
 /* the frames are simply there — only the drawings are drawn on.
    Each mark: outline first, fill arriving behind it as it lands. */
 .comic.is-drawing .ink__s {
+  opacity: 1;
   fill: none;
   stroke: #1a1a18;
   stroke-width: 3;
@@ -1799,7 +1811,8 @@ select:focus-visible {
 
 /* someone who prefers less motion just gets the finished strip */
 @media (prefers-reduced-motion: reduce) {
-  .comic.is-armed .ink__s { opacity: 1; }
+  .comic.is-armed .ink__s,
+  .js .comic .ink__s { opacity: 1; }
   .comic.is-drawing .ink__s { animation: none; }
   .comic.is-drawing .ink__s { fill: #1a1a18; stroke: none; }
 }
@@ -2161,7 +2174,8 @@ select:focus-visible {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .puzzle.is-armed .pz-cell { opacity: 1; }
+  .puzzle.is-armed .pz-cell,
+  .js .puzzle .pz-cell { opacity: 1; }
   .puzzle.is-solving .pz-cell { animation: none; }
 }
 
