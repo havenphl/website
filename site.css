@@ -1298,40 +1298,33 @@ select:focus-visible {
 
 /* ==========================================================================
    SNAPSHOTS — photographs taped into the notebook under the logo
-   Each one is a print on white stock with a handwritten caption beneath, sat
-   at its own slight angle with a scrap of washi across a corner, the way a
-   photo gets stuck into a scrapbook.
+   Prints on white stock, each at its own angle with a scrap of washi across
+   the top, overlapped like a handful of photos dropped onto the page so the
+   pile stays shallow rather than running down the margin.
    ========================================================================== */
 .snaps {
   display: flex;
   flex-wrap: wrap;
-  gap: var(--space-6);
   justify-content: center;
-  margin: var(--space-7) 0 0;
-  padding: 0;
+  align-items: flex-start;
+  margin: var(--space-6) 0 0;
+  padding: 0 0 var(--space-4);
   list-style: none;
 }
 .snaps__item {
   position: relative;
-  width: min(100%, 300px);
-  padding: var(--space-3) var(--space-3) var(--space-2);
+  width: min(62%, 252px);
+  padding: var(--space-3) var(--space-3) var(--space-4);
   background: #fffdf8;
-  box-shadow: 2px 4px 10px rgba(74, 64, 50, .22);
+  box-shadow: 2px 4px 12px rgba(74, 64, 50, .26);
 }
+/* each print after the first tucks back under the one before it */
+.snaps__item + .snaps__item { margin-left: -14%; }
 .snaps__item img {
   width: 100%;
   aspect-ratio: 4 / 3;
   object-fit: cover;
   display: block;
-}
-.snaps__caption {
-  display: block;
-  padding-top: var(--space-2);
-  font-family: var(--font-hand);
-  font-size: var(--text-body-sm);
-  line-height: var(--leading-snug);
-  color: var(--ink-soft);
-  text-align: center;
 }
 
 /* a scrap of washi holding each print down, torn at both ends */
@@ -1340,8 +1333,8 @@ select:focus-visible {
   position: absolute;
   top: -13px;
   left: 50%;
-  width: 84px;
-  height: 30px;
+  width: 78px;
+  height: 28px;
   background-image: url('assets/textures/tape-pink.jpg');
   background-size: cover;
   background-position: center;
@@ -1355,10 +1348,10 @@ select:focus-visible {
   transform: translateX(-50%) rotate(-4deg);
 }
 
-/* each print sits at its own angle; the tape alternates roll and lean */
-.snaps__item--a { transform: rotate(-2.2deg); }
-.snaps__item--b { transform: rotate(1.8deg); }
-.snaps__item--c { transform: rotate(-1.1deg); }
+/* angle, depth and a different roll of tape for each */
+.snaps__item--a { transform: rotate(-3deg); z-index: 1; }
+.snaps__item--b { transform: rotate(2.4deg); z-index: 2; margin-top: var(--space-5); }
+.snaps__item--c { transform: rotate(-1.4deg); z-index: 3; }
 .snaps__item--b::before {
   background-image: url('assets/textures/tape-gingham-yellow-brand.jpg');
   transform: translateX(-50%) rotate(5deg);
@@ -1367,6 +1360,13 @@ select:focus-visible {
   background-image: url('assets/textures/tape-green-gingham.jpg');
   transform: translateX(-50%) rotate(-2deg);
 }
+
+/* lift whichever one you point at clear of the pile */
+.snaps__item { transition: transform 180ms var(--ease-out), box-shadow 180ms var(--ease-out); }
+.snaps__item:hover { z-index: 4; box-shadow: 3px 7px 18px rgba(74, 64, 50, .32); }
+.snaps__item--a:hover { transform: rotate(-3deg) translateY(-6px) scale(1.02); }
+.snaps__item--b:hover { transform: rotate(2.4deg) translateY(-6px) scale(1.02); }
+.snaps__item--c:hover { transform: rotate(-1.4deg) translateY(-6px) scale(1.02); }
 
 /* ==========================================================================
    NOTE BOX — a yellow gingham panel for the one line that should read as a
