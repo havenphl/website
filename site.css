@@ -61,35 +61,6 @@ a { color: inherit; }
 }
 
 /* ==========================================================================
-   THE CRAYON
-   The pointer becomes a green crayon and leaves a scribble behind it. The
-   trail is drawn on a canvas that site.js adds, so without JavaScript there
-   is nothing to clean up. Only on devices with a real pointer — a finger has
-   no cursor to replace — and never when less motion is asked for.
-   ========================================================================== */
-@media (hover: hover) and (pointer: fine) {
-  /* One declaration for the whole page, and !important so nothing can change
-     it. The buttons and the nav toggle set cursor: pointer of their own, and
-     every time the computed cursor changes the browser re-resolves the image
-     — which is what made the crayon flicker as the pointer crossed the page.
-     Form fields are the one exception: a text caret there is worth more. */
-  .js, .js *:not(input):not(textarea):not(select) {
-    cursor: url('assets/shapes/crayon-cursor.png') 3 27, auto !important;
-  }
-}
-
-.scribble {
-  position: fixed;
-  inset: 0;
-  z-index: 170;                  /* over the page, under the turning leaf */
-  pointer-events: none;          /* never intercepts a click */
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .scribble { display: none; }
-}
-
-/* ==========================================================================
    TURNING THE PAGE
    A real sheet of looseleaf, swung on its binding the same way the notebook
    cover opens. Leaving a page, the leaf closes over the screen; arriving, it
