@@ -1314,7 +1314,7 @@ select:focus-visible {
 .snaps__item {
   position: relative;
   flex: 0 0 auto;
-  width: min(54%, 208px);
+  width: min(58%, 238px);
   padding: var(--space-3) var(--space-3) var(--space-4);
   background: #fffdf8;
   box-shadow: 2px 4px 12px rgba(74, 64, 50, .26);
