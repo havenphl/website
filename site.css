@@ -61,6 +61,33 @@ a { color: inherit; }
 }
 
 /* ==========================================================================
+   THE CRAYON
+   The pointer becomes a green crayon and leaves a scribble behind it. The
+   trail is drawn on a canvas that site.js adds, so without JavaScript there
+   is nothing to clean up. Only on devices with a real pointer — a finger has
+   no cursor to replace — and never when less motion is asked for.
+   ========================================================================== */
+@media (hover: hover) and (pointer: fine) {
+  .js body { cursor: url('assets/shapes/crayon-cursor.png') 12 38, auto; }
+  /* text and controls keep the cursor that tells you what they do */
+  .js a, .js button, .js [role="button"], .js summary, .js label {
+    cursor: url('assets/shapes/crayon-cursor.png') 12 38, pointer;
+  }
+  .js input, .js textarea, .js select { cursor: auto; }
+}
+
+.scribble {
+  position: fixed;
+  inset: 0;
+  z-index: 150;                  /* over the page, under the turning leaf */
+  pointer-events: none;          /* never intercepts a click */
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scribble { display: none; }
+}
+
+/* ==========================================================================
    TURNING THE PAGE
    A real sheet of looseleaf, swung on its binding the same way the notebook
    cover opens. Leaving a page, the leaf closes over the screen; arriving, it
@@ -1307,7 +1334,7 @@ select:focus-visible {
   flex-wrap: nowrap;              /* they must stay on one line to overlap */
   justify-content: center;
   align-items: flex-start;
-  margin: var(--space-6) 0 0;
+  margin: var(--space-6) 0 0 -18px;   /* the -18px sits them left of centre */
   padding: 0 0 var(--space-6);
   list-style: none;
 }
