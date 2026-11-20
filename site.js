@@ -160,9 +160,13 @@
     var canvas = document.createElement('canvas');
     canvas.className = 'scribble';
     canvas.setAttribute('aria-hidden', 'true');
-    /* on <html>, not <body>: body carries overflow-x: hidden, and putting a
-       fixed canvas inside a clipping box invites trouble */
-    document.documentElement.appendChild(canvas);
+    /* positioned inline as well as in the stylesheet: a canvas parented to
+       <html> rendered unreliably, and relying on the class alone leaves one
+       more thing that can quietly fail */
+    canvas.style.cssText =
+      'position:fixed;top:0;left:0;width:100%;height:100%;' +
+      'z-index:170;pointer-events:none';
+    document.body.appendChild(canvas);
 
     var ctx = canvas.getContext('2d');
     var dpr = Math.min(window.devicePixelRatio || 1, 2);
@@ -174,6 +178,8 @@
       canvas.height = Math.floor(window.innerHeight * dpr);
       canvas.style.width = window.innerWidth + 'px';
       canvas.style.height = window.innerHeight + 'px';
+      canvas.style.left = '0';
+      canvas.style.top = '0';
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     }
     size();
