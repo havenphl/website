@@ -1304,7 +1304,7 @@ select:focus-visible {
    ========================================================================== */
 .snaps {
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;              /* they must stay on one line to overlap */
   justify-content: center;
   align-items: flex-start;
   margin: var(--space-6) 0 0;
@@ -1313,7 +1313,8 @@ select:focus-visible {
 }
 .snaps__item {
   position: relative;
-  width: min(62%, 252px);
+  flex: 0 0 auto;
+  width: min(54%, 208px);
   padding: var(--space-3) var(--space-3) var(--space-4);
   background: #fffdf8;
   box-shadow: 2px 4px 12px rgba(74, 64, 50, .26);
