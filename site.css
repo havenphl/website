@@ -62,53 +62,57 @@ a { color: inherit; }
 
 /* ==========================================================================
    TURNING THE PAGE
-   Moving between pages turns a leaf of the notebook: the sheet you are leaving
-   lifts at its right edge and sweeps left, pivoting on the binding, while the
-   next page lies waiting underneath. Cross-document view transitions, so no
-   JavaScript and no intercepting of links — browsers without support simply
-   navigate instantly, exactly as before.
+   A real sheet of looseleaf, swung on its binding the same way the notebook
+   cover opens. Leaving a page, the leaf closes over the screen; arriving, it
+   swings back off. Driven by site.js — without JavaScript the .leaf never
+   gets a class and navigation is ordinary.
    ========================================================================== */
-@view-transition { navigation: auto; }
+.leaf {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 180;
+  perspective: 2400px;
+  pointer-events: none;
+}
+.leaf.is-closing,
+.leaf.is-opening,
+.is-arriving .leaf { display: block; }
 
-::view-transition-group(root) { animation-duration: 760ms; }
-
-/* the leaving page is the leaf being turned */
-::view-transition-old(root) {
-  z-index: 2;
+.leaf__sheet {
+  position: absolute;
+  inset: 0;
   transform-origin: left center;
-  backface-visibility: hidden;      /* once past upright it is gone, not mirrored */
-  animation: page-flip 760ms cubic-bezier(.36, .06, .28, 1) both;
+  backface-visibility: hidden;
+  /* the same ruled paper as the page underneath the notebook cover */
+  background-color: #fffdf8;
+  background-image:
+    linear-gradient(to right, transparent 0 7%, rgba(212,81,74,.45) 7% calc(7% + 2px), transparent calc(7% + 2px)),
+    repeating-linear-gradient(to bottom, transparent 0 29px, rgba(123,161,93,.26) 29px 30px);
+  box-shadow: 0 0 60px rgba(74,64,50,.35);
 }
 
-/* the arriving page simply lies there and is uncovered */
-::view-transition-new(root) {
-  z-index: 1;
-  animation: page-underneath 760ms linear both;
+/* resting positions: open is swung away to the left, closed lies flat */
+.leaf.is-closing .leaf__sheet {
+  animation: leaf-close 440ms cubic-bezier(.5, 0, .35, 1) both;
+}
+.is-arriving .leaf__sheet { transform: rotateY(0deg); }
+.leaf.is-opening .leaf__sheet {
+  animation: leaf-open 560ms cubic-bezier(.4, .02, .2, 1) both;
 }
 
-@keyframes page-flip {
-  0% {
-    transform: perspective(2200px) rotateY(0deg);
-    filter: brightness(1) drop-shadow(0 0 0 rgba(74, 64, 50, 0));
-  }
-  35% {
-    /* the sheet is well off the page here and catches a shadow under it */
-    filter: brightness(.95) drop-shadow(-18px 10px 22px rgba(74, 64, 50, .34));
-  }
-  100% {
-    transform: perspective(2200px) rotateY(-118deg);
-    filter: brightness(.74) drop-shadow(-30px 14px 30px rgba(74, 64, 50, .26));
-  }
+@keyframes leaf-close {
+  from { transform: rotateY(-125deg); box-shadow: -40px 0 50px rgba(74,64,50,.3); }
+  to   { transform: rotateY(0deg);    box-shadow: 0 0 60px rgba(74,64,50,.35); }
 }
-
-@keyframes page-underneath {
-  from, to { opacity: 1; }          /* hold it visible rather than cross-fading */
+@keyframes leaf-open {
+  from { transform: rotateY(0deg);    box-shadow: 0 0 60px rgba(74,64,50,.35); }
+  to   { transform: rotateY(-125deg); box-shadow: -40px 0 50px rgba(74,64,50,.25); }
 }
 
 /* someone who prefers less motion just gets the next page */
 @media (prefers-reduced-motion: reduce) {
-  ::view-transition-old(root),
-  ::view-transition-new(root) { animation: none; }
+  .leaf, .is-arriving .leaf { display: none; }
 }
 
 /* --- page ----------------------------------------------------------------- */

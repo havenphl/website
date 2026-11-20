@@ -76,6 +76,75 @@
     document.addEventListener('keydown', skipOpening);
   }
 
+  /* --- turning the page ---------------------------------------------------
+     Clicking an internal link swings a sheet of looseleaf shut over the screen,
+     then navigates. The next page knows it is arriving (sessionStorage, read by
+     the inline script in its <head>) so it starts covered and swings the sheet
+     away. Every guard below exists so that normal browser behaviour still wins:
+     new-tab clicks, downloads, anchors and off-site links are left alone.
+  ------------------------------------------------------------------------- */
+  var leaf = document.getElementById('leaf');
+
+  function flag(on) {
+    try {
+      if (on) window.sessionStorage.setItem('haven-turn', '1');
+      else window.sessionStorage.removeItem('haven-turn');
+    } catch (e) { /* storage unavailable — the leaf just won't play */ }
+  }
+
+  // arriving: the page is already covered, so swing the sheet off
+  if (leaf && document.documentElement.classList.contains('is-arriving')) {
+    flag(false);
+    if (reduced) {
+      document.documentElement.classList.remove('is-arriving');
+    } else {
+      leaf.classList.add('is-opening');
+      var lift = function () {
+        document.documentElement.classList.remove('is-arriving');
+        leaf.classList.remove('is-opening');
+      };
+      leaf.addEventListener('animationend', lift, { once: true });
+      window.setTimeout(lift, 1200);          // never leave the page covered
+    }
+  }
+
+  // leaving: close the sheet, then follow the link
+  if (leaf && !reduced) {
+    document.addEventListener('click', function (e) {
+      if (e.defaultPrevented || e.button !== 0) return;
+      if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+
+      var a = e.target.closest && e.target.closest('a');
+      if (!a) return;
+      if (a.target && a.target !== '_self') return;
+      if (a.hasAttribute('download')) return;
+
+      var href = a.getAttribute('href') || '';
+      if (!href || href.charAt(0) === '#') return;
+      if (/^(mailto:|tel:|https?:\/\/)/i.test(href)) {
+        // off-site links open normally; same-origin absolute ones may continue
+        if (a.origin !== window.location.origin) return;
+      }
+      if (a.pathname === window.location.pathname && a.hash) return;
+
+      e.preventDefault();
+      flag(true);
+      leaf.classList.add('is-closing');
+
+      var go = function () { window.location.href = a.href; };
+      leaf.addEventListener('animationend', go, { once: true });
+      window.setTimeout(go, 700);             // navigate even if the animation stalls
+    });
+  }
+
+  // coming back via the back button, the page is restored covered — uncover it
+  window.addEventListener('pageshow', function (e) {
+    if (!e.persisted) return;
+    flag(false);
+    document.documentElement.classList.remove('is-arriving');
+    if (leaf) leaf.classList.remove('is-closing', 'is-opening');
+  });
+
   /* --- current year in the footer ---------------------------------------- */
   var year = document.getElementById('year');
   if (year) year.textContent = new Date().getFullYear();

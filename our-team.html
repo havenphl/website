@@ -24,10 +24,22 @@
 <noscript><style>.reveal { opacity: 1 !important; transform: none !important; }</style></noscript>
 <!-- The notebook cover is only shown when JS can also open it again.
      Without this flag it stays hidden and the site loads straight in. -->
-<script>document.documentElement.className += ' js';</script>
+<script>
+document.documentElement.className += ' js';
+/* If we got here by turning a page, cover the screen before the first paint so
+   the leaf can swing away rather than the new page simply appearing. */
+try {
+  if (sessionStorage.getItem('haven-turn')) {
+    document.documentElement.className += ' is-arriving';
+  }
+} catch (e) { /* private browsing — just load normally */ }
+</script>
 </head>
 
 <body class="is-loading">
+
+<!-- the sheet that swings when you turn a page -->
+<div class="leaf" id="leaf" aria-hidden="true"><div class="leaf__sheet"></div></div>
 
 <!-- ============================================== NOTEBOOK COVER ======== -->
 <div class="book" id="book" aria-hidden="true">
