@@ -1349,9 +1349,9 @@ select:focus-visible {
 }
 
 /* angle, depth and a different roll of tape for each */
-.snaps__item--a { transform: rotate(-3deg); z-index: 1; }
-.snaps__item--b { transform: rotate(2.4deg); z-index: 2; margin-top: var(--space-5); }
-.snaps__item--c { transform: rotate(-1.4deg); z-index: 3; }
+.snaps__item--a { transform: rotate(-6.5deg); z-index: 1; }
+.snaps__item--b { transform: rotate(5.5deg); z-index: 2; margin-top: var(--space-5); }
+.snaps__item--c { transform: rotate(-4deg); z-index: 3; }
 .snaps__item--b::before {
   background-image: url('assets/textures/tape-gingham-yellow-brand.jpg');
   transform: translateX(-50%) rotate(5deg);
@@ -1364,9 +1364,9 @@ select:focus-visible {
 /* lift whichever one you point at clear of the pile */
 .snaps__item { transition: transform 180ms var(--ease-out), box-shadow 180ms var(--ease-out); }
 .snaps__item:hover { z-index: 4; box-shadow: 3px 7px 18px rgba(74, 64, 50, .32); }
-.snaps__item--a:hover { transform: rotate(-3deg) translateY(-6px) scale(1.02); }
-.snaps__item--b:hover { transform: rotate(2.4deg) translateY(-6px) scale(1.02); }
-.snaps__item--c:hover { transform: rotate(-1.4deg) translateY(-6px) scale(1.02); }
+.snaps__item--a:hover { transform: rotate(-6.5deg) translateY(-6px) scale(1.02); }
+.snaps__item--b:hover { transform: rotate(5.5deg) translateY(-6px) scale(1.02); }
+.snaps__item--c:hover { transform: rotate(-4deg) translateY(-6px) scale(1.02); }
 
 /* ==========================================================================
    NOTE BOX — a yellow gingham panel for the one line that should read as a
