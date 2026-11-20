@@ -60,6 +60,59 @@ a { color: inherit; }
   }
 }
 
+/* ==========================================================================
+   TURNING THE PAGE
+   Moving between pages reads as turning a leaf of the notebook: the page you
+   are leaving swings away on its left edge while the next one settles under
+   it. This uses cross-document view transitions, so there is no JavaScript
+   and no interception of links — browsers without support simply navigate
+   instantly, exactly as before.
+   ========================================================================== */
+@view-transition { navigation: auto; }
+
+::view-transition-group(root) { animation-duration: 520ms; }
+
+::view-transition-old(root) {
+  z-index: 2;                       /* the leaving page lifts over the new one */
+  transform-origin: left center;
+  animation: page-turn-out 520ms cubic-bezier(.45, 0, .25, 1) both;
+}
+::view-transition-new(root) {
+  z-index: 1;
+  transform-origin: left center;
+  animation: page-turn-in 520ms cubic-bezier(.3, 0, .2, 1) both;
+}
+
+@keyframes page-turn-out {
+  from {
+    transform: perspective(1800px) rotateY(0deg);
+    opacity: 1;
+    filter: brightness(1);
+  }
+  to {
+    transform: perspective(1800px) rotateY(-14deg) translateX(-2%);
+    opacity: 0;
+    filter: brightness(.94);        /* the leaf catches a little shade as it lifts */
+  }
+}
+
+@keyframes page-turn-in {
+  from {
+    transform: perspective(1800px) rotateY(7deg) translateX(1.5%);
+    opacity: 0;
+  }
+  to {
+    transform: perspective(1800px) rotateY(0deg) translateX(0);
+    opacity: 1;
+  }
+}
+
+/* someone who prefers less motion just gets the next page */
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-old(root),
+  ::view-transition-new(root) { animation: none; }
+}
+
 /* --- page ----------------------------------------------------------------- */
 /* the body is the desk the notebook is lying on — a shade deeper than the
    pages, so the white sheets read as paper sitting on top of it */
