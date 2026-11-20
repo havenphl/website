@@ -1250,6 +1250,7 @@ select:focus-visible {
      rather than the top of its line box — a line of display type carries a
      good deal of empty space above the letters. One number to tune. */
   margin-top: var(--logo-drop, 34px);
+  margin-left: var(--logo-shift, 42px);   /* sits it right of the column edge */
 }
 
 .cutout {
