@@ -193,6 +193,7 @@
         last = p;
       }
       if (marks.length > 220) marks.shift();
+      wake();
     }
     // pointermove where it exists, mousemove as the fallback
     if (window.PointerEvent) document.addEventListener('pointermove', track);
@@ -212,16 +213,31 @@
       ctx.stroke();
     }
 
-    (function frame() {
+    /* The loop only runs while there is something to fade. Repainting a
+       full-viewport canvas on every frame forever keeps a compositing layer
+       live under the pointer, which makes a custom cursor flicker. */
+    var running = false;
+
+    function frame() {
       ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
       for (var i = marks.length - 1; i >= 0; i--) {
         marks[i].life -= 0.018;            // about a second and a half to fade
         if (marks[i].life <= 0) { marks.splice(i, 1); continue; }
         stroke(marks[i]);
       }
-      if (!marks.length) last = null;      // start a fresh line next time
+      if (!marks.length) {
+        last = null;                       // start a fresh line next time
+        running = false;                   // and stop until the pointer moves
+        return;
+      }
       window.requestAnimationFrame(frame);
-    })();
+    }
+
+    function wake() {
+      if (running) return;
+      running = true;
+      window.requestAnimationFrame(frame);
+    }
   })();
 
   /* --- current year in the footer ---------------------------------------- */
